@@ -78,39 +78,3 @@ struct StickiesResponse: Decodable {
     }
 }
 
-struct Sticky: Decodable {
-    var id: String
-    var uuid: String
-    var page_id: Int
-    var left: Int
-    var top: Int
-    var width: Int
-    var height: Int
-    var content: String
-    var color: String
-    var state: Int
-    var createdAt: NSDate
-    var updatedAt: NSDate
-    var userId: Int
-
-    static func decode(e: Extractor) throws -> Sticky {
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        let posix = NSLocale(localeIdentifier: "en_US_POSIX")
-        formatter.locale = posix
-        return try Sticky(
-            id: e <| "id",
-            uuid: e <| "uuid",
-            page_id: e <| "page_id",
-            left: e <| "left",
-            top:  e <| "top",
-            width: e <| "width",
-            height: e <| "height",
-            content: e <| "content",
-            color: e <| "color",
-            state: e <| "state",
-            createdAt: formatter.dateFromString(e <| "created_at")!,
-            updatedAt: formatter.dateFromString(e <| "updated_at")!,
-            userId: e <| "user_id")
-    }
-}
