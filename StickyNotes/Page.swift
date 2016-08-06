@@ -7,3 +7,12 @@
 //
 
 import Foundation
+import Himotoki
+
+struct Page: Decodable {
+    var url: String
+    var title: String
+    static func decode(e: Extractor) throws -> Page {
+        return try Page(url: e <| "url", title: e <| "title")
+    }
+}

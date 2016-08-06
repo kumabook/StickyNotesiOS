@@ -33,7 +33,20 @@ class LoginViewController: UIViewController {
             switch result {
             case .Success(let accessToken):
                 print("accessToken: \(accessToken)")
-                
+                APIClient.sharedInstance.accessToken = accessToken
+                self.fetchStickies()
+            case .Failure(let error):
+                print("error: \(error)")
+            }
+        }
+    }
+
+    func fetchStickies() {
+        let request = StickiesRequest(newerThan: NSDate(timeIntervalSince1970: 0))
+        Session.sendRequest(request) { result in
+            switch result {
+            case .Success(let stickies):
+                print("stickies \(stickies)")
             case .Failure(let error):
                 print("error: \(error)")
             }

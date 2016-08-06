@@ -7,3 +7,11 @@
 //
 
 import Foundation
+import Himotoki
+
+struct Tag: Decodable {
+    var name: String
+    static func decode(e: Extractor) throws -> Tag {
+        return try Tag(name: e <| "name")
+    }
+}

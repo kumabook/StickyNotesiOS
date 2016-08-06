@@ -10,22 +10,33 @@ import Foundation
 import APIKit
 import Himotoki
 
-let client_id = "..."
-let client_secret = "..."
-let baseUrl = "https://stickynotes-backend.herokuapp.com"
+class APIClient {
+    let client_id = "..."
+    let client_secret = "..."
+    let baseUrl = "https://stickynotes-backend.herokuapp.com"
+    var accessToken: AccessToken?
+    static var sharedInstance: APIClient = APIClient()
+}
 
 protocol StickyNoteRequestType: RequestType {
 }
 
 extension StickyNoteRequestType {
     var baseURL: NSURL {
-        return NSURL(string: baseUrl)!
+        return NSURL(string: APIClient.sharedInstance.baseUrl)!
     }
 }
 
 extension StickyNoteRequestType where Response: Decodable {
     func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response {
         return try decodeValue(object)
+    }
+    var headerFields: [String : String] {
+        if let token = APIClient.sharedInstance.accessToken {
+            return ["Authorization": "Bearer \(token.accessToken)"]
+        } else {
+            return [:]
+        }
     }
 }
 
@@ -38,8 +49,8 @@ struct AccessTokenRequest: StickyNoteRequestType {
     var method: HTTPMethod { return .POST }
     var parameters: AnyObject? {
         return ["grant_type": "password",
-                "client_id": client_id,
-                "client_secret": client_secret,
+                "client_id": APIClient.sharedInstance.client_id,
+                "client_secret": APIClient.sharedInstance.client_secret,
                 "username": email,
                 "password": password]
     }
@@ -68,6 +79,9 @@ struct StickiesRequest: StickyNoteRequestType {
         dateFormatter.locale = enUSPosixLocale
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
         return ["newer_than": dateFormatter.stringFromDate(newerThan)]
+    }
+    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response {
+        return StickiesResponse(value: try decodeArray(object))
     }
 }
 
