@@ -16,6 +16,25 @@ class APIClient {
     let baseUrl = "https://stickynotes-backend.herokuapp.com"
     var accessToken: AccessToken?
     static var sharedInstance: APIClient = APIClient()
+    private static let userDefaults = NSUserDefaults.standardUserDefaults()
+    var _accessToken: AccessToken?
+    var accessToken: AccessToken? {
+        get {
+            if let token = _accessToken { return token }
+            if let decoded = APIClient.userDefaults.objectForKey("access_token") as? [String: AnyObject] {
+                return AccessToken(decoded: decoded)
+            }
+            return nil
+        }
+        set(token) {
+            if let token = token {
+                APIClient.userDefaults.setObject(token.encode(), forKey: "access_token")
+            } else {
+                APIClient.userDefaults.removeObjectForKey("access_token")
+            }
+            _accessToken = token
+        }
+    }
 }
 
 protocol StickyNoteRequestType: RequestType {
@@ -66,6 +85,27 @@ struct AccessToken: Decodable {
             createdAt: e.value("created_at"),
             tokenType: e.value("token_type"))
     }
+
+    init(accessToken: String, createdAt: Int64, tokenType: String) {
+        self.accessToken = accessToken
+        self.createdAt = createdAt
+        self.tokenType = tokenType
+    }
+
+    init?(decoded: [String:AnyObject]) {
+        guard let accessToken = decoded["accessToken"] as? String,
+              let createdAt = decoded["createdAt"] as? NSNumber,
+              let tokenType = decoded["tokenType"] as? String
+            else { return nil }
+
+        self.init(accessToken: accessToken, createdAt: createdAt.longLongValue, tokenType: tokenType)
+    }
+
+    func encode() -> [String:AnyObject] {
+        return ["accessToken": accessToken,
+                "createdAt": NSNumber(longLong: createdAt),
+                "tokenType": tokenType]
+    }
 }
 
 struct StickiesRequest: StickyNoteRequestType {
@@ -91,4 +131,3 @@ struct StickiesResponse: Decodable {
         return StickiesResponse(value: try e.array(KeyPath.empty))
     }
 }
-

@@ -30,14 +30,18 @@ class ProfileTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") {
-            cell.textLabel?.text = "Login"
-            return cell
+        var cell: UITableViewCell
+        if let c = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") {
+            cell = c
         } else {
-            let cell = UITableViewCell()
-            cell.textLabel?.text = "Login"
-            return cell
+            cell = UITableViewCell()
         }
+        if let _ = APIClient.sharedInstance.accessToken {
+            cell.textLabel?.text =  "Logout"
+        } else {
+            cell.textLabel?.text =  "Login"
+        }
+        return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
