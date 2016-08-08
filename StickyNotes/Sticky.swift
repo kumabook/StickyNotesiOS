@@ -8,10 +8,11 @@
 
 import Foundation
 import Himotoki
-
-
+import RealmSwift
 
 struct Sticky: Decodable {
+    private static var onceToken : dispatch_once_t = 0
+    private static let formatter = NSDateFormatter()
     enum State: Int {
         case Normal = 0
         case Deleted = 1
@@ -40,10 +41,11 @@ struct Sticky: Decodable {
     var tags: [String]
     
     static func decode(e: Extractor) throws -> Sticky {
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        let posix = NSLocale(localeIdentifier: "en_US_POSIX")
-        formatter.locale = posix
+        dispatch_once(&onceToken) {
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            let posix = NSLocale(localeIdentifier: "en_US_POSIX")
+            formatter.locale = posix
+        }
         return try Sticky(
             id: e <| "id",
             uuid: e <| "uuid",

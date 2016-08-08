@@ -97,7 +97,6 @@ struct AccessToken: Decodable {
               let createdAt = decoded["createdAt"] as? NSNumber,
               let tokenType = decoded["tokenType"] as? String
             else { return nil }
-
         self.init(accessToken: accessToken, createdAt: createdAt.longLongValue, tokenType: tokenType)
     }
 
