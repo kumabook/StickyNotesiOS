@@ -19,6 +19,9 @@ class StickyRepository {
     var tags: Results<TagEntity> {
         return realm.objects(TagEntity.self).sorted("name")
     }
+    var pages: Results<PageEntity> {
+        return realm.objects(PageEntity.self).sorted("title")
+    }
     func fetchStickies() {
         let request = StickiesRequest(newerThan: NSDate(timeIntervalSince1970: 0))
         Session.sendRequest(request) { result in
