@@ -19,13 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         let tbc = UITabBarController()
+
         let timeline = TimelineTableViewController()
         timeline.tabBarItem = UITabBarItem(title: "Stickies", image: nil, selectedImage: nil)
         tbc.addChildViewController(UINavigationController(rootViewController:timeline))
+
+        let tag = TagTableViewController()
+        tag.tabBarItem = UITabBarItem(title: "Tag", image: nil, selectedImage: nil)
+        tbc.addChildViewController(UINavigationController(rootViewController:tag))
         
         let profile = UINavigationController(rootViewController: ProfileTableViewController())
         profile.tabBarItem = UITabBarItem(title: "Profile", image: nil, selectedImage: nil)
         tbc.addChildViewController(profile)
+
         window = ObservableWindow(frame: UIScreen.mainScreen().bounds)
         window!.rootViewController = tbc
         window!.makeKeyAndVisible()
