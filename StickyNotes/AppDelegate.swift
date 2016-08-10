@@ -12,7 +12,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var observableWindow: ObservableWindow {
+        return window as! ObservableWindow
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -24,9 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let profile = UINavigationController(rootViewController: ProfileTableViewController())
         profile.tabBarItem = UITabBarItem(title: "Profile", image: nil, selectedImage: nil)
         tbc.addChildViewController(profile)
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window?.rootViewController = tbc
-        window?.makeKeyAndVisible()
+        window = ObservableWindow(frame: UIScreen.mainScreen().bounds)
+        window!.rootViewController = tbc
+        window!.makeKeyAndVisible()
         return true
     }
 
