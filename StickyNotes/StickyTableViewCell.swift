@@ -1,5 +1,5 @@
 //
-//  TimelineTableViewCell.swift
+//  StickyTableViewCell.swift
 //  StickyNotes
 //
 //  Created by Hiroki Kumamoto on 8/8/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimelineTableViewCell: UITableViewCell {
+class StickyTableViewCell: UITableViewCell {
 
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var pageLabel: UILabel!
