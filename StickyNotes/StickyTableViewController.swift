@@ -13,17 +13,6 @@ class StickyTableViewController: UITableViewController {
     let reuseIdentifier = "StickyTableViewCell"
     var stickies: [StickyEntity]!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.title = "Stickies"
-        
-        let nib = UINib(nibName: "StickyTableViewCell", bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
-        
-        self.stickies = StickyRepository.sharedInstance.items.map { $0 }
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

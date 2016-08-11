@@ -37,4 +37,9 @@ class TagTableViewController: UITableViewController {
         cell.textLabel?.text = tags[indexPath.item].name
         return cell
     }
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let vc = TagStickyTableViewController(tag: self.tags[indexPath.item])
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

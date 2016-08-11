@@ -1,15 +1,23 @@
 //
-//  TimelineTableViewController.swift
+//  TagStickyTableViewController.swift
 //  StickyNotes
 //
-//  Created by Hiroki Kumamoto on 8/6/16.
+//  Created by Hiroki Kumamoto on 8/11/16.
 //  Copyright © 2016 kumabook. All rights reserved.
 //
 
 import UIKit
-import Breit
 
-class TimelineTableViewController: StickyTableViewController {
+class TagStickyTableViewController: StickyTableViewController {
+    var tag: TagEntity!
+    init(tag: TagEntity) {
+        self.tag = tag
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,6 +27,6 @@ class TimelineTableViewController: StickyTableViewController {
         let nib = UINib(nibName: "StickyTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
 
-        self.stickies = StickyRepository.sharedInstance.items.map { $0 }
+        self.stickies = tag.stickies.map { $0 }
     }
 }

@@ -89,6 +89,7 @@ class PageEntity: Object {
 
 class TagEntity: Object {
     dynamic var name: String = ""
+    let stickies = LinkingObjects(fromType: StickyEntity.self, property: "tags")
     override static func primaryKey() -> String? {
         return "name"
     }
