@@ -19,6 +19,12 @@ class StickyTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let nib = UINib(nibName: "StickyTableViewCell", bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
+    }
     
     // MARK: - Table view data source
     

@@ -16,9 +16,6 @@ class TimelineTableViewController: StickyTableViewController {
         self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.title = "Stickies"
 
-        let nib = UINib(nibName: "StickyTableViewCell", bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
-
         self.reloadData()
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: #selector(TimelineTableViewController.reload), forControlEvents: UIControlEvents.ValueChanged)

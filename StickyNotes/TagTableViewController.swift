@@ -7,15 +7,21 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TagTableViewController: UITableViewController {
-    var tags: [TagEntity]!
+    var cellHeight: CGFloat = 80
+    let reuseIdentifier = "TagTableViewCell"
+    var tags: Results<TagEntity>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Tags"
+        
+        let nib = UINib(nibName: "TabTableViewCell", bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
 
-        self.tags = StickyRepository.sharedInstance.tags.map { $0 }
+        self.tags = StickyRepository.sharedInstance.tags
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,6 +29,10 @@ class TagTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
+
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return cellHeight
+    }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -33,8 +43,11 @@ class TagTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = tags[indexPath.item].name
+        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath:indexPath) as! TabTableViewCell
+        let tag = tags[indexPath.item]
+        cell.nameLabel.text          = tag.name
+        cell.tagImageView?.tintColor = Color.values[indexPath.item % Color.values.count].backgroundColor
+        cell.stickiesNumLabel.text   = "\(tag.stickies.count) stickies"
         return cell
     }
 
