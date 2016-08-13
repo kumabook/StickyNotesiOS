@@ -4,3 +4,4 @@ github "realm/realm-cocoa"
 github "ishkawa/APIKit" ~> 2.0
 github "ikesyo/Himotoki"
 github "thoughtbot/Delta"
+github "dekatotoro/SlideMenuControllerSwift"

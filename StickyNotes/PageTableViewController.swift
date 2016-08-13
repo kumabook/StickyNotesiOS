@@ -26,6 +26,32 @@ class PageTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
 
+    func reload() {
+        reloadData()
+        Store.sharedInstance.dispatch(FetchStickiesAction())
+    }
+
+    func reloadData() {
+        self.pages = Store.sharedInstance.state.value.stickiesRepository.pages
+        self.tableView.reloadData()
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        Store.sharedInstance.state.value.stickiesRepository.state.signal.observeNext() { [weak self] state in
+            switch state {
+            case .Normal:
+                self?.refreshControl?.endRefreshing()
+                self?.reloadData()
+            case .Fetching:
+                self?.refreshControl?.beginRefreshing()
+            }
+        }
+        Store.sharedInstance.state.subscribe {[weak self] _ in
+            self?.reloadData()
+        }
+    }
+
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -50,9 +76,7 @@ class PageTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let url = NSURL(string: pages[indexPath.item].url) {
-            let vc = WebViewController(url: url)
-            navigationController?.pushViewController(vc, animated: true)
-        }
+        let vc = WebViewController(page: pages[indexPath.item])
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

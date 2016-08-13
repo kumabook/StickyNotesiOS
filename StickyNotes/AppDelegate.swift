@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import SlideMenuControllerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var slideMenu: SlideMenuController?
+    var pageStickies: PageStickyTableViewController?
     var observableWindow: ObservableWindow {
         return window as! ObservableWindow
     }
@@ -41,9 +44,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let profile = UINavigationController(rootViewController: ProfileTableViewController())
         profile.tabBarItem = UITabBarItem(title: "Profile", image: nil, selectedImage: nil)
         tbc.addChildViewController(profile)
-
+        let pageStickies = PageStickyTableViewController()
+        self.pageStickies = pageStickies
+        let stb = UINavigationController(rootViewController: pageStickies)
+        let smc = SlideMenuController(mainViewController: tbc, rightMenuViewController: stb)
+        slideMenu = smc
         window = ObservableWindow(frame: UIScreen.mainScreen().bounds)
-        window!.rootViewController = tbc
+        window!.rootViewController = smc
         window!.makeKeyAndVisible()
         return true
     }

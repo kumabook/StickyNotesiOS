@@ -39,11 +39,11 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     }
     var appDelegate: AppDelegate { return UIApplication.sharedApplication().delegate as! AppDelegate }
     var webView:    WKWebView?
-    var currentURL: NSURL!
+    var page: PageEntity?
     var observer: Observer?
     var messageHandler: MessageHandler?
-    init(url: NSURL) {
-        currentURL = url
+    init(page: PageEntity) {
+        self.page = page
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -59,10 +59,15 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
         webView = createWebView()
         view.addSubview(webView!)
-        webView?.loadRequest(NSURLRequest(URL: currentURL))
         webView!.navigationDelegate = self
         messageHandler = MessageHandler(vc: self)
         webView!.configuration.userContentController.addScriptMessageHandler(messageHandler!, name: "stickynotes")
+        let item = UIBarButtonItem(title: "Stickies", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(WebViewController.showStickies))
+        navigationItem.rightBarButtonItem = item
+
+        if let str = page?.url, url = NSURL(string: str) {
+            webView?.loadRequest(NSURLRequest(URL: url))
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -73,6 +78,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         super.viewWillAppear(animated)
         observer = Observer(viewController: self)
         appDelegate.observableWindow.addObserver(observer!)
+        appDelegate.pageStickies?.page = self.page
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -81,6 +87,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         if let _observer = observer {
             appDelegate.observableWindow.removeObserver(_observer)
         }
+        appDelegate.pageStickies?.page = self.page
     }
     
     private func createWebView() -> WKWebView {
@@ -103,11 +110,11 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     }
     
     func showStickies() {
-        // TODO
+        guard let app = UIApplication.sharedApplication().delegate as? AppDelegate else { return }
+        app.slideMenu?.openRight()
     }
     
     func loadURL(url: NSURL) {
-        currentURL = url
         if let _webView = webView {
             _webView.loadRequest(NSURLRequest(URL: url))
         }
@@ -115,5 +122,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     
     // MARK: - WKNavigationDelegate
     func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {}
-    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {}
+    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+        print("frame: \(webView.frame)")
+        print("contentSize: \(webView.scrollView.contentSize)")
+    }
 }

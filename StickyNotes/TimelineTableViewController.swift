@@ -20,16 +20,6 @@ class TimelineTableViewController: StickyTableViewController {
         self.refreshControl?.addTarget(self, action: #selector(TimelineTableViewController.reload), forControlEvents: UIControlEvents.ValueChanged)
     }
 
-    func reload() {
-        reloadData()
-        Store.sharedInstance.dispatch(FetchStickiesAction())
-    }
-
-    func reloadData() {
-        self.stickies = Store.sharedInstance.state.value.stickiesRepository.items
-        self.tableView.reloadData()
-    }
-
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         Store.sharedInstance.state.value.stickiesRepository.state.signal.observeNext() { [weak self] state in

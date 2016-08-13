@@ -25,7 +25,33 @@ class StickyTableViewController: UITableViewController {
         let nib = UINib(nibName: "StickyTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
     }
+
+    func reload() {
+        reloadData()
+        Store.sharedInstance.dispatch(FetchStickiesAction())
+    }
     
+    func reloadData() {
+        self.stickies = Store.sharedInstance.state.value.stickiesRepository.items
+        self.tableView.reloadData()
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        Store.sharedInstance.state.value.stickiesRepository.state.signal.observeNext() { [weak self] state in
+            switch state {
+            case .Normal:
+                self?.refreshControl?.endRefreshing()
+                self?.reloadData()
+            case .Fetching:
+                self?.refreshControl?.beginRefreshing()
+            }
+        }
+        Store.sharedInstance.state.subscribe {[weak self] _ in
+            self?.reloadData()
+        }
+    }
+
     // MARK: - Table view data source
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -64,8 +90,8 @@ class StickyTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let sticky = stickies[indexPath.item]
-        if let str = sticky.page?.url, url = NSURL(string: str) {
-            let vc = WebViewController(url: url)
+        if let page = sticky.page {
+            let vc = WebViewController(page: page)
             navigationController?.pushViewController(vc, animated: true)
         }
     }
