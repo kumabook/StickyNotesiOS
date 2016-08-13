@@ -13,7 +13,6 @@ class TimelineTableViewController: StickyTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.title = "Stickies"
 
         self.reloadData()

@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 class StickyTableViewController: UITableViewController {
-    var cellHeight: CGFloat = 120
+    var cellHeight: CGFloat = 160
     let reuseIdentifier = "StickyTableViewCell"
     var stickies: Results<StickyEntity>!
     
@@ -43,8 +43,10 @@ class StickyTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath:indexPath) as! StickyTableViewCell
         let sticky = stickies[indexPath.item]
-        
         cell.contentLabel.text = sticky.content
+        if sticky.content.characters.count == 0 {
+            cell.contentLabel.text = "No memo"
+        }
         if let page = sticky.page {
             cell.pageLabel.text = page.title
         } else {
@@ -52,8 +54,11 @@ class StickyTableViewController: UITableViewController {
         }
         cell.dateLabel.text = sticky.updatedAt.passedTime
         cell.tagLabel.text = sticky.tags.reduce("", combine: {
-            return $0 + $1.name
+            return $0 + " " + $1.name
         }) as String
+        if sticky.tags.count == 0 {
+            cell.tagLabel.text = "No tag"
+        }
         return cell
     }
     
