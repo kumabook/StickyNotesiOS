@@ -40,6 +40,7 @@ struct LoggedInAction: Delta.ActionType {
 struct LogoutAction: Delta.ActionType {
     func reduce(state: AppState) -> AppState {
         APIClient.sharedInstance.accessToken = nil
+        APIClient.sharedInstance.lastSyncedAt = NSDate(timeIntervalSince1970: 0)
         StickyRepository.sharedInstance.clear()
         return AppState(accessToken: nil, stickiesRepository: state.stickiesRepository)
     }

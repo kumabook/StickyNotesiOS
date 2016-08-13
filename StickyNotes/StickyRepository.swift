@@ -31,7 +31,7 @@ class StickyRepository {
     func fetchStickies(callback: (Bool) -> ()) {
         if state.value == .Fetching { return }
         state.value = .Fetching
-        let request = StickiesRequest(newerThan: NSDate(timeIntervalSince1970: 0))
+        let request = StickiesRequest(newerThan: APIClient.sharedInstance.lastSyncedAt)
         Session.sendRequest(request) { result in
             switch result {
             case .Success(let stickies):
@@ -60,6 +60,7 @@ class StickyRepository {
                     }
                 }
                 self.state.value = .Normal
+                APIClient.sharedInstance.lastSyncedAt = NSDate()
                 callback(true)
                 print("stickies \(stickies)")
             case .Failure(let error):

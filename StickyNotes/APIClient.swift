@@ -34,6 +34,20 @@ class APIClient {
             _accessToken = token
         }
     }
+    var _lastSyncedAt: NSDate?
+    var lastSyncedAt: NSDate {
+        get {
+            if let lastSyncedAt = _lastSyncedAt { return lastSyncedAt }
+            if let date = APIClient.userDefaults.objectForKey("last_synced_at") as? NSDate {
+                return date
+            }
+            return NSDate(timeIntervalSince1970: 0)
+        }
+        set(date) {
+            APIClient.userDefaults.setObject(date, forKey: "last_synced_at")
+            _lastSyncedAt = date
+        }
+    }
 }
 
 protocol StickyNoteRequestType: RequestType {

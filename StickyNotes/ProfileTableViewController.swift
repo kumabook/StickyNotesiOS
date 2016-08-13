@@ -11,6 +11,7 @@ import UIKit
 class ProfileTableViewController: UITableViewController {
     enum Item: Int {
         case LoginOrLogout = 0
+        case Sync          = 1
         var label: String {
             switch self {
             case .LoginOrLogout:
@@ -19,6 +20,8 @@ class ProfileTableViewController: UITableViewController {
                 } else {
                     return "Logout"
                 }
+            case .Sync:
+                return "Sync (latest sync \(APIClient.sharedInstance.lastSyncedAt.passedTime))"
             }
         }
     }
@@ -46,7 +49,7 @@ class ProfileTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -71,6 +74,8 @@ class ProfileTableViewController: UITableViewController {
             } else {
                 Store.sharedInstance.dispatch(LogoutAction())
             }
+        case .Sync:
+            Store.sharedInstance.dispatch(FetchStickiesAction())
         }
     }
 }
