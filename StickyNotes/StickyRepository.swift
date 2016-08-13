@@ -20,7 +20,7 @@ class StickyRepository {
     var realm: Realm = try! Realm()
     static var sharedInstance: StickyRepository = StickyRepository()
     var items: Results<StickyEntity> {
-        return realm.objects(StickyEntity.self)
+        return realm.objects(StickyEntity.self).filter("state != 1")
     }
     var tags: Results<TagEntity> {
         return realm.objects(TagEntity.self).sorted("name")
