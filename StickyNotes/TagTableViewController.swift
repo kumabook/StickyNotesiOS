@@ -14,6 +14,11 @@ class TagTableViewController: UITableViewController {
     let reuseIdentifier = "TagTableViewCell"
     var tags: Results<TagEntity>!
 
+    func reloadData() {
+        tags = StickyRepository.sharedInstance.tags
+        tableView.reloadData()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Tags"
@@ -21,7 +26,10 @@ class TagTableViewController: UITableViewController {
         let nib = UINib(nibName: "TabTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
 
-        self.tags = StickyRepository.sharedInstance.tags
+        reloadData()
+        Store.sharedInstance.state.subscribe {[weak self] _ in
+            self?.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {

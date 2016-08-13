@@ -32,8 +32,8 @@ class StickyTableViewController: UITableViewController {
     }
     
     func reloadData() {
-        self.stickies = Store.sharedInstance.state.value.stickiesRepository.items
-        self.tableView.reloadData()
+        stickies = Store.sharedInstance.state.value.stickiesRepository.items
+        tableView.reloadData()
     }
 
     override func viewWillAppear(animated: Bool) {

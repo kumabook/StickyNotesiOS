@@ -19,7 +19,10 @@ class PageTableViewController: UITableViewController {
 
         let nib = UINib(nibName: "PageTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
-        pages = StickyRepository.sharedInstance.pages
+        reloadData()
+        Store.sharedInstance.state.subscribe {[weak self] _ in
+            self?.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,8 +35,8 @@ class PageTableViewController: UITableViewController {
     }
 
     func reloadData() {
-        self.pages = Store.sharedInstance.state.value.stickiesRepository.pages
-        self.tableView.reloadData()
+        pages = Store.sharedInstance.state.value.stickiesRepository.pages
+        tableView.reloadData()
     }
 
     override func viewWillAppear(animated: Bool) {

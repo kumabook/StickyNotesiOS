@@ -22,15 +22,7 @@ class TagStickyTableViewController: UITableViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.title = tag.name
-
-        let nib = UINib(nibName: "PageTableViewCell", bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
-
+    func reloadData() {
         pageDict = [:]
         tag.stickies.forEach() { s in
             guard let page = s.page else { return }
@@ -41,6 +33,20 @@ class TagStickyTableViewController: UITableViewController {
             }
         }
         pages = pageDict.keys.map { $0 }
+        tableView.reloadData()
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.title = tag.name
+
+        let nib = UINib(nibName: "PageTableViewCell", bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
+        reloadData()
+        Store.sharedInstance.state.subscribe {[weak self] _ in
+            self?.reloadData()
+        }
     }
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return cellHeight

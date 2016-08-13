@@ -16,10 +16,18 @@ class PageStickyTableViewController: UITableViewController {
             self.tableView.reloadData()
         }
     }
+
+    func reloadData() {
+        tableView.reloadData()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let nib = UINib(nibName: "PageStickyTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
+        Store.sharedInstance.state.subscribe {[weak self] _ in
+            self?.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
