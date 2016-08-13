@@ -103,6 +103,7 @@ class StickyEntity: Object {
 class PageEntity: Object {
     dynamic var url:   String = ""
     dynamic var title: String = ""
+    let stickies = LinkingObjects(fromType: StickyEntity.self, property: "page")
     override static func primaryKey() -> String? {
         return "url"
     }

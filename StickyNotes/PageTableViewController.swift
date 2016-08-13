@@ -7,14 +7,19 @@
 //
 
 import UIKit
+import RealmSwift
 
 class PageTableViewController: UITableViewController {
-    var pages: [PageEntity]!
+    var cellHeight: CGFloat = 80
+    let reuseIdentifier = "PageTableViewCell"
+    var pages: Results<PageEntity>!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Pages"
-        
-        self.pages = StickyRepository.sharedInstance.pages.map { $0 }
+
+        let nib = UINib(nibName: "PageTableViewCell", bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
+        pages = StickyRepository.sharedInstance.pages
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,6 +27,10 @@ class PageTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
+
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return cellHeight
+    }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -32,8 +41,11 @@ class PageTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = pages[indexPath.item].title
+        let page = pages[indexPath.item]
+        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath:indexPath) as! PageTableViewCell
+        cell.titleLabel.text = page.title
+        cell.thumbImageView.image = UIImage(named: "no_image")
+        cell.stickiesNumLabel.text = "\(page.stickies.count) stickies"
         return cell
     }
 
