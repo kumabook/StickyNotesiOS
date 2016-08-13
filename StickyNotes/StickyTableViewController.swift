@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import RealmSwift
 
 class StickyTableViewController: UITableViewController {
     var cellHeight: CGFloat = 120
     let reuseIdentifier = "StickyTableViewCell"
-    var stickies: [StickyEntity]!
+    var stickies: Results<StickyEntity>!
     
     
     override func didReceiveMemoryWarning() {

@@ -27,6 +27,6 @@ class TagStickyTableViewController: StickyTableViewController {
         let nib = UINib(nibName: "StickyTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
 
-        self.stickies = tag.stickies.map { $0 }
+        self.stickies = tag.stickies.filter(NSPredicate(value: true))
     }
 }

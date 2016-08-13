@@ -9,6 +9,19 @@
 import UIKit
 
 class ProfileTableViewController: UITableViewController {
+    enum Item: Int {
+        case LoginOrLogout = 0
+        var label: String {
+            switch self {
+            case .LoginOrLogout:
+                if APIClient.sharedInstance.accessToken == nil {
+                    return "Login"
+                } else {
+                    return "Logout"
+                }
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +30,13 @@ class ProfileTableViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        Store.sharedInstance.state.subscribe {[weak self] _ in
+            self?.tableView.reloadData()
+        }
     }
 
     // MARK: - Table view data source
@@ -36,16 +56,21 @@ class ProfileTableViewController: UITableViewController {
         } else {
             cell = UITableViewCell()
         }
-        if let _ = APIClient.sharedInstance.accessToken {
-            cell.textLabel?.text =  "Logout"
-        } else {
-            cell.textLabel?.text =  "Login"
-        }
+        guard let item = Item(rawValue: indexPath.item) else { return cell }
+        cell.textLabel?.text =  item.label
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vc = LoginViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        guard let item = Item(rawValue: indexPath.item) else { return }
+        switch item {
+        case .LoginOrLogout:
+            if APIClient.sharedInstance.accessToken == nil {
+                let vc = LoginViewController()
+                navigationController?.pushViewController(vc, animated: true)
+            } else {
+                Store.sharedInstance.dispatch(LogoutAction())
+            }
+        }
     }
 }

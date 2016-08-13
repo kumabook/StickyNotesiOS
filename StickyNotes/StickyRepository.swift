@@ -9,8 +9,14 @@
 import Foundation
 import RealmSwift
 import APIKit
+import ReactiveCocoa
 
 class StickyRepository {
+    enum State {
+        case Normal
+        case Fetching
+    }
+    var state: MutableProperty<State> = MutableProperty(.Normal)
     var realm: Realm = try! Realm()
     static var sharedInstance: StickyRepository = StickyRepository()
     var items: Results<StickyEntity> {
@@ -22,7 +28,9 @@ class StickyRepository {
     var pages: Results<PageEntity> {
         return realm.objects(PageEntity.self).sorted("title")
     }
-    func fetchStickies() {
+    func fetchStickies(callback: (Bool) -> ()) {
+        if state.value == .Fetching { return }
+        state.value = .Fetching
         let request = StickiesRequest(newerThan: NSDate(timeIntervalSince1970: 0))
         Session.sendRequest(request) { result in
             switch result {
@@ -51,10 +59,23 @@ class StickyRepository {
                         print("error")
                     }
                 }
+                self.state.value = .Normal
+                callback(true)
                 print("stickies \(stickies)")
             case .Failure(let error):
                 print("error: \(error)")
+                self.state.value = .Normal
+                callback(false)
             }
+        }
+    }
+    func clear() {
+        do {
+            try self.realm.write {
+                self.realm.deleteAll()
+            }
+        } catch {
+            print("Failed to delete")
         }
     }
 }

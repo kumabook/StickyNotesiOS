@@ -28,16 +28,6 @@ class LoginViewController: UIViewController {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
 
-        let request = AccessTokenRequest(email: email, password: password)
-        Session.sendRequest(request) { result in
-            switch result {
-            case .Success(let accessToken):
-                print("accessToken: \(accessToken)")
-                APIClient.sharedInstance.accessToken = accessToken
-                StickyRepository.sharedInstance.fetchStickies()
-            case .Failure(let error):
-                print("error: \(error)")
-            }
-        }
+        Store.sharedInstance.dispatch(LoginAction(email: email, password: password))
     }
 }

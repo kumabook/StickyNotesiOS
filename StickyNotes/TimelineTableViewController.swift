@@ -19,6 +19,34 @@ class TimelineTableViewController: StickyTableViewController {
         let nib = UINib(nibName: "StickyTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
 
-        self.stickies = StickyRepository.sharedInstance.items.map { $0 }
+        self.reloadData()
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.addTarget(self, action: #selector(TimelineTableViewController.reload), forControlEvents: UIControlEvents.ValueChanged)
+    }
+
+    func reload() {
+        reloadData()
+        Store.sharedInstance.dispatch(FetchStickiesAction())
+    }
+
+    func reloadData() {
+        self.stickies = Store.sharedInstance.state.value.stickiesRepository.items
+        self.tableView.reloadData()
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        Store.sharedInstance.state.value.stickiesRepository.state.signal.observeNext() { [weak self] state in
+            switch state {
+            case .Normal:
+                self?.refreshControl?.endRefreshing()
+                self?.reloadData()
+            case .Fetching:
+                self?.refreshControl?.beginRefreshing()
+            }
+        }
+        Store.sharedInstance.state.subscribe {[weak self] _ in
+            self?.reloadData()
+        }
     }
 }
