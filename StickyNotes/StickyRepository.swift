@@ -36,6 +36,7 @@ class StickyRepository {
             switch result {
             case .Success(let stickies):
                 stickies.value.forEach {
+                    if $0.state == .Deleted { return }
                     do {
                         let entity = StickyEntity()
                         entity.id = $0.id
@@ -69,6 +70,18 @@ class StickyRepository {
                 callback(false)
             }
         }
+    }
+
+    func removeSticky(sticky:  StickyEntity) -> Bool {
+        do {
+            try self.realm.write {
+                self.realm.add(TrashedStickyEntity.build(sticky))
+                self.realm.delete(sticky)
+            }
+        } catch {
+            return false
+        }
+        return true
     }
     func clear() {
         do {

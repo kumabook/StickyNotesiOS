@@ -50,6 +50,22 @@ class PageStickyTableViewController: UITableViewController {
         return page.stickies.count
     }
 
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        guard let page = page else { return [] }
+        let sticky = page.stickies[indexPath.item]
+        let remove = UITableViewRowAction(style: .Default, title: "Remove".localize()) { (action, indexPath) in
+            Store.sharedInstance.dispatch(DeleteStickyAction(sticky: sticky))
+        }
+
+        remove.backgroundColor = UIColor.redColor()
+        return [remove]
+    }
+
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath:indexPath) as! PageStickyTableViewCell
         guard let page = page else { return cell }
