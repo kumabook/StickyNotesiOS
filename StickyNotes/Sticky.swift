@@ -12,7 +12,6 @@ import RealmSwift
 
 struct Sticky: Decodable {
     private static var onceToken : dispatch_once_t = 0
-    private static let formatter = NSDateFormatter()
     enum State: Int {
         case Normal = 0
         case Deleted = 1
@@ -41,11 +40,6 @@ struct Sticky: Decodable {
     var tags: [String]
     
     static func decode(e: Extractor) throws -> Sticky {
-        dispatch_once(&onceToken) {
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-            let posix = NSLocale(localeIdentifier: "en_US_POSIX")
-            formatter.locale = posix
-        }
         return try Sticky(
             id: e <| "id",
             uuid: e <| "uuid",
@@ -56,8 +50,8 @@ struct Sticky: Decodable {
             content: e <| "content",
             color: e <| "color",
             state: State.fromRawValue(e <| "state"),
-            createdAt: formatter.dateFromString(e <| "created_at")!,
-            updatedAt: formatter.dateFromString(e <| "updated_at")!,
+            createdAt: DateFormatter.sharedInstance.dateFromString(e <| "created_at")!,
+            updatedAt: DateFormatter.sharedInstance.dateFromString(e <| "updated_at")!,
             userId: e <| "user_id",
             page: e <| "page",
             tags: e <|| "tags")

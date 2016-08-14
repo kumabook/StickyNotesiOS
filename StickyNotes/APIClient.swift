@@ -126,11 +126,7 @@ struct StickiesRequest: StickyNoteRequestType {
     var path: String { return "/api/v1/stickies.json" }
     var method: HTTPMethod { return .GET }
     var parameters: AnyObject? {
-        let dateFormatter = NSDateFormatter()
-        let enUSPosixLocale = NSLocale(localeIdentifier: "en_US_POSIX")
-        dateFormatter.locale = enUSPosixLocale
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-        return ["newer_than": dateFormatter.stringFromDate(newerThan)]
+        return ["newer_than": DateFormatter.sharedInstance.stringFromDate(newerThan)]
     }
     func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response {
         return StickiesResponse(value: try decodeArray(object))
