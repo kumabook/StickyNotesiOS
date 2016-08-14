@@ -14,6 +14,7 @@ import ReactiveCocoa
 class StickyRepository {
     enum State {
         case Normal
+        case Updating
         case Fetching
     }
     var state: MutableProperty<State> = MutableProperty(.Normal)
@@ -26,8 +27,26 @@ class StickyRepository {
         return realm.objects(TagEntity.self).sorted("name")
     }
     var pages: Results<PageEntity> {
-        return realm.objects(PageEntity.self).sorted("title")
+        return realm.objects(PageEntity.self).filter("_stickies.@count >= 1").sorted("title")
     }
+
+    func updateStickies(callback: (Bool) -> ()) {
+        if state.value == .Updating { return }
+        state.value = .Updating
+        let request = UpdateStickiesRequest(stickies: self.realm.objects(TrashedStickyEntity.self).map { $0 })
+        Session.sendRequest(request) { result in
+            switch result {
+            case .Success:
+                self.state.value = .Normal
+                callback(true)
+            case .Failure(let error):
+                print("failure: \(error)")
+                self.state.value = .Normal
+                callback(false)
+            }
+        }
+    }
+
     func fetchStickies(callback: (Bool) -> ()) {
         if state.value == .Fetching { return }
         state.value = .Fetching
@@ -112,12 +131,52 @@ class StickyEntity: Object {
     override static func primaryKey() -> String? {
         return "uuid"
     }
+    func toParameter() -> [String:AnyObject] {
+        return  [
+                    "id": id,
+                  "uuid": uuid,
+                  "left": left,
+                   "top": top,
+                 "width": width,
+                "height": height,
+               "content": content,
+                 "color": color,
+                 "state": state,
+            "created_at": DateFormatter.sharedInstance.stringFromDate(createdAt),
+            "updated_at": DateFormatter.sharedInstance.stringFromDate(updatedAt),
+               "user_id": userId,
+                   "url":  page!.url,
+                 "title": page!.title,
+                  "tags": tags.map { $0.name }
+        ]
+    }
+}
+
+class TrashedStickyEntity: StickyEntity {
+    static func build(sticky: StickyEntity) -> TrashedStickyEntity {
+        let trashed = TrashedStickyEntity()
+        trashed.id        = sticky.id
+        trashed.uuid      = sticky.uuid
+        trashed.left      = sticky.left
+        trashed.top       = sticky.top
+        trashed.width     = sticky.width
+        trashed.height    = sticky.height
+        trashed.content   = sticky.content
+        trashed.color     = sticky.color
+        trashed.state     = Sticky.State.Deleted.rawValue
+        trashed.createdAt = sticky.createdAt
+        trashed.updatedAt = sticky.updatedAt
+        trashed.userId    = sticky.userId
+        trashed.page      = sticky.page
+        return trashed
+    }
 }
 
 class PageEntity: Object {
     dynamic var url:   String = ""
     dynamic var title: String = ""
-    let stickies = LinkingObjects(fromType: StickyEntity.self, property: "page")
+    let _stickies = LinkingObjects(fromType: StickyEntity.self, property: "page")
+    var stickies: Results<StickyEntity> { return _stickies.filter("state != 1") }
     override static func primaryKey() -> String? {
         return "url"
     }

@@ -48,9 +48,14 @@ struct LogoutAction: Delta.ActionType {
 
 struct FetchStickiesAction: Delta.ActionType {
     func reduce(state: AppState) -> AppState {
-        state.stickiesRepository.fetchStickies() { isSuccess in
-            if isSuccess {
-                Store.sharedInstance.dispatch(FetchedStickiesAction())
+        state.stickiesRepository.updateStickies() {isSuccess in
+            if !isSuccess {
+                return
+            }
+            state.stickiesRepository.fetchStickies() { isSuccess in
+                if isSuccess {
+                    Store.sharedInstance.dispatch(FetchedStickiesAction())
+                }
             }
         }
         return state

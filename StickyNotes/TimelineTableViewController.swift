@@ -29,6 +29,8 @@ class TimelineTableViewController: StickyTableViewController {
                 self?.reloadData()
             case .Fetching:
                 self?.refreshControl?.beginRefreshing()
+            case .Updating:
+                self?.refreshControl?.beginRefreshing()
             }
         }
         Store.sharedInstance.state.subscribe {[weak self] _ in

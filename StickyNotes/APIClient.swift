@@ -139,3 +139,23 @@ struct StickiesResponse: Decodable {
         return StickiesResponse(value: try e.array(KeyPath.empty))
     }
 }
+
+struct UpdateStickiesRequest: StickyNoteRequestType {
+    typealias Response = UpdateStickiesResponse
+    var stickies: [StickyEntity]
+
+    var path: String { return "/api/v1/stickies.json" }
+    var method: HTTPMethod { return .POST }
+    var parameters: AnyObject? {
+        return ["stickies": stickies.map { $0.toParameter() }]
+    }
+    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response {
+        return UpdateStickiesResponse()
+    }
+}
+
+struct UpdateStickiesResponse: Decodable {
+    static func decode(e: Extractor) throws -> UpdateStickiesResponse {
+        return UpdateStickiesResponse()
+    }
+}
