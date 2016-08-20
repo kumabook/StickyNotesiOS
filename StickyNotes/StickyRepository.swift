@@ -91,6 +91,26 @@ class StickyRepository {
         }
     }
 
+    func saveSticky(sticky: StickyEntity, newSticky: StickyEntity) -> Bool {
+        do {
+            try self.realm.write {
+                sticky.content   = newSticky.content
+                sticky.updatedAt = newSticky.updatedAt
+                sticky.color     = newSticky.color
+                sticky.left      = newSticky.left
+                sticky.top       = newSticky.top
+                sticky.width     = newSticky.width
+                sticky.height    = newSticky.height
+                sticky.tags.removeAll()
+
+                sticky.tags.appendContentsOf(newSticky.tags)
+            }
+        } catch {
+            return false
+        }
+        return true
+    }
+
     func removeSticky(sticky:  StickyEntity) -> Bool {
         do {
             try self.realm.write {
@@ -150,6 +170,28 @@ class StickyEntity: Object {
                   "tags": tags.map { $0.name }
         ]
     }
+    func clone() -> StickyEntity {
+        let e = StickyEntity()
+        e.id = id
+        e.uuid = uuid
+        e.left = left
+        e.top = top
+        e.width = width
+        e.height = height
+        e.content = content
+        e.color = color
+        e.state = state
+        e.createdAt = createdAt
+        e.updatedAt = updatedAt
+        e.userId = userId
+        return e
+    }
+    var backgroundColor: UIColor? {
+        return Color.get(color)?.backgroundColor
+    }
+    var fontColor: UIColor? {
+        return Color.get(color)?.fontColor
+    }
 }
 
 class TrashedStickyEntity: StickyEntity {
@@ -187,5 +229,20 @@ class TagEntity: Object {
     let stickies = LinkingObjects(fromType: StickyEntity.self, property: "tags")
     override static func primaryKey() -> String? {
         return "name"
+    }
+    static func findBy(name name: String) -> TagEntity? {
+        let realm: Realm = try! Realm()
+        if let tag = realm.objectForPrimaryKey(TagEntity.self, key: name) {
+            return tag
+        }
+        return nil
+    }
+    static func findOrCreateBy(name name: String) -> TagEntity {
+        if let tag = findBy(name: name) {
+            return tag
+        }
+        let tag = TagEntity()
+        tag.name = name
+        return tag
     }
 }

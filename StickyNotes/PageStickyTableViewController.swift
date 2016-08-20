@@ -74,13 +74,18 @@ class PageStickyTableViewController: UITableViewController {
         cell.contentLabel.text = sticky.content.characters.count > 0 ? sticky.content : "No content"
         cell.dateLabel.text = sticky.updatedAt.passedTime
         cell.locationLabel.text = "position: (\(sticky.top),\(sticky.left))"
-        cell.tagLabel.text = sticky.tags.reduce("", combine: {
-            return $0 + " " + $1.name
-        }) as String
+        cell.tagLabel.text = sticky.tags.map { $0.name }.joinWithSeparator(",")
         if sticky.tags.count == 0 {
             cell.tagLabel.text = "No tag"
         }
 
         return cell
+    }
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        guard let page = page else { return }
+        let sticky = page.stickies[indexPath.item]
+        let vc = EditStickyViewController(sticky: sticky)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -75,3 +75,12 @@ struct DeleteStickyAction: Delta.ActionType {
         return state
     }
 }
+
+struct EditStickyAction: Delta.ActionType {
+    let sticky: StickyEntity
+    let editSticky: StickyEntity
+    func reduce(state: AppState) -> AppState {
+        StickyRepository.sharedInstance.saveSticky(sticky, newSticky: editSticky)
+        return state
+    }
+}
