@@ -9,7 +9,7 @@
 import UIKit
 
 class PageStickyTableViewController: UITableViewController {
-    var cellHeight: CGFloat = 160
+    var cellHeight: CGFloat = 250
     let reuseIdentifier = "PageStickyTableViewCell"
     var page: PageEntity? {
         didSet {
