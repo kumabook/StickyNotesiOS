@@ -47,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let pageStickies = PageStickyTableViewController()
         self.pageStickies = pageStickies
         let stb = UINavigationController(rootViewController: pageStickies)
+        SlideMenuOptions.rightPanFromBezel = false
         let smc = SlideMenuController(mainViewController: tbc, rightMenuViewController: stb)
         slideMenu = smc
         window = ObservableWindow(frame: UIScreen.mainScreen().bounds)
