@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditStickyViewController" customModule="StickyNotes" customModuleProvider="target">
+            <connections>
+                <outlet property="contentTextView" destination="Kr7-rc-zcN" id="8eM-8x-g3j"/>
+                <outlet property="tagTextField" destination="Bfg-gc-Wgt" id="KM8-UK-0xy"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="tag, ..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bfg-gc-Wgt">
+                    <rect key="frame" x="8" y="138" width="584" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="content" translatesAutoresizingMaskIntoConstraints="NO" id="zPN-Un-AXc">
+                    <rect key="frame" x="11" y="176" width="40" height="41"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sticky_tag" translatesAutoresizingMaskIntoConstraints="NO" id="VbD-Wj-APY">
+                    <rect key="frame" x="11" y="89" width="40" height="41"/>
+                </imageView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="No memo" translatesAutoresizingMaskIntoConstraints="NO" id="Kr7-rc-zcN">
+                    <rect key="frame" x="11" y="225" width="578" height="311"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="311" id="KJU-dJ-t8L"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Bfg-gc-Wgt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="138" id="L6T-cy-nCL"/>
+                <constraint firstItem="Bfg-gc-Wgt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="PSw-W3-HWV"/>
+                <constraint firstAttribute="trailing" secondItem="Kr7-rc-zcN" secondAttribute="trailing" constant="11" id="U2A-qF-G8V"/>
+                <constraint firstItem="Kr7-rc-zcN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="11" id="fF3-xl-sYo"/>
+                <constraint firstAttribute="trailing" secondItem="Bfg-gc-Wgt" secondAttribute="trailing" constant="8" id="h7x-56-Tte"/>
+                <constraint firstItem="Kr7-rc-zcN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="225" id="xpf-Jh-th9"/>
+            </constraints>
+            <point key="canvasLocation" x="335" y="227"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="content" width="64" height="64"/>
+        <image name="sticky_tag" width="64" height="64"/>
+    </resources>
+</document>
