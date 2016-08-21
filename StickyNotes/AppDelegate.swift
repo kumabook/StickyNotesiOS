@@ -51,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let smc = SlideMenuController(mainViewController: tbc, rightMenuViewController: stb)
         slideMenu = smc
         window = ObservableWindow(frame: UIScreen.mainScreen().bounds)
+        window!.backgroundColor = UIColor.whiteColor()
         window!.rootViewController = smc
         window!.makeKeyAndVisible()
         return true
