@@ -24,25 +24,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tbc = UITabBarController()
 
         let timeline = TimelineTableViewController()
-        timeline.tabBarItem = UITabBarItem(title: "Stickies", image: nil, selectedImage: nil)
+        timeline.tabBarItem = UITabBarItem(title: "Stickies", image: UIImage(named: "content"), selectedImage: nil)
         let timelineNav = UINavigationController(rootViewController:timeline)
         timelineNav.title = "Stickies"
         tbc.addChildViewController(timelineNav)
 
         let tag = TagTableViewController()
-        tag.tabBarItem = UITabBarItem(title: "Tags", image: nil, selectedImage: nil)
+        tag.tabBarItem = UITabBarItem(title: "Tags", image: UIImage(named: "tag"), selectedImage: nil)
         let tagNav = UINavigationController(rootViewController:tag)
         tagNav.title = "Tags"
         tbc.addChildViewController(tagNav)
 
         let page = PageTableViewController()
-        page.tabBarItem = UITabBarItem(title: "Pages", image: nil, selectedImage: nil)
+        page.tabBarItem = UITabBarItem(title: "Pages", image: UIImage(named: "page"), selectedImage: nil)
         let pageNav = UINavigationController(rootViewController:page)
         pageNav.title = "Pages"
         tbc.addChildViewController(pageNav)
 
         let profile = UINavigationController(rootViewController: ProfileTableViewController())
-        profile.tabBarItem = UITabBarItem(title: "Profile", image: nil, selectedImage: nil)
+        profile.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profile"), selectedImage: nil)
         tbc.addChildViewController(profile)
         let pageStickies = PageStickyTableViewController()
         self.pageStickies = pageStickies
