@@ -17,6 +17,14 @@ extension UIColor {
         let b = CGFloat( rgb & 0x0000FF       ) / 255.0
         self.init(red: r, green: g, blue: b, alpha: 1.0)
     }
+
+    static func ThemeColor() -> UIColor {
+        return UIColor(rgb: 0x87CEEB)
+    }
+
+    static func ThemeLightColor() -> UIColor {
+        return UIColor(rgb: 0x87CEEB)
+    }
 }
 
 struct Color {

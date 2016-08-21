@@ -17,40 +17,73 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="tag, ..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bfg-gc-Wgt">
-                    <rect key="frame" x="8" y="138" width="584" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="content" translatesAutoresizingMaskIntoConstraints="NO" id="zPN-Un-AXc">
-                    <rect key="frame" x="11" y="176" width="40" height="41"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sticky_tag" translatesAutoresizingMaskIntoConstraints="NO" id="VbD-Wj-APY">
-                    <rect key="frame" x="11" y="89" width="40" height="41"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="content" translatesAutoresizingMaskIntoConstraints="NO" id="zPN-Un-AXc">
+                    <rect key="frame" x="8" y="72" width="40" height="41"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="QGs-2s-020"/>
+                        <constraint firstAttribute="height" constant="41" id="oGb-Z2-E5Z"/>
+                    </constraints>
                 </imageView>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="No memo" translatesAutoresizingMaskIntoConstraints="NO" id="Kr7-rc-zcN">
-                    <rect key="frame" x="11" y="225" width="578" height="311"/>
+                    <rect key="frame" x="8" y="126" width="578" height="365"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="311" id="KJU-dJ-t8L"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="KJU-dJ-t8L"/>
+                        </mask>
+                    </variation>
                 </textView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tag" translatesAutoresizingMaskIntoConstraints="NO" id="lEX-Hn-xYw">
+                    <rect key="frame" x="8" y="503" width="35" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="dbL-YG-wcB"/>
+                        <constraint firstAttribute="width" constant="35" id="vPL-Da-WCz"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tags (comma separated)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Fs-Ui-Ums">
+                    <rect key="frame" x="51" y="513" width="182" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="182" id="Nfq-7P-hE5"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="tag, ..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bfg-gc-Wgt">
+                    <rect key="frame" x="8" y="552" width="584" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="mbb-6e-7si"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Bfg-gc-Wgt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="138" id="L6T-cy-nCL"/>
+                <constraint firstItem="zPN-Un-AXc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="E4D-jK-c9D"/>
+                <constraint firstItem="Bfg-gc-Wgt" firstAttribute="top" secondItem="lEX-Hn-xYw" secondAttribute="bottom" constant="14" id="LTs-dM-GLf"/>
                 <constraint firstItem="Bfg-gc-Wgt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="PSw-W3-HWV"/>
-                <constraint firstAttribute="trailing" secondItem="Kr7-rc-zcN" secondAttribute="trailing" constant="11" id="U2A-qF-G8V"/>
-                <constraint firstItem="Kr7-rc-zcN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="11" id="fF3-xl-sYo"/>
+                <constraint firstItem="Bfg-gc-Wgt" firstAttribute="top" secondItem="2Fs-Ui-Ums" secondAttribute="bottom" constant="18" id="QBT-Sx-iyK"/>
+                <constraint firstAttribute="trailing" secondItem="Kr7-rc-zcN" secondAttribute="trailing" constant="14" id="U2A-qF-G8V"/>
+                <constraint firstItem="2Fs-Ui-Ums" firstAttribute="leading" secondItem="lEX-Hn-xYw" secondAttribute="trailing" constant="8" symbolic="YES" id="USX-wD-K8W"/>
+                <constraint firstItem="zPN-Un-AXc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="72" id="XwC-YB-IiC"/>
+                <constraint firstItem="Kr7-rc-zcN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="fF3-xl-sYo"/>
+                <constraint firstItem="lEX-Hn-xYw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="gcG-9w-3LE"/>
                 <constraint firstAttribute="trailing" secondItem="Bfg-gc-Wgt" secondAttribute="trailing" constant="8" id="h7x-56-Tte"/>
-                <constraint firstItem="Kr7-rc-zcN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="225" id="xpf-Jh-th9"/>
+                <constraint firstItem="Kr7-rc-zcN" firstAttribute="top" secondItem="zPN-Un-AXc" secondAttribute="bottom" constant="13" id="oES-02-EfM"/>
+                <constraint firstItem="2Fs-Ui-Ums" firstAttribute="centerY" secondItem="lEX-Hn-xYw" secondAttribute="centerY" constant="3" id="sD4-Ac-NsA"/>
+                <constraint firstAttribute="bottom" secondItem="Bfg-gc-Wgt" secondAttribute="bottom" constant="8" id="yee-39-xaj"/>
+                <constraint firstItem="lEX-Hn-xYw" firstAttribute="top" secondItem="Kr7-rc-zcN" secondAttribute="bottom" constant="12" id="zLz-a0-eLh"/>
             </constraints>
             <point key="canvasLocation" x="335" y="227"/>
         </view>
     </objects>
     <resources>
-        <image name="content" width="64" height="64"/>
-        <image name="sticky_tag" width="64" height="64"/>
+        <image name="content" width="21" height="21"/>
+        <image name="tag" width="21" height="21"/>
     </resources>
 </document>
