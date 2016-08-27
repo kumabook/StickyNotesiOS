@@ -72,7 +72,16 @@ class ProfileTableViewController: UITableViewController {
                 let vc = LoginViewController()
                 navigationController?.pushViewController(vc, animated: true)
             } else {
-                Store.sharedInstance.dispatch(LogoutAction())
+                let alertController = UIAlertController(title: "Logout",
+                                                      message: "ログアウトしますか?",
+                                               preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "いいえ", style: .Cancel) { action in
+                    })
+                alertController.addAction(UIAlertAction(title: "はい", style: .Default) { action in
+                    Store.sharedInstance.dispatch(LogoutAction())
+                    })
+                presentViewController(alertController, animated: true, completion: nil)
+
             }
         case .Sync:
             Store.sharedInstance.dispatch(FetchStickiesAction())
