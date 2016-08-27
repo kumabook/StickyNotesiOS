@@ -55,7 +55,12 @@ class StickyRepository {
             switch result {
             case .Success(let stickies):
                 stickies.value.forEach {
-                    if $0.state == .Deleted { return }
+                    if $0.state == .Deleted {
+                        if let s = StickyEntity.findBy(uuid: $0.uuid) {
+                            StickyRepository.sharedInstance.removeSticky(s)
+                        }
+                        return
+                    }
                     do {
                         let entity = StickyEntity()
                         entity.id = $0.id
@@ -150,6 +155,13 @@ class StickyEntity: Object {
     let tags = List<TagEntity>()
     override static func primaryKey() -> String? {
         return "uuid"
+    }
+    static func findBy(uuid uuid: String) -> StickyEntity? {
+        let realm: Realm = try! Realm()
+        if let sticky = realm.objectForPrimaryKey(StickyEntity.self, key: uuid) {
+            return sticky
+        }
+        return nil
     }
     func toParameter() -> [String:AnyObject] {
         return  [
