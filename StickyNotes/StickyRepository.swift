@@ -21,7 +21,7 @@ class StickyRepository {
     var realm: Realm = try! Realm()
     static var sharedInstance: StickyRepository = StickyRepository()
     var items: Results<StickyEntity> {
-        return realm.objects(StickyEntity.self).filter("state != 1")
+        return realm.objects(StickyEntity.self).filter("state != 1").sorted("updatedAt", ascending: false)
     }
     var tags: Results<TagEntity> {
         return realm.objects(TagEntity.self).sorted("name")
