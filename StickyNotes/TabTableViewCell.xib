@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 stickies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bFJ-mD-6VI">
-                        <rect key="frame" x="290" y="54" width="72" height="20"/>
+                        <rect key="frame" x="285" y="51" width="72" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="JPr-OI-TMP"/>
                         </constraints>
@@ -24,32 +24,32 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tag_thumb" translatesAutoresizingMaskIntoConstraints="NO" id="v5X-58-tHi">
+                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="218-qd-r9e"/>
+                        </constraints>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVR-Fc-SEz">
-                        <rect key="frame" x="76" y="8" width="286" height="46"/>
+                        <rect key="frame" x="92" y="8" width="265" height="46"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tag" translatesAutoresizingMaskIntoConstraints="NO" id="v5X-58-tHi">
-                        <rect key="frame" x="8" y="17" width="48" height="46"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="48" id="218-qd-r9e"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="v5X-58-tHi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Hk3-Cc-BSZ"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="bFJ-mD-6VI" secondAttribute="trailing" id="HvV-7A-R9s"/>
-                    <constraint firstItem="bFJ-mD-6VI" firstAttribute="top" secondItem="SVR-Fc-SEz" secondAttribute="bottom" id="UUJ-Xd-21h"/>
+                    <constraint firstItem="v5X-58-tHi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="Hk3-Cc-BSZ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="bFJ-mD-6VI" secondAttribute="trailing" constant="5" id="HvV-7A-R9s"/>
+                    <constraint firstItem="SVR-Fc-SEz" firstAttribute="leading" secondItem="v5X-58-tHi" secondAttribute="trailing" constant="12" id="URr-P9-zRe"/>
+                    <constraint firstItem="bFJ-mD-6VI" firstAttribute="top" secondItem="SVR-Fc-SEz" secondAttribute="bottom" constant="-3" id="UUJ-Xd-21h"/>
                     <constraint firstItem="SVR-Fc-SEz" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-8.5" id="aDv-IZ-lHN"/>
-                    <constraint firstItem="SVR-Fc-SEz" firstAttribute="leading" secondItem="v5X-58-tHi" secondAttribute="trailing" constant="20" id="jbO-OT-lay"/>
                     <constraint firstItem="SVR-Fc-SEz" firstAttribute="trailing" secondItem="bFJ-mD-6VI" secondAttribute="trailing" id="m1j-qp-MFM"/>
-                    <constraint firstItem="v5X-58-tHi" firstAttribute="top" secondItem="SVR-Fc-SEz" secondAttribute="top" constant="9" id="ruA-P7-S8X"/>
+                    <constraint firstItem="v5X-58-tHi" firstAttribute="top" secondItem="SVR-Fc-SEz" secondAttribute="top" constant="-8" id="ruA-P7-S8X"/>
                     <constraint firstItem="SVR-Fc-SEz" firstAttribute="centerY" secondItem="v5X-58-tHi" secondAttribute="centerY" constant="-9" id="yIE-t5-W3S"/>
                 </constraints>
             </tableViewCellContentView>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="bFJ-mD-6VI" secondAttribute="bottom" constant="6" id="OzO-es-zvs"/>
+                <constraint firstAttribute="bottom" secondItem="bFJ-mD-6VI" secondAttribute="bottom" constant="9" id="OzO-es-zvs"/>
             </constraints>
             <connections>
                 <outlet property="nameLabel" destination="SVR-Fc-SEz" id="Kfm-kT-9s6"/>
@@ -60,6 +60,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="tag" width="64" height="64"/>
+        <image name="tag_thumb" width="32" height="32"/>
     </resources>
 </document>
