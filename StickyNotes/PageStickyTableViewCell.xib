@@ -21,42 +21,47 @@
                         <color key="textColor" red="0.040517241379999999" green="0.42411099140000003" blue="0.68434806029999995" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="content" translatesAutoresizingMaskIntoConstraints="NO" id="Hif-dt-7O3">
-                        <rect key="frame" x="12" y="8" width="40" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="40" id="FJG-Ob-2Od"/>
-                            <constraint firstAttribute="height" constant="40" id="HCy-5k-JKt"/>
-                        </constraints>
-                    </imageView>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gYB-r0-z3R">
-                        <rect key="frame" x="64" y="14" width="311" height="128"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="location: (100, 500)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f69-mo-vfs">
                         <rect key="frame" x="14" y="170" width="128" height="16"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                         <color key="textColor" red="0.040517241379999999" green="0.42411099140000003" blue="0.68434806029999995" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gYB-r0-z3R">
+                        <rect key="frame" x="8" y="15" width="311" height="128"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0NY-uH-MAe">
+                        <rect key="frame" x="327" y="15" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="UHH-Zk-faC"/>
+                            <constraint firstAttribute="width" constant="40" id="VkM-Qf-XsT"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="content"/>
+                        <connections>
+                            <action selector="editButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hES-eh-lrB"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="leadingMargin" secondItem="Hif-dt-7O3" secondAttribute="leading" constant="-4" id="0PI-yr-0bK"/>
                     <constraint firstAttribute="leadingMargin" secondItem="f69-mo-vfs" secondAttribute="leading" constant="-6" id="2Tz-Hr-zgM"/>
-                    <constraint firstItem="gYB-r0-z3R" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="56" id="3qB-J2-zw8"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="gYB-r0-z3R" secondAttribute="trailing" constant="-8" id="JCa-Od-KSm"/>
-                    <constraint firstItem="gYB-r0-z3R" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="MQi-9P-e19"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="gYB-r0-z3R" secondAttribute="bottom" constant="77" id="e41-Oc-pVc"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="L97-ec-CbP" secondAttribute="trailing" constant="278" id="eeh-WJ-EcL"/>
+                    <constraint firstItem="gYB-r0-z3R" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="3qB-J2-zw8"/>
+                    <constraint firstItem="L97-ec-CbP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="J2l-a2-sVt"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="gYB-r0-z3R" secondAttribute="trailing" constant="48" id="JCa-Od-KSm"/>
+                    <constraint firstItem="gYB-r0-z3R" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="MQi-9P-e19"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="gYB-r0-z3R" secondAttribute="bottom" constant="76" id="e41-Oc-pVc"/>
                     <constraint firstAttribute="bottomMargin" secondItem="f69-mo-vfs" secondAttribute="bottom" constant="33" id="our-HN-eaO"/>
+                    <constraint firstItem="0NY-uH-MAe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="qfk-bX-6w8"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="0NY-uH-MAe" secondAttribute="trailing" id="rS3-Qi-xku"/>
                     <constraint firstAttribute="bottomMargin" secondItem="L97-ec-CbP" secondAttribute="bottom" constant="52" id="vP7-9C-qkq"/>
-                    <constraint firstAttribute="topMargin" secondItem="Hif-dt-7O3" secondAttribute="top" id="yhm-TB-TA9"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="contentTextView" destination="gYB-r0-z3R" id="Nk5-21-q5J"/>
                 <outlet property="dateLabel" destination="L97-ec-CbP" id="3oW-Uc-IDB"/>
+                <outlet property="editButton" destination="0NY-uH-MAe" id="yQr-DA-gSF"/>
                 <outlet property="locationLabel" destination="f69-mo-vfs" id="DUV-dF-idi"/>
             </connections>
             <point key="canvasLocation" x="367.5" y="397"/>

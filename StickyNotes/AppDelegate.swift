@@ -8,6 +8,7 @@
 
 import UIKit
 import SlideMenuControllerSwift
+import ReactiveCocoa
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -54,6 +55,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.backgroundColor = UIColor.whiteColor()
         window!.rootViewController = smc
         window!.makeKeyAndVisible()
+        Store.sharedInstance.state.value.mode.signal.observe(Observer(next: { mode in
+            switch mode {
+            case .ListSticky(let page):
+                self.pageStickies?.page = page
+                self.slideMenu?.openRight()
+                dispatch_async(dispatch_get_main_queue()) {
+                    Store.sharedInstance.dispatch(ListingStickyAction(page: page))
+                }
+            case .SelectSticky(let sticky):
+                self.pageStickies?.page = sticky.page
+                self.slideMenu?.openRight()
+            case .JumpSticky(_):
+                self.slideMenu?.closeRight()
+            default: break
+            }
+        }))
         return true
     }
 

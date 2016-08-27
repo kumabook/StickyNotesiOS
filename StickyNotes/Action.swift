@@ -33,7 +33,8 @@ struct LoginAction: Delta.ActionType {
 struct LoggedInAction: Delta.ActionType {
     let accessToken: AccessToken
     func reduce(state: AppState) -> AppState {
-        return AppState(accessToken: accessToken, stickiesRepository: state.stickiesRepository)
+        state.accessToken.value = accessToken
+        return state
     }
 }
 
@@ -42,7 +43,8 @@ struct LogoutAction: Delta.ActionType {
         APIClient.sharedInstance.accessToken = nil
         APIClient.sharedInstance.lastSyncedAt = NSDate(timeIntervalSince1970: 0)
         StickyRepository.sharedInstance.clear()
-        return AppState(accessToken: nil, stickiesRepository: state.stickiesRepository)
+        state.accessToken.value = nil
+        return state
     }
 }
 
@@ -80,7 +82,56 @@ struct EditStickyAction: Delta.ActionType {
     let sticky: StickyEntity
     let editSticky: StickyEntity
     func reduce(state: AppState) -> AppState {
+        state.mode.value = Mode.ListingSticky(page: sticky.page!)
         StickyRepository.sharedInstance.saveSticky(sticky, newSticky: editSticky)
+        return state
+    }
+}
+
+struct BackHomeAction: Delta.ActionType {
+    func reduce(state: AppState) -> AppState {
+        state.mode.value = Mode.Home
+        return state
+    }
+}
+
+struct ListStickyAction: Delta.ActionType {
+    let page: PageEntity
+    func reduce(state: AppState) -> AppState {
+        state.mode.value = Mode.ListSticky(page: page)
+        return state
+    }
+}
+
+struct ListingStickyAction: Delta.ActionType {
+    let page: PageEntity
+    func reduce(state: AppState) -> AppState {
+        state.mode.value = Mode.ListingSticky(page: page)
+        return state
+    }
+}
+
+
+struct JumpStickyAction: Delta.ActionType {
+    let sticky: StickyEntity
+    func reduce(state: AppState) -> AppState {
+        state.mode.value = Mode.JumpSticky(sticky: sticky)
+        return state
+    }
+}
+
+struct ShowingPageAction: Delta.ActionType {
+    let page: PageEntity
+    func reduce(state: AppState) -> AppState {
+        state.mode.value = Mode.Page(page: page)
+        return state
+    }
+}
+
+struct SelectStickyAction: Delta.ActionType {
+    let sticky: StickyEntity
+    func reduce(state: AppState) -> AppState {
+        state.mode.value = Mode.SelectSticky(sticky: sticky)
         return state
     }
 }

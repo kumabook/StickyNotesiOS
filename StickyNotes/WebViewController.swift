@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import ReactiveCocoa
 
 class WebViewController: UIViewController, WKNavigationDelegate {
     class Observer: WindowObserver {
@@ -28,9 +29,15 @@ class WebViewController: UIViewController, WKNavigationDelegate {
                 if message.name == "stickynotes" {
                     let json: AnyObject? = try? NSJSONSerialization.JSONObjectWithData(body.dataUsingEncoding(NSUTF8StringEncoding)!, options: NSJSONReadingOptions.AllowFragments)
                     if let dic = json as? [String: AnyObject],
-                        type = dic["type"] as? String
-                        where type == "create-sticky" {
-                        vc?.createSticky()
+                        type = dic["type"] as? String {
+                        switch type {
+                        case "create-sticky": vc?.createSticky()
+                        case "select-sticky":
+                            if let id = dic["id"] as? Int {
+                                vc?.showStickies(vc?.page?.stickies.map { $0 }.filter { $0.id == id }.first)
+                            }
+                        default:              break
+                        }
                     }
                 }
             }
@@ -68,6 +75,16 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         if let str = page?.url, url = NSURL(string: str) {
             webView?.loadRequest(NSURLRequest(URL: url))
         }
+        Store.sharedInstance.state.subscribe { state in
+            switch state.mode.value {
+            case .JumpSticky(let sticky):
+                self.jumpToSticky(sticky)
+                UIScheduler().schedule {
+                    Store.sharedInstance.dispatch(ShowingPageAction(page: self.page!))
+                }
+            default: break
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -78,7 +95,6 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         super.viewWillAppear(animated)
         observer = Observer(viewController: self)
         appDelegate.observableWindow.addObserver(observer!)
-        appDelegate.pageStickies?.page = self.page
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -87,7 +103,6 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         if let _observer = observer {
             appDelegate.observableWindow.removeObserver(_observer)
         }
-        appDelegate.pageStickies?.page = self.page
     }
     
     private func createWebView() -> WKWebView {
@@ -109,9 +124,15 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         // TODO
     }
     
-    func showStickies() {
-        guard let app = UIApplication.sharedApplication().delegate as? AppDelegate else { return }
-        app.slideMenu?.openRight()
+    func showStickies(sticky: StickyEntity?) {
+        guard let page = page else { return }
+        Store.sharedInstance.dispatch(ListStickyAction(page: page))
+    }
+
+    func jumpToSticky(sticky: StickyEntity) {
+        try! webView?.evaluateJavaScript("jumpToSticky(\(sticky.toJSONString()))") { (val, error) in
+            print("callback \(val) \(error)")
+        }
     }
     
     func loadURL(url: NSURL) {
@@ -123,7 +144,10 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     // MARK: - WKNavigationDelegate
     func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {}
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
-        print("frame: \(webView.frame)")
-        print("contentSize: \(webView.scrollView.contentSize)")
+        page?.stickies.forEach() { sticky in
+            try! webView.evaluateJavaScript("addSticky(\(sticky.toJSONString()))") { (val, error) in
+                print("callback \(val) \(error)")
+            }
+        }
     }
 }

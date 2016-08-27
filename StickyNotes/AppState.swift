@@ -14,15 +14,25 @@ extension MutableProperty: ObservablePropertyType {
 }
 
 struct AppState {
-    var accessToken: AccessToken?
+    let accessToken: MutableProperty<AccessToken?>
     let stickiesRepository: StickyRepository
+    let mode: MutableProperty<Mode>
 }
 
 struct Store: StoreType {
     var state: ObservableProperty<AppState>
     static var sharedInstance: Store = Store(state:
-        ObservableProperty(AppState(accessToken: APIClient.sharedInstance.accessToken,
-                             stickiesRepository: StickyRepository()))
+        ObservableProperty(AppState(accessToken: MutableProperty(APIClient.sharedInstance.accessToken),
+                             stickiesRepository: StickyRepository(),
+                                           mode: MutableProperty(.Home)))
     )
 }
 
+enum Mode {
+    case Home
+    case Page(page: PageEntity)
+    case ListSticky(page: PageEntity)
+    case ListingSticky(page: PageEntity)
+    case SelectSticky(sticky: StickyEntity)
+    case JumpSticky(sticky: StickyEntity)
+}

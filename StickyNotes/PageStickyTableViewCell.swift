@@ -10,20 +10,28 @@ import UIKit
 
 class PageStickyTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    weak var delegate: PageStickyTableViewController?
+    var sticky: StickyEntity?
     var tagLabels: [UILabel] = []
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 
+    @IBAction func editButtonTapped(sender: AnyObject) {
+        guard let sticky = sticky else { return }
+        delegate?.editButtonTapped(sticky)
+    }
+
     func updateView(sticky: StickyEntity) {
+        self.sticky = sticky
         separatorInset = UIEdgeInsetsZero
         preservesSuperviewLayoutMargins = false
         layoutMargins = UIEdgeInsetsZero
@@ -33,7 +41,7 @@ class PageStickyTableViewCell: UITableViewCell {
         contentTextView.textContainer.lineFragmentPadding = 0
         contentTextView.userInteractionEnabled = false
 
-        locationLabel.text = "position: (\(sticky.top),\(sticky.left))"
+        locationLabel.text = "position: (\(sticky.left),\(sticky.top))"
         locationLabel.textColor = UIColor.ThemeColor()
 
         dateLabel.text = sticky.updatedAt.passedTime

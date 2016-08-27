@@ -204,6 +204,10 @@ class StickyEntity: Object {
     var fontColor: UIColor? {
         return Color.get(color)?.fontColor
     }
+    func toJSONString() throws -> String {
+        let data = try NSJSONSerialization.dataWithJSONObject(toParameter(), options: NSJSONWritingOptions.PrettyPrinted)
+        return String(data: data, encoding: NSUTF8StringEncoding)!
+    }
 }
 
 class TrashedStickyEntity: StickyEntity {

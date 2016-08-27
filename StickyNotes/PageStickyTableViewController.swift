@@ -10,6 +10,7 @@ import UIKit
 
 class PageStickyTableViewController: UITableViewController {
     var cellHeight: CGFloat = 160
+    var appDelegate: AppDelegate { return UIApplication.sharedApplication().delegate as! AppDelegate }
     let reuseIdentifier = "PageStickyTableViewCell"
     var page: PageEntity? {
         didSet {
@@ -26,9 +27,18 @@ class PageStickyTableViewController: UITableViewController {
         let nib = UINib(nibName: "PageStickyTableViewCell", bundle: nil)
         title = "Sticky list"
         tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
-        Store.sharedInstance.state.subscribe {[weak self] _ in
-            self?.reloadData()
+        Store.sharedInstance.state.subscribe {[weak self] state in
+            switch state.mode.value {
+            default:
+                self?.reloadData()
+                break
+            }
         }
+    }
+
+    func editButtonTapped(sticky: StickyEntity) {
+        let vc = EditStickyViewController(sticky: sticky)
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,7 +71,6 @@ class PageStickyTableViewController: UITableViewController {
         let remove = UITableViewRowAction(style: .Default, title: "Remove".localize()) { (action, indexPath) in
             Store.sharedInstance.dispatch(DeleteStickyAction(sticky: sticky))
         }
-
         remove.backgroundColor = UIColor.redColor()
         return [remove]
     }
@@ -72,13 +81,13 @@ class PageStickyTableViewController: UITableViewController {
         guard let page = page else { return cell }
         let sticky = page.stickies[indexPath.item]
         cell.updateView(sticky)
+        cell.delegate = self
         return cell
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         guard let page = page else { return }
         let sticky = page.stickies[indexPath.item]
-        let vc = EditStickyViewController(sticky: sticky)
-        navigationController?.pushViewController(vc, animated: true)
+        Store.sharedInstance.dispatch(JumpStickyAction(sticky: sticky))
     }
 }
