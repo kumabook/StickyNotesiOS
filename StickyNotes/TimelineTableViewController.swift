@@ -36,5 +36,6 @@ class TimelineTableViewController: StickyTableViewController {
         Store.sharedInstance.state.subscribe {[weak self] _ in
             self?.reloadData()
         }
+        tabBarController?.title = "タイムライン"
     }
 }

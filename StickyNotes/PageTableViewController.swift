@@ -41,20 +41,7 @@ class PageTableViewController: UITableViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        Store.sharedInstance.state.value.stickiesRepository.state.signal.observeNext() { [weak self] state in
-            switch state {
-            case .Normal:
-                self?.refreshControl?.endRefreshing()
-                self?.reloadData()
-            case .Fetching:
-                self?.refreshControl?.beginRefreshing()
-            case .Updating:
-                self?.refreshControl?.beginRefreshing()
-            }
-        }
-        Store.sharedInstance.state.subscribe {[weak self] _ in
-            self?.reloadData()
-        }
+        tabBarController?.title = "ページ"
     }
 
     // MARK: - Table view data source

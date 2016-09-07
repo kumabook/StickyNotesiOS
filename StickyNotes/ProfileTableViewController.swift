@@ -28,7 +28,9 @@ class ProfileTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Profile"
+        Store.sharedInstance.state.subscribe {[weak self] _ in
+            self?.tableView.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,9 +39,7 @@ class ProfileTableViewController: UITableViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        Store.sharedInstance.state.subscribe {[weak self] _ in
-            self?.tableView.reloadData()
-        }
+        tabBarController?.title = "プロフィール"
     }
 
     // MARK: - Table view data source

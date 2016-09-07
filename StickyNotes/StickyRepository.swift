@@ -33,7 +33,10 @@ class StickyRepository {
     func updateStickies(callback: (Bool) -> ()) {
         if state.value == .Updating { return }
         state.value = .Updating
-        let request = UpdateStickiesRequest(stickies: self.realm.objects(TrashedStickyEntity.self).map { $0 })
+        let predicate = NSPredicate(format: "updatedAt > %@", APIClient.sharedInstance.lastSyncedAt)
+        var stickies = realm.objects(StickyEntity.self).filter(predicate).map { $0 }
+        stickies.appendContentsOf(realm.objects(TrashedStickyEntity.self).map { $0 })
+        let request = UpdateStickiesRequest(stickies: stickies)
         Session.sendRequest(request) { result in
             switch result {
             case .Success:
@@ -62,21 +65,7 @@ class StickyRepository {
                         return
                     }
                     do {
-                        let entity = StickyEntity()
-                        entity.id = $0.id
-                        entity.uuid = $0.uuid
-                        entity.left = $0.left
-                        entity.top = $0.top
-                        entity.width = $0.width
-                        entity.height = $0.height
-                        entity.content = $0.content
-                        entity.color = $0.color
-                        entity.state = $0.state.rawValue
-                        entity.createdAt = $0.createdAt
-                        entity.updatedAt = $0.updatedAt
-                        entity.userId = $0.userId
-                        entity.page = PageEntity(value: ["url": $0.page.url, "title": $0.page.title])
-                        entity.tags.appendContentsOf($0.tags.map { TagEntity(value: ["name": $0]) })
+                        let entity = StickyEntity(sticky: $0)
                         try self.realm.write {
                             self.realm.add(entity, update: true)
                         }
@@ -100,7 +89,7 @@ class StickyRepository {
         do {
             try self.realm.write {
                 sticky.content   = newSticky.content
-                sticky.updatedAt = newSticky.updatedAt
+                sticky.updatedAt = NSDate()
                 sticky.color     = newSticky.color
                 sticky.left      = newSticky.left
                 sticky.top       = newSticky.top
@@ -156,6 +145,25 @@ class StickyEntity: Object {
     override static func primaryKey() -> String? {
         return "uuid"
     }
+
+    convenience init(sticky: Sticky) {
+        self.init()
+        id        = sticky.id
+        uuid      = sticky.uuid
+        left      = sticky.left
+        top       = sticky.top
+        width     = sticky.width
+        height    = sticky.height
+        content   = sticky.content
+        color     = sticky.color
+        state     = sticky.state.rawValue
+        createdAt = sticky.createdAt
+        updatedAt = sticky.updatedAt
+        userId    = sticky.userId
+        page      	= PageEntity(value: ["url": sticky.page.url, "title": sticky.page.title])
+        tags.appendContentsOf(sticky.tags.map { TagEntity.findOrCreateBy(name: $0) })
+    }
+
     static func findBy(uuid uuid: String) -> StickyEntity? {
         let realm: Realm = try! Realm()
         if let sticky = realm.objectForPrimaryKey(StickyEntity.self, key: uuid) {
@@ -177,9 +185,10 @@ class StickyEntity: Object {
             "created_at": DateFormatter.sharedInstance.stringFromDate(createdAt),
             "updated_at": DateFormatter.sharedInstance.stringFromDate(updatedAt),
                "user_id": userId,
-                   "url":  page!.url,
+                   "url": page!.url,
                  "title": page!.title,
-                  "tags": tags.map { $0.name }
+                  "tags": tags.map { $0.name },
+                  "page": page != nil ? ["url": page!.url, "title": page!.title] : [:]
         ]
     }
     func clone() -> StickyEntity {

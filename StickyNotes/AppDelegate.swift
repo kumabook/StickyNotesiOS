@@ -26,30 +26,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let timeline = TimelineTableViewController()
         timeline.tabBarItem = UITabBarItem(title: "Stickies", image: UIImage(named: "content"), selectedImage: nil)
-        let timelineNav = UINavigationController(rootViewController:timeline)
-        timelineNav.title = "Stickies"
-        tbc.addChildViewController(timelineNav)
+        tbc.addChildViewController(timeline)
 
         let tag = TagTableViewController()
         tag.tabBarItem = UITabBarItem(title: "Tags", image: UIImage(named: "tag"), selectedImage: nil)
-        let tagNav = UINavigationController(rootViewController:tag)
-        tagNav.title = "Tags"
-        tbc.addChildViewController(tagNav)
+        tbc.addChildViewController(tag)
 
         let page = PageTableViewController()
         page.tabBarItem = UITabBarItem(title: "Pages", image: UIImage(named: "page"), selectedImage: nil)
-        let pageNav = UINavigationController(rootViewController:page)
-        pageNav.title = "Pages"
-        tbc.addChildViewController(pageNav)
+        tbc.addChildViewController(page)
 
-        let profile = UINavigationController(rootViewController: ProfileTableViewController())
+        let profile = ProfileTableViewController()
         profile.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profile"), selectedImage: nil)
         tbc.addChildViewController(profile)
         let pageStickies = PageStickyTableViewController()
         self.pageStickies = pageStickies
         let stb = UINavigationController(rootViewController: pageStickies)
         SlideMenuOptions.rightPanFromBezel = false
-        let smc = SlideMenuController(mainViewController: tbc, rightMenuViewController: stb)
+        let smc = SlideMenuController(mainViewController: UINavigationController(rootViewController: tbc),
+                                 rightMenuViewController: stb)
         slideMenu = smc
         window = ObservableWindow(frame: UIScreen.mainScreen().bounds)
         window!.backgroundColor = UIColor.whiteColor()
