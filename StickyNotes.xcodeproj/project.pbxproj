@@ -7,6 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		670599EE1D8195BA0085FCAC /* PutSticky.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 670599E41D8195BA0085FCAC /* PutSticky.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		670599F41D8196460085FCAC /* PutStickyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670599F21D8196460085FCAC /* PutStickyViewController.swift */; };
+		670599F51D8196460085FCAC /* PutStickyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 670599F31D8196460085FCAC /* PutStickyViewController.xib */; };
+		670599F61D81A62D0085FCAC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF5B1D5EA4FD0029440F /* Color.swift */; };
+		670599F71D81A64B0085FCAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67FECEED1D5399BC0029440F /* Assets.xcassets */; };
+		670599FA1D838BF60085FCAC /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF2D1D558ABD0029440F /* APIClient.swift */; };
+		670599FB1D838BF60085FCAC /* Sticky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF311D55C44A0029440F /* Sticky.swift */; };
+		670599FC1D838BF60085FCAC /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF331D55C47A0029440F /* Tag.swift */; };
+		670599FD1D838BF60085FCAC /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF351D55C4830029440F /* Page.swift */; };
+		670599FE1D838C2C0085FCAC /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67FECF061D54EF2C0029440F /* APIKit.framework */; };
+		670599FF1D838C2F0085FCAC /* Himotoki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67FECF081D54EF2C0029440F /* Himotoki.framework */; };
+		67059A001D838C3F0085FCAC /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67FECF0C1D54EF2C0029440F /* Result.framework */; };
+		67059A021D838C790085FCAC /* APIKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF061D54EF2C0029440F /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		67059A031D838C790085FCAC /* Himotoki.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF081D54EF2C0029440F /* Himotoki.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		67059A041D838C790085FCAC /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF0C1D54EF2C0029440F /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		67059A051D838C940085FCAC /* StickyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF3A1D5613240029440F /* StickyRepository.swift */; };
+		67059A061D838C9D0085FCAC /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF6A1D60840A0029440F /* DateFormatter.swift */; };
+		67059A071D838CBC0085FCAC /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67FECF0B1D54EF2C0029440F /* RealmSwift.framework */; };
+		67059A081D838CC70085FCAC /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67FECF091D54EF2C0029440F /* ReactiveCocoa.framework */; };
+		67059A091D838CCB0085FCAC /* ReactiveCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF091D54EF2C0029440F /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		67059A0A1D838CD00085FCAC /* RealmSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF0B1D54EF2C0029440F /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		67059A0C1D87E5580085FCAC /* ColorSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67059A0B1D87E5580085FCAC /* ColorSlider.swift */; };
+		67059A0E1D87E5830085FCAC /* ColorSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67059A0B1D87E5580085FCAC /* ColorSlider.swift */; };
+		67059A101D87E72E0085FCAC /* GetPage.js in Resources */ = {isa = PBXBuildFile; fileRef = 67059A0F1D87E72E0085FCAC /* GetPage.js */; };
 		67FECEE51D5399BC0029440F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECEE41D5399BC0029440F /* AppDelegate.swift */; };
 		67FECEEE1D5399BC0029440F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67FECEED1D5399BC0029440F /* Assets.xcassets */; };
 		67FECEF11D5399BC0029440F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67FECEEF1D5399BC0029440F /* LaunchScreen.storyboard */; };
@@ -62,6 +86,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		670599EC1D8195BA0085FCAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 67FECED91D5399BC0029440F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 670599E31D8195BA0085FCAC;
+			remoteInfo = PutSticky;
+		};
 		67FECEF81D5399BC0029440F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 67FECED91D5399BC0029440F /* Project object */;
@@ -72,6 +103,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		670599CB1D808EDE0085FCAC /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				670599EE1D8195BA0085FCAC /* PutSticky.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		67059A011D838C650085FCAC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				67059A021D838C790085FCAC /* APIKit.framework in CopyFiles */,
+				67059A031D838C790085FCAC /* Himotoki.framework in CopyFiles */,
+				67059A041D838C790085FCAC /* Result.framework in CopyFiles */,
+				67059A0A1D838CD00085FCAC /* RealmSwift.framework in CopyFiles */,
+				67059A091D838CCB0085FCAC /* ReactiveCocoa.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		67FECF171D54EF9D0029440F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -93,6 +149,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		670599E41D8195BA0085FCAC /* PutSticky.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PutSticky.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		670599EB1D8195BA0085FCAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		670599F21D8196460085FCAC /* PutStickyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PutStickyViewController.swift; sourceTree = "<group>"; };
+		670599F31D8196460085FCAC /* PutStickyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PutStickyViewController.xib; sourceTree = "<group>"; };
+		670599F81D8389240085FCAC /* StickyNotes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = StickyNotes.entitlements; sourceTree = "<group>"; };
+		670599F91D8389710085FCAC /* PutSticky.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PutSticky.entitlements; sourceTree = "<group>"; };
+		67059A0B1D87E5580085FCAC /* ColorSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSlider.swift; sourceTree = "<group>"; };
+		67059A0F1D87E72E0085FCAC /* GetPage.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = GetPage.js; sourceTree = "<group>"; };
 		67FECEE11D5399BC0029440F /* StickyNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickyNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67FECEE41D5399BC0029440F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67FECEED1D5399BC0029440F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -142,6 +206,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		670599E11D8195BA0085FCAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				670599FE1D838C2C0085FCAC /* APIKit.framework in Frameworks */,
+				670599FF1D838C2F0085FCAC /* Himotoki.framework in Frameworks */,
+				67059A001D838C3F0085FCAC /* Result.framework in Frameworks */,
+				67059A071D838CBC0085FCAC /* RealmSwift.framework in Frameworks */,
+				67059A081D838CC70085FCAC /* ReactiveCocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		67FECEDE1D5399BC0029440F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -168,11 +244,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		670599E51D8195BA0085FCAC /* PutSticky */ = {
+			isa = PBXGroup;
+			children = (
+				670599F91D8389710085FCAC /* PutSticky.entitlements */,
+				670599EB1D8195BA0085FCAC /* Info.plist */,
+				670599F21D8196460085FCAC /* PutStickyViewController.swift */,
+				670599F31D8196460085FCAC /* PutStickyViewController.xib */,
+				67059A0F1D87E72E0085FCAC /* GetPage.js */,
+			);
+			path = PutSticky;
+			sourceTree = "<group>";
+		};
 		67FECED81D5399BC0029440F = {
 			isa = PBXGroup;
 			children = (
 				67FECF451D58ACBA0029440F /* UserScript */,
 				67FECEE31D5399BC0029440F /* StickyNotes */,
+				670599E51D8195BA0085FCAC /* PutSticky */,
 				67FECF161D54EF740029440F /* Frameworks */,
 				67FECEE21D5399BC0029440F /* Products */,
 			);
@@ -183,6 +272,7 @@
 			children = (
 				67FECEE11D5399BC0029440F /* StickyNotes.app */,
 				67FECEF71D5399BC0029440F /* StickyNotesTests.xctest */,
+				670599E41D8195BA0085FCAC /* PutSticky.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -190,6 +280,7 @@
 		67FECEE31D5399BC0029440F /* StickyNotes */ = {
 			isa = PBXGroup;
 			children = (
+				670599F81D8389240085FCAC /* StickyNotes.entitlements */,
 				67FECF5A1D5EA4ED0029440F /* Util */,
 				67FECF3C1D580F850029440F /* View */,
 				67FECF2C1D5577B90029440F /* ViewControllers */,
@@ -263,6 +354,7 @@
 				67FECF5E1D5EAEE90029440F /* PageTableViewCell.xib */,
 				67FECF661D5F47380029440F /* PageStickyTableViewCell.swift */,
 				67FECF671D5F47380029440F /* PageStickyTableViewCell.xib */,
+				67059A0B1D87E5580085FCAC /* ColorSlider.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -287,6 +379,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		670599E31D8195BA0085FCAC /* PutSticky */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 670599EF1D8195BA0085FCAC /* Build configuration list for PBXNativeTarget "PutSticky" */;
+			buildPhases = (
+				670599E01D8195BA0085FCAC /* Sources */,
+				670599E11D8195BA0085FCAC /* Frameworks */,
+				670599E21D8195BA0085FCAC /* Resources */,
+				67059A011D838C650085FCAC /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PutSticky;
+			productName = PutSticky;
+			productReference = 670599E41D8195BA0085FCAC /* PutSticky.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		67FECEE01D5399BC0029440F /* StickyNotes */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 67FECF001D5399BC0029440F /* Build configuration list for PBXNativeTarget "StickyNotes" */;
@@ -295,10 +405,12 @@
 				67FECEDE1D5399BC0029440F /* Frameworks */,
 				67FECEDF1D5399BC0029440F /* Resources */,
 				67FECF171D54EF9D0029440F /* CopyFiles */,
+				670599CB1D808EDE0085FCAC /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				670599ED1D8195BA0085FCAC /* PBXTargetDependency */,
 			);
 			name = StickyNotes;
 			productName = StickyNotes;
@@ -333,8 +445,23 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = kumabook;
 				TargetAttributes = {
+					670599E31D8195BA0085FCAC = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 7AK92UN63W;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					67FECEE01D5399BC0029440F = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 7AK92UN63W;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					67FECEF61D5399BC0029440F = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -357,11 +484,22 @@
 			targets = (
 				67FECEE01D5399BC0029440F /* StickyNotes */,
 				67FECEF61D5399BC0029440F /* StickyNotesTests */,
+				670599E31D8195BA0085FCAC /* PutSticky */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		670599E21D8195BA0085FCAC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				670599F71D81A64B0085FCAC /* Assets.xcassets in Resources */,
+				670599F51D8196460085FCAC /* PutStickyViewController.xib in Resources */,
+				67059A101D87E72E0085FCAC /* GetPage.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		67FECEDF1D5399BC0029440F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -388,10 +526,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		670599E01D8195BA0085FCAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67059A0E1D87E5830085FCAC /* ColorSlider.swift in Sources */,
+				67059A061D838C9D0085FCAC /* DateFormatter.swift in Sources */,
+				67059A051D838C940085FCAC /* StickyRepository.swift in Sources */,
+				670599FA1D838BF60085FCAC /* APIClient.swift in Sources */,
+				670599FB1D838BF60085FCAC /* Sticky.swift in Sources */,
+				670599FC1D838BF60085FCAC /* Tag.swift in Sources */,
+				670599FD1D838BF60085FCAC /* Page.swift in Sources */,
+				670599F61D81A62D0085FCAC /* Color.swift in Sources */,
+				670599F41D8196460085FCAC /* PutStickyViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		67FECEDD1D5399BC0029440F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67059A0C1D87E5580085FCAC /* ColorSlider.swift in Sources */,
 				67FECF6B1D60840A0029440F /* DateFormatter.swift in Sources */,
 				67FECF2A1D5577B00029440F /* LoginViewController.swift in Sources */,
 				67FECF531D5CB6780029440F /* Action.swift in Sources */,
@@ -430,6 +585,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		670599ED1D8195BA0085FCAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 670599E31D8195BA0085FCAC /* PutSticky */;
+			targetProxy = 670599EC1D8195BA0085FCAC /* PBXContainerItemProxy */;
+		};
 		67FECEF91D5399BC0029440F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 67FECEE01D5399BC0029440F /* StickyNotes */;
@@ -449,6 +609,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		670599F01D8195BA0085FCAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_ENTITLEMENTS = PutSticky/PutSticky.entitlements;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = PutSticky/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.kumabook.StickyNotes.PutSticky;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		670599F11D8195BA0085FCAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_ENTITLEMENTS = PutSticky/PutSticky.entitlements;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = PutSticky/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.kumabook.StickyNotes.PutSticky;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		67FECEFE1D5399BC0029440F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -538,6 +734,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = StickyNotes/StickyNotes.entitlements;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -553,6 +751,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = StickyNotes/StickyNotes.entitlements;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -591,6 +791,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		670599EF1D8195BA0085FCAC /* Build configuration list for PBXNativeTarget "PutSticky" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				670599F01D8195BA0085FCAC /* Debug */,
+				670599F11D8195BA0085FCAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		67FECEDC1D5399BC0029440F /* Build configuration list for PBXProject "StickyNotes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -40,6 +40,7 @@ class ProfileTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.title = "プロフィール"
+        self.tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -49,6 +50,9 @@ class ProfileTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if APIClient.sharedInstance.accessToken == nil {
+            return 1
+        }
         return 2
     }
 

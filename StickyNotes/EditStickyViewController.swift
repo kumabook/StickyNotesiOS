@@ -140,7 +140,7 @@ class EditStickyViewController: UIViewController, UITextFieldDelegate {
         navigationController?.popViewControllerAnimated(true)
     }
 
-    @IBAction func colorChaged(sender: AnyObject) {
+    @IBAction func colorChanged(sender: AnyObject) {
         let index = min(Int(colorSlider.value), Color.values.count - 1)
         editSticky.color = Color.values[index].id
         colorView.backgroundColor = Color.values[index].backgroundColor
@@ -149,14 +149,5 @@ class EditStickyViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-}
-
-class ColorSlider: UISlider {
-    let thumbWidth = 40 as CGFloat
-    let thumbHeight = 40 as CGFloat
-    override func thumbRectForBounds(bounds: CGRect, trackRect: CGRect, value: Float) -> CGRect {
-        let x = trackRect.width * CGFloat(value / maximumValue) - thumbWidth / 2.0
-        return CGRectMake(x, 0, thumbWidth, thumbHeight)
     }
 }

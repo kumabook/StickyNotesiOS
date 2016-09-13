@@ -15,7 +15,9 @@ class APIClient {
     let client_secret = "..."
     let baseUrl = "https://stickynotes-backend.herokuapp.com"
     static var sharedInstance: APIClient = APIClient()
-    private static let userDefaults = NSUserDefaults.standardUserDefaults()
+
+    private static let userDefaults: NSUserDefaults! = NSUserDefaults(suiteName: "group.io.kumabook.StickyNotes")
+    var isLoggedIn: Bool { return accessToken != nil }
     var _accessToken: AccessToken?
     var accessToken: AccessToken? {
         get {

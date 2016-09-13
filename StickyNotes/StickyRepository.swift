@@ -30,6 +30,21 @@ class StickyRepository {
         return realm.objects(PageEntity.self).filter("_stickies.@count >= 1").sorted("title")
     }
 
+    func newStickies(sticky: StickyEntity, callback: (Bool) -> ()) {
+        let request = UpdateStickiesRequest(stickies: [sticky])
+        Session.sendRequest(request) { result in
+            switch result {
+            case .Success:
+                self.state.value = .Normal
+                callback(true)
+            case .Failure(let error):
+                print("failure: \(error)")
+                self.state.value = .Normal
+                callback(false)
+            }
+        }
+    }
+
     func updateStickies(callback: (Bool) -> ()) {
         if state.value == .Updating { return }
         state.value = .Updating
