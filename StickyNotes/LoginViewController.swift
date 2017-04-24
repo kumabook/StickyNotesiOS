@@ -24,7 +24,7 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func login(sender: AnyObject) {
+    @IBAction func login(_ sender: AnyObject) {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
 

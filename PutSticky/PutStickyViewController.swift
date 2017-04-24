@@ -28,45 +28,45 @@ class PutStickyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if APIClient.sharedInstance.isLoggedIn {
-            needLoginMessageView.hidden = true
-            putButton.addTarget(self, action: #selector(PutStickyViewController.putSticky), forControlEvents: .TouchUpInside)
-            cancelButton.addTarget(self, action: #selector(PutStickyViewController.cancel), forControlEvents: .TouchUpInside)
-            colorSlider.addTarget(self, action: #selector(PutStickyViewController.colorChanged(_:)), forControlEvents: .ValueChanged)
+            needLoginMessageView.isHidden = true
+            putButton.addTarget(self, action: #selector(PutStickyViewController.putSticky), for: .touchUpInside)
+            cancelButton.addTarget(self, action: #selector(PutStickyViewController.cancel), for: .touchUpInside)
+            colorSlider.addTarget(self, action: #selector(PutStickyViewController.colorChanged(_:)), for: .valueChanged)
         } else {
-            stickyView.hidden = true
+            stickyView.isHidden = true
         }
-        self.view.transform = CGAffineTransformMakeTranslation(0, self.view.frame.size.height)
-        UIView.animateWithDuration(1.0) {
-            self.view.transform = CGAffineTransformIdentity;
+        self.view.transform = CGAffineTransform(translationX: 0, y: self.view.frame.size.height)
+        UIView.animate(withDuration: 1.0, animations: {
+            self.view.transform = CGAffineTransform.identity;
             if APIClient.sharedInstance.isLoggedIn {
                 return
             }
-            let queue = dispatch_get_main_queue()
-            let startTime = dispatch_time(DISPATCH_TIME_NOW, Int64(self.delaySec * Double(NSEC_PER_SEC)))
-            dispatch_after(startTime, queue) {
+            let queue = DispatchQueue.main
+            let startTime = DispatchTime.now() + Double(Int64(self.delaySec * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            queue.asyncAfter(deadline: startTime) {
                 self.complete()
             }
-        }
+        }) 
         
         colorView.backgroundColor = color.backgroundColor
         
-        colorSlider.minimumTrackTintColor = UIColor.clearColor()
-        colorSlider.maximumTrackTintColor = UIColor.clearColor()
-        colorSlider.backgroundColor = UIColor.clearColor()
+        colorSlider.minimumTrackTintColor = UIColor.clear
+        colorSlider.maximumTrackTintColor = UIColor.clear
+        colorSlider.backgroundColor = UIColor.clear
         colorSlider.minimumValue = 0
         colorSlider.maximumValue = Float(Color.values.count)
-        colorSlider.value        = Float(Color.values.indexOf { $0.id == color.id } ?? 0) + 0.5
-        colorSlider.setThumbImage(UIImage(named: "down_arrow"), forState: UIControlState.Normal)
-        colorSlider.setThumbImage(UIImage(named: "down_arrow"), forState: UIControlState.Highlighted)
+        colorSlider.value        = Float(Color.values.index { $0.id == color.id } ?? 0) + 0.5
+        colorSlider.setThumbImage(UIImage(named: "down_arrow"), for: UIControlState())
+        colorSlider.setThumbImage(UIImage(named: "down_arrow"), for: UIControlState.highlighted)
         
         let size = sliderBackgroundImageView.frame.size
         UIGraphicsBeginImageContextWithOptions(size, true, 0);
         let context = UIGraphicsGetCurrentContext()
         
         let w = size.width / CGFloat(Color.values.count)
-        Color.values.enumerate().forEach { (i, v) in
+        Color.values.enumerated().forEach { (i, v) in
             v.backgroundColor.setFill()
-            CGContextFillRect(context, CGRectMake(w * CGFloat(i), 0, w, size.height))
+            context?.fill(CGRect(x: w * CGFloat(i), y: 0, width: w, height: size.height))
         }
         sliderBackgroundImageView.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -78,20 +78,20 @@ class PutStickyViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func fetchPage(onSuccess onSuccess: (String, String) -> (), onFailure: () -> ()) {
+    func fetchPage(onSuccess: @escaping (String, String) -> (), onFailure: @escaping () -> ()) {
         self.extensionContext!.inputItems.forEach { inputItem in
-            inputItem.attachments.flatMap({ $0 })?.forEach { _itemProvider in
+            (inputItem as AnyObject).attachments.flatMap({ $0 })?.forEach { _itemProvider in
                 guard  let itemProvider = _itemProvider as? NSItemProvider else { return onFailure() }
                 if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeURL as String) {
-                    itemProvider.loadItemForTypeIdentifier(kUTTypeURL as String, options: nil) { (value, error) in
-                        guard let url = value as? NSURL else { onFailure(); return }
+                    itemProvider.loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil) { (value, error) in
+                        guard let url = value as? URL else { onFailure(); return }
                         self.complete(onSuccess(url.absoluteString, url.absoluteString))
                     }
                 } else if itemProvider.hasItemConformingToTypeIdentifier(kUTTypePropertyList as String) {
-                    itemProvider.loadItemForTypeIdentifier(kUTTypePropertyList as String, options: nil) { (item, error) in
+                    itemProvider.loadItem(forTypeIdentifier: kUTTypePropertyList as String, options: nil) { (item, error) in
                         guard let results: NSDictionary = item as? NSDictionary                                else { onFailure(); return }
                         guard let dic = results[NSExtensionJavaScriptPreprocessingResultsKey] as? NSDictionary else { onFailure(); return }
-                        guard let url = dic["url"] as? String, title = dic["title"] as? String                 else { onFailure(); return }
+                        guard let url = dic["url"] as? String, let title = dic["title"] as? String                 else { onFailure(); return }
                         self.complete(onSuccess(url, title))
                     }
                 } else {
@@ -109,10 +109,10 @@ class PutStickyViewController: UIViewController {
         })
     }
 
-    func newSticky(url url: String, title: String) {
+    func newSticky(url: String, title: String) {
         let sticky = StickyEntity()
         sticky.id      = 0
-        sticky.uuid    = NSUUID().UUIDString
+        sticky.uuid    = UUID().uuidString
         sticky.left    = 0
         sticky.top     = 0
         sticky.width   = 100
@@ -123,8 +123,8 @@ class PutStickyViewController: UIViewController {
         sticky.page = PageEntity()
         sticky.page?.title = title
         sticky.page?.url   = url
-        if let tags = tagTextField.text?.characters.split(",").map({ String($0) }) {
-            sticky.tags.appendContentsOf(tags.map {
+        if let tags = tagTextField.text?.characters.split(separator: ",").map({ String($0) }) {
+            sticky.tags.append(objectsIn: tags.map {
                 let tag = TagEntity()
                 tag.name = String($0)
                 return tag
@@ -137,7 +137,7 @@ class PutStickyViewController: UIViewController {
         }
     }
 
-    func colorChanged(sender: AnyObject) {
+    func colorChanged(_ sender: AnyObject) {
         let index = min(Int(colorSlider.value), Color.values.count - 1)
         color = Color.values[index]
         colorView.backgroundColor = color.backgroundColor
@@ -148,6 +148,6 @@ class PutStickyViewController: UIViewController {
     }
     
     func complete() {
-        self.extensionContext?.completeRequestReturningItems([], completionHandler: nil)
+        self.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
     }
 }

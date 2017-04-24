@@ -10,17 +10,17 @@ import UIKit
 
 class ProfileTableViewController: UITableViewController {
     enum Item: Int {
-        case LoginOrLogout = 0
-        case Sync          = 1
+        case loginOrLogout = 0
+        case sync          = 1
         var label: String {
             switch self {
-            case .LoginOrLogout:
+            case .loginOrLogout:
                 if APIClient.sharedInstance.accessToken == nil {
                     return "Login"
                 } else {
                     return "Logout"
                 }
-            case .Sync:
+            case .sync:
                 return "Sync (latest sync \(APIClient.sharedInstance.lastSyncedAt.passedTime))"
             }
         }
@@ -37,7 +37,7 @@ class ProfileTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.title = "プロフィール"
         self.tableView.reloadData()
@@ -45,20 +45,20 @@ class ProfileTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if APIClient.sharedInstance.accessToken == nil {
             return 1
         }
         return 2
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell: UITableViewCell
-        if let c = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") {
+        if let c = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier") {
             cell = c
         } else {
             cell = UITableViewCell()
@@ -68,26 +68,26 @@ class ProfileTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let item = Item(rawValue: indexPath.item) else { return }
         switch item {
-        case .LoginOrLogout:
+        case .loginOrLogout:
             if APIClient.sharedInstance.accessToken == nil {
                 let vc = LoginViewController()
                 navigationController?.pushViewController(vc, animated: true)
             } else {
                 let alertController = UIAlertController(title: "Logout",
                                                       message: "ログアウトしますか?",
-                                               preferredStyle: .Alert)
-                alertController.addAction(UIAlertAction(title: "いいえ", style: .Cancel) { action in
+                                               preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "いいえ", style: .cancel) { action in
                     })
-                alertController.addAction(UIAlertAction(title: "はい", style: .Default) { action in
+                alertController.addAction(UIAlertAction(title: "はい", style: .default) { action in
                     Store.sharedInstance.dispatch(LogoutAction())
                     })
-                presentViewController(alertController, animated: true, completion: nil)
+                present(alertController, animated: true, completion: nil)
 
             }
-        case .Sync:
+        case .sync:
             Store.sharedInstance.dispatch(FetchStickiesAction())
         }
     }

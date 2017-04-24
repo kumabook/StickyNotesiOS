@@ -34,35 +34,35 @@ class EditStickyViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: #selector(EditStickyViewController.save))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(EditStickyViewController.save))
 
-        hideKeyboardButton.hidden = true
-        tagTextField.text = sticky.tags.map { $0.name }.joinWithSeparator(",")
+        hideKeyboardButton.isHidden = true
+        tagTextField.text = sticky.tags.map { $0.name }.joined(separator: ",")
         tagTextField.delegate = self
         contentTextView.text = sticky.content
         contentTextView.layer.borderWidth = 1
-        contentTextView.layer.borderColor = UIColor.lightGrayColor().CGColor
+        contentTextView.layer.borderColor = UIColor.lightGray.cgColor
         contentTextView.layer.cornerRadius = 8
 
         colorView.backgroundColor = sticky.backgroundColor
 
-        colorSlider.minimumTrackTintColor = UIColor.clearColor()
-        colorSlider.maximumTrackTintColor = UIColor.clearColor()
-        colorSlider.backgroundColor = UIColor.clearColor()
+        colorSlider.minimumTrackTintColor = UIColor.clear
+        colorSlider.maximumTrackTintColor = UIColor.clear
+        colorSlider.backgroundColor = UIColor.clear
         colorSlider.minimumValue = 0
         colorSlider.maximumValue = Float(Color.values.count)
-        colorSlider.value        = Float(Color.values.indexOf { $0.id == sticky.color } ?? 0) + 0.5
-        colorSlider.setThumbImage(UIImage(named: "down_arrow"), forState: UIControlState.Normal)
-        colorSlider.setThumbImage(UIImage(named: "down_arrow"), forState: UIControlState.Highlighted)
+        colorSlider.value        = Float(Color.values.index { $0.id == sticky.color } ?? 0) + 0.5
+        colorSlider.setThumbImage(UIImage(named: "down_arrow"), for: UIControlState())
+        colorSlider.setThumbImage(UIImage(named: "down_arrow"), for: UIControlState.highlighted)
 
         let size = sliderBackgroundImageView.frame.size
         UIGraphicsBeginImageContextWithOptions(size, true, 0);
         let context = UIGraphicsGetCurrentContext()
 
         let w = size.width / CGFloat(Color.values.count)
-        Color.values.enumerate().forEach { (i, v) in
+        Color.values.enumerated().forEach { (i, v) in
             v.backgroundColor.setFill()
-            CGContextFillRect(context, CGRectMake(w * CGFloat(i), 0, w, size.height))
+            context?.fill(CGRect(x: w * CGFloat(i), y: 0, width: w, height: size.height))
         }
         sliderBackgroundImageView.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -75,78 +75,78 @@ class EditStickyViewController: UIViewController, UITextFieldDelegate {
         super.viewWillLayoutSubviews()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self,
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self,
                                                          selector: #selector(EditStickyViewController.keyboardWillBeShown(_:)),
-                                                         name: UIKeyboardWillShowNotification,
+                                                         name: NSNotification.Name.UIKeyboardWillShow,
                                                          object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self,
+        NotificationCenter.default.addObserver(self,
                                                          selector: #selector(EditStickyViewController.keyboardWillBeHidden(_:)),
-                                                         name: UIKeyboardWillHideNotification,
+                                                         name: NSNotification.Name.UIKeyboardWillHide,
                                                          object: nil)
     }
 
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
-    func keyboardWillBeShown(notification: NSNotification) {
+    func keyboardWillBeShown(_ notification: Notification) {
         guard let info = notification.userInfo else { return }
-        guard let keyboardFrame = info[UIKeyboardFrameEndUserInfoKey]?.CGRectValue else { return }
-        guard let duration = info[UIKeyboardAnimationDurationUserInfoKey]?.doubleValue else { return }
+        guard let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue else { return }
+        guard let duration = (info[UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue else { return }
         guard let superHeight = view.superview?.frame.height else { return }
 
         height = superHeight - keyboardFrame.height
         view.frame = CGRect(x: view.frame.minX, y: view.frame.minY, width: view.frame.width, height: height!)
-        UIView.animateWithDuration(duration) {
+        UIView.animate(withDuration: duration, animations: {
             self.view.layoutIfNeeded()
-            self.hideKeyboardButton.hidden = false
-        }
+            self.hideKeyboardButton.isHidden = false
+        }) 
     }
     
-    func keyboardWillBeHidden(notification: NSNotification) {
+    func keyboardWillBeHidden(_ notification: Notification) {
         guard let info = notification.userInfo else { return }
-        guard let duration = info[UIKeyboardAnimationDurationUserInfoKey]?.doubleValue else { return }
+        guard let duration = (info[UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue else { return }
         guard let superHeight = view.superview?.frame.height else { return }
         height = superHeight
         view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: height!)
-        UIView.animateWithDuration(duration) {
+        UIView.animate(withDuration: duration, animations: {
             self.view.layoutIfNeeded()
-            self.hideKeyboardButton.hidden = true
-        }
+            self.hideKeyboardButton.isHidden = true
+        }) 
     }
 
-    @IBAction func keyboardButtonTapped(sender: AnyObject) {
+    @IBAction func keyboardButtonTapped(_ sender: AnyObject) {
         view.endEditing(true)
     }
 
     func save() {
         editSticky.content = contentTextView.text
         if let text = tagTextField.text {
-            editSticky.tags.appendContentsOf(text.characters.split(",").map {
+            editSticky.tags.append(contentsOf: text.components(separatedBy: ",").map {
                 return TagEntity.findOrCreateBy(name: String($0))
             })
         }
         Store.sharedInstance.dispatch(EditStickyAction(sticky: sticky, editSticky: editSticky))
-        navigationController?.popViewControllerAnimated(true)
+        let _ = navigationController?.popViewController(animated: true)
     }
 
-    @IBAction func colorChanged(sender: AnyObject) {
+    @IBAction func colorChanged(_ sender: AnyObject) {
         let index = min(Int(colorSlider.value), Color.values.count - 1)
         editSticky.color = Color.values[index].id
         colorView.backgroundColor = Color.values[index].backgroundColor
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }

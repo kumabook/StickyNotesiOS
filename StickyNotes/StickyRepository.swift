@@ -7,75 +7,77 @@
 //
 
 import Foundation
+import UIKit
 import RealmSwift
 import APIKit
-import ReactiveCocoa
+import ReactiveSwift
 
 class StickyRepository {
     enum State {
-        case Normal
-        case Updating
-        case Fetching
+        case normal
+        case updating
+        case fetching
     }
-    var state: MutableProperty<State> = MutableProperty(.Normal)
+    var state: MutableProperty<State> = MutableProperty(.normal)
     var realm: Realm = try! Realm()
     static var sharedInstance: StickyRepository = StickyRepository()
     var items: Results<StickyEntity> {
-        return realm.objects(StickyEntity.self).filter("state != 1").sorted("updatedAt", ascending: false)
+        return realm.objects(StickyEntity.self).filter("state != 1").sorted(byKeyPath: "updatedAt", ascending: false)
     }
     var tags: Results<TagEntity> {
-        return realm.objects(TagEntity.self).sorted("name")
+        return realm.objects(TagEntity.self).sorted(byKeyPath: "name")
     }
     var pages: Results<PageEntity> {
-        return realm.objects(PageEntity.self).filter("_stickies.@count >= 1").sorted("title")
+        return realm.objects(PageEntity.self).filter("_stickies.@count >= 1").sorted(byKeyPath: "title")
     }
 
-    func newStickies(sticky: StickyEntity, callback: (Bool) -> ()) {
+    func newStickies(_ sticky: StickyEntity, callback: @escaping (Bool) -> ()) {
         let request = UpdateStickiesRequest(stickies: [sticky])
-        Session.sendRequest(request) { result in
+        Session.send(request) { result in
             switch result {
-            case .Success:
-                self.state.value = .Normal
+            case .success:
+                self.state.value = .normal
                 callback(true)
-            case .Failure(let error):
+            case .failure(let error):
                 print("failure: \(error)")
-                self.state.value = .Normal
+                self.state.value = .normal
                 callback(false)
             }
         }
     }
 
-    func updateStickies(callback: (Bool) -> ()) {
-        if state.value == .Updating { return }
-        state.value = .Updating
-        let predicate = NSPredicate(format: "updatedAt > %@", APIClient.sharedInstance.lastSyncedAt)
-        var stickies = realm.objects(StickyEntity.self).filter(predicate).map { $0 }
-        stickies.appendContentsOf(realm.objects(TrashedStickyEntity.self).map { $0 })
+    func updateStickies(_ callback: @escaping (Bool) -> ()) {
+        if state.value == .updating { return }
+        state.value = .updating
+        let predicate = NSPredicate(format: "updatedAt > %@", APIClient.sharedInstance.lastSyncedAt as NSDate)
+        var stickies: [StickyEntity] = []
+        stickies.append(contentsOf: realm.objects(StickyEntity.self).filter(predicate).map { $0 })
+        stickies.append(contentsOf: realm.objects(TrashedStickyEntity.self).map { $0 })
         let request = UpdateStickiesRequest(stickies: stickies)
-        Session.sendRequest(request) { result in
+        Session.send(request) { result in
             switch result {
-            case .Success:
-                self.state.value = .Normal
+            case .success:
+                self.state.value = .normal
                 callback(true)
-            case .Failure(let error):
+            case .failure(let error):
                 print("failure: \(error)")
-                self.state.value = .Normal
+                self.state.value = .normal
                 callback(false)
             }
         }
     }
 
-    func fetchStickies(callback: (Bool) -> ()) {
-        if state.value == .Fetching { return }
-        state.value = .Fetching
+    func fetchStickies(_ callback: @escaping (Bool) -> ()) {
+        if state.value == .fetching { return }
+        state.value = .fetching
         let request = StickiesRequest(newerThan: APIClient.sharedInstance.lastSyncedAt)
-        Session.sendRequest(request) { result in
+        Session.send(request) { result in
             switch result {
-            case .Success(let stickies):
+            case .success(let stickies):
                 stickies.value.forEach {
-                    if $0.state == .Deleted {
+                    if $0.state == .deleted {
                         if let s = StickyEntity.findBy(uuid: $0.uuid) {
-                            StickyRepository.sharedInstance.removeSticky(s)
+                            let _ = StickyRepository.sharedInstance.removeSticky(s)
                         }
                         return
                     }
@@ -88,23 +90,23 @@ class StickyRepository {
                         print("error")
                     }
                 }
-                self.state.value = .Normal
-                APIClient.sharedInstance.lastSyncedAt = NSDate()
+                self.state.value = .normal
+                APIClient.sharedInstance.lastSyncedAt = Date()
                 callback(true)
                 print("stickies \(stickies)")
-            case .Failure(let error):
+            case .failure(let error):
                 print("error: \(error)")
-                self.state.value = .Normal
+                self.state.value = .normal
                 callback(false)
             }
         }
     }
 
-    func saveSticky(sticky: StickyEntity, newSticky: StickyEntity) -> Bool {
+    func saveSticky(_ sticky: StickyEntity, newSticky: StickyEntity) -> Bool {
         do {
             try self.realm.write {
                 sticky.content   = newSticky.content
-                sticky.updatedAt = NSDate()
+                sticky.updatedAt = Date()
                 sticky.color     = newSticky.color
                 sticky.left      = newSticky.left
                 sticky.top       = newSticky.top
@@ -112,7 +114,7 @@ class StickyRepository {
                 sticky.height    = newSticky.height
                 sticky.tags.removeAll()
 
-                sticky.tags.appendContentsOf(newSticky.tags)
+                sticky.tags.append(contentsOf: newSticky.tags)
             }
         } catch {
             return false
@@ -120,7 +122,7 @@ class StickyRepository {
         return true
     }
 
-    func removeSticky(sticky:  StickyEntity) -> Bool {
+    func removeSticky(_ sticky:  StickyEntity) -> Bool {
         do {
             try self.realm.write {
                 self.realm.add(TrashedStickyEntity.build(sticky))
@@ -152,11 +154,11 @@ class StickyEntity: Object {
     dynamic var content:   String = ""
     dynamic var color:     String = ""
     dynamic var state:     Int = 0
-    dynamic var createdAt: NSDate = NSDate()
-    dynamic var updatedAt: NSDate = NSDate()
+    dynamic var createdAt: Date = Date()
+    dynamic var updatedAt: Date = Date()
     dynamic var userId:    Int = 0
     dynamic var page:      PageEntity?
-    let tags = List<TagEntity>()
+    var tags = List<TagEntity>()
     override static func primaryKey() -> String? {
         return "uuid"
     }
@@ -172,37 +174,37 @@ class StickyEntity: Object {
         content   = sticky.content
         color     = sticky.color
         state     = sticky.state.rawValue
-        createdAt = sticky.createdAt
-        updatedAt = sticky.updatedAt
+        createdAt = sticky.createdAt as Date
+        updatedAt = sticky.updatedAt as Date
         userId    = sticky.userId
         page      	= PageEntity(value: ["url": sticky.page.url, "title": sticky.page.title])
-        tags.appendContentsOf(sticky.tags.map { TagEntity.findOrCreateBy(name: $0) })
+        tags.append(contentsOf: sticky.tags.map { TagEntity.findOrCreateBy(name: $0) })
     }
 
-    static func findBy(uuid uuid: String) -> StickyEntity? {
+    static func findBy(uuid: String) -> StickyEntity? {
         let realm: Realm = try! Realm()
-        if let sticky = realm.objectForPrimaryKey(StickyEntity.self, key: uuid) {
+        if let sticky = realm.object(ofType: StickyEntity.self, forPrimaryKey: uuid) {
             return sticky
         }
         return nil
     }
-    func toParameter() -> [String:AnyObject] {
+    func toParameter() -> [String:Any] {
         return  [
-                    "id": id,
-                  "uuid": uuid,
-                  "left": left,
-                   "top": top,
-                 "width": width,
-                "height": height,
-               "content": content,
+                    "id": id as Any,
+                  "uuid": uuid as Any,
+                  "left": left as Any,
+                   "top": top as Any,
+                 "width": width as Any,
+                "height": height as Any,
+               "content": content as Any,
                  "color": color,
                  "state": state,
-            "created_at": DateFormatter.sharedInstance.stringFromDate(createdAt),
-            "updated_at": DateFormatter.sharedInstance.stringFromDate(updatedAt),
+            "created_at": DateFormatter.sharedInstance.string(from: createdAt),
+            "updated_at": DateFormatter.sharedInstance.string(from: updatedAt),
                "user_id": userId,
                    "url": page!.url,
                  "title": page!.title,
-                  "tags": tags.map { $0.name },
+                  "tags": tags.map { $0.name } as [String],
                   "page": page != nil ? ["url": page!.url, "title": page!.title] : [:]
         ]
     }
@@ -229,13 +231,13 @@ class StickyEntity: Object {
         return Color.get(color)?.fontColor
     }
     func toJSONString() throws -> String {
-        let data = try NSJSONSerialization.dataWithJSONObject(toParameter(), options: NSJSONWritingOptions.PrettyPrinted)
-        return String(data: data, encoding: NSUTF8StringEncoding)!
+        let data = try JSONSerialization.data(withJSONObject: toParameter(), options: JSONSerialization.WritingOptions.prettyPrinted)
+        return String(data: data, encoding: String.Encoding.utf8)!
     }
 }
 
 class TrashedStickyEntity: StickyEntity {
-    static func build(sticky: StickyEntity) -> TrashedStickyEntity {
+    static func build(_ sticky: StickyEntity) -> TrashedStickyEntity {
         let trashed = TrashedStickyEntity()
         trashed.id        = sticky.id
         trashed.uuid      = sticky.uuid
@@ -245,7 +247,7 @@ class TrashedStickyEntity: StickyEntity {
         trashed.height    = sticky.height
         trashed.content   = sticky.content
         trashed.color     = sticky.color
-        trashed.state     = Sticky.State.Deleted.rawValue
+        trashed.state     = Sticky.State.deleted.rawValue
         trashed.createdAt = sticky.createdAt
         trashed.updatedAt = sticky.updatedAt
         trashed.userId    = sticky.userId
@@ -270,14 +272,14 @@ class TagEntity: Object {
     override static func primaryKey() -> String? {
         return "name"
     }
-    static func findBy(name name: String) -> TagEntity? {
+    static func findBy(name: String) -> TagEntity? {
         let realm: Realm = try! Realm()
-        if let tag = realm.objectForPrimaryKey(TagEntity.self, key: name) {
+        if let tag = realm.object(ofType: TagEntity.self, forPrimaryKey: name) {
             return tag
         }
         return nil
     }
-    static func findOrCreateBy(name name: String) -> TagEntity {
+    static func findOrCreateBy(name: String) -> TagEntity {
         if let tag = findBy(name: name) {
             return tag
         }

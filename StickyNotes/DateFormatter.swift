@@ -9,14 +9,15 @@
 import Foundation
 
 class DateFormatter {
-    private static var dateFormatter = NSDateFormatter()
-    private static var onceToken : dispatch_once_t = 0
-    static var sharedInstance: NSDateFormatter {
-        dispatch_once(&onceToken) {
+    private static var __once: () = {
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-            let posix = NSLocale(localeIdentifier: "en_US_POSIX")
+            let posix = Locale(identifier: "en_US_POSIX")
             dateFormatter.locale = posix
-        }
+        }()
+    fileprivate static var dateFormatter = Foundation.DateFormatter()
+    fileprivate static var onceToken : Int = 0
+    static var sharedInstance: Foundation.DateFormatter {
+        _ = DateFormatter.__once
         return dateFormatter
     }
 }

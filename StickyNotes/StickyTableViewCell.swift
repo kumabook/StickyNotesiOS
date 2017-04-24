@@ -26,33 +26,33 @@ class StickyTableViewCell: UITableViewCell {
 
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 
-    func updateView(sticky: StickyEntity) {
-        separatorInset = UIEdgeInsetsZero
+    func updateView(_ sticky: StickyEntity) {
+        separatorInset = UIEdgeInsets.zero
         preservesSuperviewLayoutMargins = false
-        layoutMargins = UIEdgeInsetsZero
+        layoutMargins = UIEdgeInsets.zero
 
         UITableView.appearance().cellLayoutMarginsFollowReadableWidth = false
-        UITableView.appearance().layoutMargins = UIEdgeInsetsZero
-        UITableViewCell.appearance().layoutMargins = UIEdgeInsetsZero
+        UITableView.appearance().layoutMargins = UIEdgeInsets.zero
+        UITableViewCell.appearance().layoutMargins = UIEdgeInsets.zero
         UITableViewCell.appearance().preservesSuperviewLayoutMargins = false
 
-        UITableView.appearance().separatorStyle = .SingleLine
-        UITableView.appearance().separatorInset = UIEdgeInsetsZero
-        UITableViewCell.appearance().separatorInset = UIEdgeInsetsZero
+        UITableView.appearance().separatorStyle = .singleLine
+        UITableView.appearance().separatorInset = UIEdgeInsets.zero
+        UITableViewCell.appearance().separatorInset = UIEdgeInsets.zero
 
         contentTextView.text = sticky.content
-        contentTextView.textContainerInset = UIEdgeInsetsZero
+        contentTextView.textContainerInset = UIEdgeInsets.zero
         contentTextView.textContainer.lineFragmentPadding = 0
-        contentTextView.userInteractionEnabled = false
+        contentTextView.isUserInteractionEnabled = false
 
         colorEdgeView.backgroundColor = sticky.backgroundColor
         colorEdgeView.frame = CGRect(x: 0, y: 0, width: 3, height: frame.height)
 
-        separator.backgroundColor = UIColor.lightGrayColor()
+        separator.backgroundColor = UIColor.lightGray
         separator.frame = CGRect(x: 0, y: frame.height - 2, width: frame.width, height: 1)
 
         if sticky.content.characters.count == 0 {
@@ -75,8 +75,8 @@ class StickyTableViewCell: UITableViewCell {
             label.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(label)
             self.tagLabels.append(label)
-            label.leadingAnchor.constraintEqualToAnchor(prev.anchor, constant: prev.margin).active = true
-            label.bottomAnchor.constraintEqualToAnchor(margins.bottomAnchor).active = true
+            label.leadingAnchor.constraint(equalTo: prev.anchor, constant: prev.margin).isActive = true
+            label.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
             return (anchor: label.trailingAnchor, margin: 8.0)
         }
     }
@@ -88,9 +88,9 @@ class TagLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        font = UIFont.boldSystemFontOfSize(14.0)
+        font = UIFont.boldSystemFont(ofSize: 14.0)
         layer.cornerRadius = 8
-        textColor = UIColor.whiteColor()
+        textColor = UIColor.white
         backgroundColor = UIColor.ThemeLightColor()
         clipsToBounds = true
         numberOfLines = 1
@@ -100,13 +100,13 @@ class TagLabel: UILabel {
         super.init(coder: aDecoder)
     }
 
-    override func drawTextInRect(rect: CGRect) {
+    override func drawText(in rect: CGRect) {
         let newRect = UIEdgeInsetsInsetRect(rect, padding)
-        super.drawTextInRect(newRect)
+        super.drawText(in: newRect)
     }
 
-    override func intrinsicContentSize() -> CGSize {
-        var intrinsicContentSize = super.intrinsicContentSize()
+    override var intrinsicContentSize : CGSize {
+        var intrinsicContentSize = super.intrinsicContentSize
         intrinsicContentSize.height += padding.top + padding.bottom
         intrinsicContentSize.width += padding.left + padding.right
         return intrinsicContentSize

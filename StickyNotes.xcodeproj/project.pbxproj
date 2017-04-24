@@ -31,6 +31,8 @@
 		67059A0C1D87E5580085FCAC /* ColorSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67059A0B1D87E5580085FCAC /* ColorSlider.swift */; };
 		67059A0E1D87E5830085FCAC /* ColorSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67059A0B1D87E5580085FCAC /* ColorSlider.swift */; };
 		67059A101D87E72E0085FCAC /* GetPage.js in Resources */ = {isa = PBXBuildFile; fileRef = 67059A0F1D87E72E0085FCAC /* GetPage.js */; };
+		67CF2B181EAD9BFA0094B25E /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67CF2B171EAD9BFA0094B25E /* ReactiveSwift.framework */; };
+		67CF2B191EAD9C170094B25E /* ReactiveSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67CF2B171EAD9BFA0094B25E /* ReactiveSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		67FECEE51D5399BC0029440F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECEE41D5399BC0029440F /* AppDelegate.swift */; };
 		67FECEEE1D5399BC0029440F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67FECEED1D5399BC0029440F /* Assets.xcassets */; };
 		67FECEF11D5399BC0029440F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67FECEEF1D5399BC0029440F /* LaunchScreen.storyboard */; };
@@ -134,6 +136,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				67CF2B191EAD9C170094B25E /* ReactiveSwift.framework in CopyFiles */,
 				67FECF631D5F053F0029440F /* SlideMenuControllerSwift.framework in CopyFiles */,
 				67FECF181D54EFAA0029440F /* Delta.framework in CopyFiles */,
 				67FECF191D54EFAA0029440F /* APIKit.framework in CopyFiles */,
@@ -157,6 +160,7 @@
 		670599F91D8389710085FCAC /* PutSticky.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PutSticky.entitlements; sourceTree = "<group>"; };
 		67059A0B1D87E5580085FCAC /* ColorSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSlider.swift; sourceTree = "<group>"; };
 		67059A0F1D87E72E0085FCAC /* GetPage.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = GetPage.js; sourceTree = "<group>"; };
+		67CF2B171EAD9BFA0094B25E /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
 		67FECEE11D5399BC0029440F /* StickyNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickyNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67FECEE41D5399BC0029440F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67FECEED1D5399BC0029440F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67CF2B181EAD9BFA0094B25E /* ReactiveSwift.framework in Frameworks */,
 				67FECF621D5F05370029440F /* SlideMenuControllerSwift.framework in Frameworks */,
 				67FECF151D54EF6A0029440F /* Delta.framework in Frameworks */,
 				67FECF0D1D54EF2C0029440F /* APIKit.framework in Frameworks */,
@@ -299,6 +304,7 @@
 		67FECF161D54EF740029440F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				67CF2B171EAD9BFA0094B25E /* ReactiveSwift.framework */,
 				67FECF611D5F05370029440F /* SlideMenuControllerSwift.framework */,
 				67FECF141D54EF6A0029440F /* Delta.framework */,
 				67FECF061D54EF2C0029440F /* APIKit.framework */,
@@ -442,12 +448,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = kumabook;
 				TargetAttributes = {
 					670599E31D8195BA0085FCAC = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 7AK92UN63W;
+						LastSwiftMigration = 0820;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -457,6 +464,7 @@
 					67FECEE01D5399BC0029440F = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 7AK92UN63W;
+						LastSwiftMigration = 0820;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -624,6 +632,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.kumabook.StickyNotes.PutSticky;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -642,6 +651,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.kumabook.StickyNotes.PutSticky;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -659,8 +669,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -705,8 +717,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -725,6 +739,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -733,9 +748,9 @@
 		67FECF011D5399BC0029440F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = StickyNotes/StickyNotes.entitlements;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -744,15 +759,16 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.kumabook.StickyNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		67FECF021D5399BC0029440F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = StickyNotes/StickyNotes.entitlements;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -761,6 +777,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.kumabook.StickyNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -798,6 +815,7 @@
 				670599F11D8195BA0085FCAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		67FECEDC1D5399BC0029440F /* Build configuration list for PBXProject "StickyNotes" */ = {
 			isa = XCConfigurationList;

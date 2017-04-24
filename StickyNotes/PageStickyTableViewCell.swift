@@ -21,25 +21,25 @@ class PageStickyTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 
-    @IBAction func editButtonTapped(sender: AnyObject) {
+    @IBAction func editButtonTapped(_ sender: AnyObject) {
         guard let sticky = sticky else { return }
         delegate?.editButtonTapped(sticky)
     }
 
-    func updateView(sticky: StickyEntity) {
+    func updateView(_ sticky: StickyEntity) {
         self.sticky = sticky
-        separatorInset = UIEdgeInsetsZero
+        separatorInset = UIEdgeInsets.zero
         preservesSuperviewLayoutMargins = false
-        layoutMargins = UIEdgeInsetsZero
+        layoutMargins = UIEdgeInsets.zero
 
         contentTextView.text = sticky.content.characters.count > 0 ? sticky.content : "No content"
-        contentTextView.textContainerInset = UIEdgeInsetsZero
+        contentTextView.textContainerInset = UIEdgeInsets.zero
         contentTextView.textContainer.lineFragmentPadding = 0
-        contentTextView.userInteractionEnabled = false
+        contentTextView.isUserInteractionEnabled = false
 
         locationLabel.text = "position: (\(sticky.left),\(sticky.top))"
         locationLabel.textColor = UIColor.ThemeColor()
@@ -56,8 +56,8 @@ class PageStickyTableViewCell: UITableViewCell {
             label.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(label)
             self.tagLabels.append(label)
-            label.leadingAnchor.constraintEqualToAnchor(prev.anchor, constant: prev.margin).active = true
-            label.bottomAnchor.constraintEqualToAnchor(margins.bottomAnchor).active = true
+            label.leadingAnchor.constraint(equalTo: prev.anchor, constant: prev.margin).isActive = true
+            label.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
             return (anchor: label.trailingAnchor, margin: 8.0)
         }
     }

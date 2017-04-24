@@ -23,7 +23,7 @@ class StickyTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let nib = UINib(nibName: "StickyTableViewCell", bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(nib, forCellReuseIdentifier: reuseIdentifier)
     }
 
     func reload() {
@@ -36,16 +36,16 @@ class StickyTableViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Store.sharedInstance.state.value.stickiesRepository.state.signal.observeNext() { [weak self] state in
+        Store.sharedInstance.state.value.stickiesRepository.state.signal.observeValues() { [weak self] state in
             switch state {
-            case .Normal:
+            case .normal:
                 self?.refreshControl?.endRefreshing()
                 self?.reloadData()
-            case .Fetching:
+            case .fetching:
                 self?.refreshControl?.beginRefreshing()
-            case .Updating:
+            case .updating:
                 self?.refreshControl?.beginRefreshing()
             }
         }
@@ -56,26 +56,26 @@ class StickyTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeight
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return stickies.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath:indexPath) as! StickyTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for:indexPath) as! StickyTableViewCell
         let sticky = stickies[indexPath.item]
         cell.updateView(sticky)
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sticky = stickies[indexPath.item]
         if let page = sticky.page {
             let vc = WebViewController(page: page)

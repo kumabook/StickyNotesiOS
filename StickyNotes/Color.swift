@@ -56,7 +56,7 @@ struct Color {
                                   Color(id:   "black", background: 0x111111, font: 0xffffff),
                                   Color(id:    "gray", background: 0xaaaaaa, font: 0x000000),
                                   Color(id:  "silver", background: 0xdddddd, font: 0x000000)]
-    static func get(id: String) -> Color? {
+    static func get(_ id: String) -> Color? {
         return values.filter { $0.id ==  id }.first
     }
 }

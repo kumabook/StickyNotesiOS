@@ -24,7 +24,7 @@ class TagTableViewController: UITableViewController {
         self.title = "Tags"
         
         let nib = UINib(nibName: "TabTableViewCell", bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(nib, forCellReuseIdentifier: reuseIdentifier)
 
         reloadData()
         Store.sharedInstance.state.subscribe {[weak self] _ in
@@ -32,16 +32,16 @@ class TagTableViewController: UITableViewController {
         }
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         tabBarController?.title = "タグ"
-        Store.sharedInstance.state.value.stickiesRepository.state.signal.observeNext() { [weak self] state in
+        Store.sharedInstance.state.value.stickiesRepository.state.signal.observeValues() { [weak self] state in
             switch state {
-            case .Normal:
+            case .normal:
                 self?.refreshControl?.endRefreshing()
                 self?.reloadData()
-            case .Fetching:
+            case .fetching:
                 self?.refreshControl?.beginRefreshing()
-            case .Updating:
+            case .updating:
                 self?.refreshControl?.beginRefreshing()
             }
         }
@@ -57,20 +57,20 @@ class TagTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeight
     }
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tags.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath:indexPath) as! TabTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for:indexPath) as! TabTableViewCell
         let tag = tags[indexPath.item]
         cell.nameLabel.text          = tag.name
         cell.tagImageView?.tintColor = Color.values[indexPath.item % Color.values.count].backgroundColor
@@ -78,7 +78,7 @@ class TagTableViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = TagStickyTableViewController(tag: self.tags[indexPath.item])
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -38,38 +38,38 @@ class TagStickyTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
         self.title = tag.name
 
         let nib = UINib(nibName: "PageTableViewCell", bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(nib, forCellReuseIdentifier: reuseIdentifier)
         reloadData()
         Store.sharedInstance.state.subscribe {[weak self] _ in
             self?.reloadData()
         }
     }
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeight
     }
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return pages.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let page = pages[indexPath.item]
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath:indexPath) as! PageTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for:indexPath) as! PageTableViewCell
         cell.titleLabel.text = page.title
         cell.thumbImageView.image = UIImage(named: "no_image")
         cell.stickiesNumLabel.text = "\(pageDict[page]!.count)/\(page.stickies.count) stickies"
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = WebViewController(page: pages[indexPath.item])
         navigationController?.pushViewController(vc, animated: true)
     }

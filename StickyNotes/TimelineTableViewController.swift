@@ -17,19 +17,19 @@ class TimelineTableViewController: StickyTableViewController {
 
         self.reloadData()
         self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: #selector(TimelineTableViewController.reload), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(TimelineTableViewController.reload), for: UIControlEvents.valueChanged)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Store.sharedInstance.state.value.stickiesRepository.state.signal.observeNext() { [weak self] state in
+        Store.sharedInstance.state.value.stickiesRepository.state.signal.observeValues() { [weak self] state in
             switch state {
-            case .Normal:
+            case .normal:
                 self?.refreshControl?.endRefreshing()
                 self?.reloadData()
-            case .Fetching:
+            case .fetching:
                 self?.refreshControl?.beginRefreshing()
-            case .Updating:
+            case .updating:
                 self?.refreshControl?.beginRefreshing()
             }
         }

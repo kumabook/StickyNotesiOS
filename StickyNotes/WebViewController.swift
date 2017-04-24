@@ -8,7 +8,7 @@
 
 import UIKit
 import WebKit
-import ReactiveCocoa
+import ReactiveSwift
 
 class WebViewController: UIViewController, WKNavigationDelegate {
     class Observer: WindowObserver {
@@ -16,7 +16,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         init(viewController: WebViewController) {
             self.viewController = viewController
         }
-        override func longTapped(coordinate: CGPoint) {
+        override func longTapped(_ coordinate: CGPoint) {
         }
     }
     class MessageHandler: NSObject, WKScriptMessageHandler {
@@ -24,21 +24,21 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         init(vc: WebViewController) {
             self.vc = vc
         }
-        func getSticky(dic: [String:AnyObject]) -> Sticky? {
+        func getSticky(_ dic: [String:AnyObject]) -> Sticky? {
             guard let obj = dic["sticky"] else { return nil }
             guard let s = try? Sticky.decodeValue(obj) else { return nil }
             return s
         }
-        func getStickyEntity(dic: [String:AnyObject]) -> StickyEntity? {
+        func getStickyEntity(_ dic: [String:AnyObject]) -> StickyEntity? {
             guard let s = getSticky(dic) else { return nil }
             guard let stickies = vc?.page?.stickies else { return nil }
             guard let sticky = stickies.map({ $0 }).filter({ $0.id == s.id }).first else { return nil }
             return sticky
         }
-        func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
+        func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
             guard let body = message.body as? String else { return }
             if message.name != "stickynotes" { return }
-            let json: AnyObject? = try? NSJSONSerialization.JSONObjectWithData(body.dataUsingEncoding(NSUTF8StringEncoding)!, options: NSJSONReadingOptions.AllowFragments)
+            let json: AnyObject? = try! JSONSerialization.jsonObject(with: body.data(using: String.Encoding.utf8)!, options: JSONSerialization.ReadingOptions.allowFragments) as AnyObject?
             guard let dic = json as? [String: AnyObject] else { return }
             guard let type = dic["type"] as?  String else { return }
             switch type {
@@ -56,7 +56,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
             }
         }
     }
-    var appDelegate: AppDelegate { return UIApplication.sharedApplication().delegate as! AppDelegate }
+    var appDelegate: AppDelegate { return UIApplication.shared.delegate as! AppDelegate }
     var webView:     WKWebView?
     var page: PageEntity?
     var observer: Observer?
@@ -71,7 +71,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     }
     
     deinit {
-        webView!.configuration.userContentController.removeScriptMessageHandlerForName("stickynotes")
+        webView!.configuration.userContentController.removeScriptMessageHandler(forName: "stickynotes")
     }
     
     override func viewDidLoad() {
@@ -81,18 +81,18 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         webView = _webView
         webView!.navigationDelegate = self
         messageHandler = MessageHandler(vc: self)
-        webView!.configuration.userContentController.addScriptMessageHandler(messageHandler!, name: "stickynotes")
-        let item = UIBarButtonItem(title: "Stickies", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(WebViewController.showStickies))
+        webView!.configuration.userContentController.add(messageHandler!, name: "stickynotes")
+        let item = UIBarButtonItem(title: "Stickies", style: UIBarButtonItemStyle.plain, target: self, action: #selector(WebViewController.showStickies))
         navigationItem.rightBarButtonItem = item
         navigationItem.title = page!.title
 
-        if let str = page?.url, url = NSURL(string: str) {
-            webView?.loadRequest(NSURLRequest(URL: url))
+        if let str = page?.url, let url = URL(string: str) {
+            let _ = webView?.load(URLRequest(url: url))
         }
         Store.sharedInstance.state.subscribe {[weak self] state in
             guard let strongSelf = self else { return }
             switch state.mode.value {
-            case .JumpSticky(let sticky):
+            case .jumpSticky(let sticky):
                 strongSelf.jumpToSticky(sticky)
                 UIScheduler().schedule {
                     Store.sharedInstance.dispatch(ShowingPageAction(page: strongSelf.page!))
@@ -106,7 +106,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         observer = Observer(viewController: self)
         appDelegate.observableWindow.addObserver(observer!)
@@ -119,7 +119,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         }
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         webView?.navigationDelegate = nil
         webView?.removeFromSuperview()
@@ -128,8 +128,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         }
     }
     
-    private func createWebView() -> WKWebView {
-        let script = WKUserScript(source: getSource(), injectionTime: WKUserScriptInjectionTime.AtDocumentEnd, forMainFrameOnly: false)
+    fileprivate func createWebView() -> WKWebView {
+        let script = WKUserScript(source: getSource(), injectionTime: WKUserScriptInjectionTime.atDocumentEnd, forMainFrameOnly: false)
         let userContentController = WKUserContentController()
         userContentController.addUserScript(script)
         let configuration = WKWebViewConfiguration()
@@ -137,9 +137,9 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         return WKWebView(frame: view.bounds, configuration: configuration)
     }
     
-    private func getSource() -> String {
-        let bundle                  = NSBundle.mainBundle()
-        let userScriptPath: String = bundle.pathForResource("stickynotes-userscript", ofType: "js")!
+    fileprivate func getSource() -> String {
+        let bundle                  = Bundle.main
+        let userScriptPath: String = bundle.path(forResource: "stickynotes-userscript", ofType: "js")!
         return try! String(contentsOfFile: userScriptPath)
     }
     
@@ -147,27 +147,29 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         // TODO
     }
     
-    func updateSticky(sticky: StickyEntity, editSticky: Sticky) {
+    func updateSticky(_ sticky: StickyEntity, editSticky: Sticky) {
         Store.sharedInstance.dispatch(EditStickyAction(sticky: sticky,
                                                    editSticky: StickyEntity(sticky: editSticky)))
     }
 
-    func showStickies(sticky: StickyEntity?) {
+    func showStickies(_ sticky: StickyEntity?) {
         guard let page = page else { return }
         Store.sharedInstance.dispatch(ListStickyAction(page: page))
     }
 
-    func jumpToSticky(sticky: StickyEntity) {
+    func jumpToSticky(_ sticky: StickyEntity) {
         try! webView?.evaluateJavaScript("StickyNotes.jumpToSticky(\(sticky.toJSONString()))") { (val, error) in
             print("callback \(val) \(error)")
         }
     }
     
     func reloadStickies() {
-        guard let objs = page?.stickies.map({ $0.toParameter() }) else { return }
+        guard let stickies = page?.stickies else { return }
+        let entities: [StickyEntity] = stickies.map({ $0 })
+        let objs = entities.map { $0.toParameter() }
         do {
-            let data = try NSJSONSerialization.dataWithJSONObject(objs, options: .PrettyPrinted)
-            let jsonString = String(data: data, encoding: NSUTF8StringEncoding)!
+            let data = try JSONSerialization.data(withJSONObject: objs, options: .prettyPrinted)
+            let jsonString = String(data: data, encoding: String.Encoding.utf8)!
             webView?.evaluateJavaScript("StickyNotes.reloadStickies(\(jsonString))") { (val, error) in
                 print("callback \(val) \(error)")
             }
@@ -176,15 +178,15 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         }
     }
 
-    func loadURL(url: NSURL) {
+    func loadURL(_ url: URL) {
         if let webView = webView {
-            webView.loadRequest(NSURLRequest(URL: url))
+            webView.load(URLRequest(url: url))
         }
     }
     
     // MARK: - WKNavigationDelegate
-    func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {}
-    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {}
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.reloadStickies()
     }
 }

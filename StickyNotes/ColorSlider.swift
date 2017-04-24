@@ -11,8 +11,8 @@ import UIKit
 class ColorSlider: UISlider {
     let thumbWidth = 40 as CGFloat
     let thumbHeight = 40 as CGFloat
-    override func thumbRectForBounds(bounds: CGRect, trackRect: CGRect, value: Float) -> CGRect {
+    override func thumbRect(forBounds bounds: CGRect, trackRect: CGRect, value: Float) -> CGRect {
         let x = trackRect.width * CGFloat(value / maximumValue) - thumbWidth / 2.0
-        return CGRectMake(x, 0, thumbWidth, thumbHeight)
+        return CGRect(x: x, y: 0, width: thumbWidth, height: thumbHeight)
     }
 }

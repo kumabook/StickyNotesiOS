@@ -7,7 +7,7 @@
 //
 
 import Delta
-import ReactiveCocoa
+import ReactiveSwift
 
 extension MutableProperty: ObservablePropertyType {
     public typealias ValueType = Value
@@ -24,15 +24,15 @@ struct Store: StoreType {
     static var sharedInstance: Store = Store(state:
         ObservableProperty(AppState(accessToken: MutableProperty(APIClient.sharedInstance.accessToken),
                              stickiesRepository: StickyRepository(),
-                                           mode: MutableProperty(.Home)))
+                                           mode: MutableProperty(.home)))
     )
 }
 
 enum Mode {
-    case Home
-    case Page(page: PageEntity)
-    case ListSticky(page: PageEntity)
-    case ListingSticky(page: PageEntity)
-    case SelectSticky(sticky: StickyEntity)
-    case JumpSticky(sticky: StickyEntity)
+    case home
+    case page(page: PageEntity)
+    case listSticky(page: PageEntity)
+    case listingSticky(page: PageEntity)
+    case selectSticky(sticky: StickyEntity)
+    case jumpSticky(sticky: StickyEntity)
 }

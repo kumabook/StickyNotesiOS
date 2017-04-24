@@ -10,7 +10,7 @@ import UIKit
 
 class PageStickyTableViewController: UITableViewController {
     var cellHeight: CGFloat = 160
-    var appDelegate: AppDelegate { return UIApplication.sharedApplication().delegate as! AppDelegate }
+    var appDelegate: AppDelegate { return UIApplication.shared.delegate as! AppDelegate }
     let reuseIdentifier = "PageStickyTableViewCell"
     var page: PageEntity? {
         didSet {
@@ -26,7 +26,7 @@ class PageStickyTableViewController: UITableViewController {
         super.viewDidLoad()
         let nib = UINib(nibName: "PageStickyTableViewCell", bundle: nil)
         title = "Sticky list"
-        tableView.registerNib(nib, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(nib, forCellReuseIdentifier: reuseIdentifier)
         Store.sharedInstance.state.subscribe {[weak self] state in
             switch state.mode.value {
             default:
@@ -36,7 +36,7 @@ class PageStickyTableViewController: UITableViewController {
         }
     }
 
-    func editButtonTapped(sticky: StickyEntity) {
+    func editButtonTapped(_ sticky: StickyEntity) {
         let vc = EditStickyViewController(sticky: sticky)
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -48,36 +48,36 @@ class PageStickyTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeight
     }
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let page = page else { return 0 }
         return page.stickies.count
     }
 
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         guard let page = page else { return [] }
         let sticky = page.stickies[indexPath.item]
-        let remove = UITableViewRowAction(style: .Default, title: "Remove".localize()) { (action, indexPath) in
+        let remove = UITableViewRowAction(style: .default, title: "Remove".localize()) { (action, indexPath) in
             Store.sharedInstance.dispatch(DeleteStickyAction(sticky: sticky))
         }
-        remove.backgroundColor = UIColor.redColor()
+        remove.backgroundColor = UIColor.red
         return [remove]
     }
 
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath:indexPath) as! PageStickyTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for:indexPath) as! PageStickyTableViewCell
         guard let page = page else { return cell }
         let sticky = page.stickies[indexPath.item]
         cell.updateView(sticky)
@@ -85,7 +85,7 @@ class PageStickyTableViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let page = page else { return }
         let sticky = page.stickies[indexPath.item]
         Store.sharedInstance.dispatch(JumpStickyAction(sticky: sticky))
