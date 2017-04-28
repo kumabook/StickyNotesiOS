@@ -19,11 +19,12 @@ class LoginViewController: UIViewController {
 
         title = "Login"
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        emailTextField.becomeFirstResponder()
+    }
+
     @IBAction func login(_ sender: AnyObject) {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
