@@ -34,6 +34,8 @@ class TagTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.title = "タグ"
+        tabBarController?.navigationItem.leftBarButtonItem = nil
+        tabBarController?.navigationItem.rightBarButtonItem = nil
         Store.sharedInstance.state.value.stickiesRepository.state.signal.observeValues() { [weak self] state in
             switch state {
             case .normal:

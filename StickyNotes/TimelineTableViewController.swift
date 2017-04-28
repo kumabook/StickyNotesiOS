@@ -10,14 +10,17 @@ import UIKit
 import Breit
 
 class TimelineTableViewController: StickyTableViewController {
+    func newPage() {
+    }
+    func search() {
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Stickies"
-
-        self.reloadData()
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: #selector(TimelineTableViewController.reload), for: UIControlEvents.valueChanged)
+        title = "Stickies"
+        reloadData()
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(TimelineTableViewController.reload), for: .valueChanged)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -37,5 +40,7 @@ class TimelineTableViewController: StickyTableViewController {
             self?.reloadData()
         }
         tabBarController?.title = "タイムライン"
+        tabBarController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "new_page"), style: .plain, target: self, action: #selector(TimelineTableViewController.newPage))
+        tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "search"), style: .plain, target: self, action: #selector(TimelineTableViewController.search))
     }
 }
