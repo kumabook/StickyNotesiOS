@@ -53,7 +53,7 @@
 		67FECF1E1D54EFAA0029440F /* RealmSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF0B1D54EF2C0029440F /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		67FECF1F1D54EFAA0029440F /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF0C1D54EF2C0029440F /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		67FECF251D556CCA0029440F /* TimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF241D556CCA0029440F /* TimelineTableViewController.swift */; };
-		67FECF271D5576E30029440F /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF261D5576E30029440F /* ProfileTableViewController.swift */; };
+		67FECF271D5576E30029440F /* PreferenceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF261D5576E30029440F /* PreferenceTableViewController.swift */; };
 		67FECF2A1D5577B00029440F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF281D5577B00029440F /* LoginViewController.swift */; };
 		67FECF2B1D5577B00029440F /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67FECF291D5577B00029440F /* LoginViewController.xib */; };
 		67FECF2E1D558ABD0029440F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF2D1D558ABD0029440F /* APIClient.swift */; };
@@ -176,7 +176,7 @@
 		67FECF0C1D54EF2C0029440F /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		67FECF141D54EF6A0029440F /* Delta.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Delta.framework; path = Carthage/Build/iOS/Delta.framework; sourceTree = "<group>"; };
 		67FECF241D556CCA0029440F /* TimelineTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableViewController.swift; sourceTree = "<group>"; };
-		67FECF261D5576E30029440F /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		67FECF261D5576E30029440F /* PreferenceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceTableViewController.swift; sourceTree = "<group>"; };
 		67FECF281D5577B00029440F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		67FECF291D5577B00029440F /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		67FECF2D1D558ABD0029440F /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
@@ -326,7 +326,7 @@
 				67FECF4E1D5C05060029440F /* TagStickyTableViewController.swift */,
 				67FECF481D5B80230029440F /* TagTableViewController.swift */,
 				67FECF4A1D5BEF550029440F /* PageTableViewController.swift */,
-				67FECF261D5576E30029440F /* ProfileTableViewController.swift */,
+				67FECF261D5576E30029440F /* PreferenceTableViewController.swift */,
 				67FECF281D5577B00029440F /* LoginViewController.swift */,
 				67FECF291D5577B00029440F /* LoginViewController.xib */,
 				67FECF411D58AA1E0029440F /* WebViewController.swift */,
@@ -559,7 +559,7 @@
 				67FECF2A1D5577B00029440F /* LoginViewController.swift in Sources */,
 				67FECF531D5CB6780029440F /* Action.swift in Sources */,
 				67FECF421D58AA1E0029440F /* WebViewController.swift in Sources */,
-				67FECF271D5576E30029440F /* ProfileTableViewController.swift in Sources */,
+				67FECF271D5576E30029440F /* PreferenceTableViewController.swift in Sources */,
 				67FECF4F1D5C05060029440F /* TagStickyTableViewController.swift in Sources */,
 				67FECF3F1D580FC70029440F /* StickyTableViewCell.swift in Sources */,
 				67FECF4D1D5BFA010029440F /* StickyTableViewController.swift in Sources */,

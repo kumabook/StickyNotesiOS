@@ -36,8 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         page.tabBarItem = UITabBarItem(title: "Pages", image: UIImage(named: "page"), selectedImage: nil)
         tbc.addChildViewController(page)
 
-        let profile = ProfileTableViewController()
-        profile.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profile"), selectedImage: nil)
+        let profile = PreferenceTableViewController()
+        profile.tabBarItem = UITabBarItem(title: "Preference", image: UIImage(named: "profile"), selectedImage: nil)
         tbc.addChildViewController(profile)
         let pageStickies = PageStickyTableViewController()
         self.pageStickies = pageStickies

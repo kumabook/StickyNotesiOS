@@ -8,10 +8,15 @@
 
 import UIKit
 
-class ProfileTableViewController: UITableViewController {
+class PreferenceTableViewController: UITableViewController {
     enum Item: Int {
         case loginOrLogout = 0
         case sync          = 1
+        case support       = 2
+        case help          = 3
+        case version       = 4
+        case license       = 5
+        static let count   = 6
         var label: String {
             switch self {
             case .loginOrLogout:
@@ -22,6 +27,14 @@ class ProfileTableViewController: UITableViewController {
                 }
             case .sync:
                 return "Sync (latest sync \(APIClient.sharedInstance.lastSyncedAt.passedTime))"
+            case .version:
+                return "Version information"
+            case .support:
+                return "Support StickyNotes"
+            case .help:
+                return "Help"
+            case .license:
+                return "License information"
             }
         }
     }
@@ -39,7 +52,9 @@ class ProfileTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tabBarController?.title = "プロフィール"
+        tabBarController?.title = "設定"
+        tabBarController?.navigationItem.leftBarButtonItem = nil
+        tabBarController?.navigationItem.rightBarButtonItem = nil
         self.tableView.reloadData()
     }
 
@@ -53,7 +68,7 @@ class ProfileTableViewController: UITableViewController {
         if APIClient.sharedInstance.accessToken == nil {
             return 1
         }
-        return 2
+        return Item.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,6 +104,8 @@ class ProfileTableViewController: UITableViewController {
             }
         case .sync:
             Store.sharedInstance.dispatch(FetchStickiesAction())
+        default:
+            break
         }
     }
 }
