@@ -264,6 +264,22 @@ class PageEntity: Object {
     override static func primaryKey() -> String? {
         return "url"
     }
+    static func findBy(url: String) -> PageEntity? {
+        let realm: Realm = try! Realm()
+        if let page = realm.object(ofType: PageEntity.self, forPrimaryKey: url) {
+            return page
+        }
+        return nil
+    }
+    static func findOrCreateBy(url: String, title: String) -> PageEntity {
+        if let page = findBy(url: url) {
+            return page
+        }
+        let page = PageEntity()
+        page.url   = url
+        page.title = title
+        return page
+    }
 }
 
 class TagEntity: Object {
