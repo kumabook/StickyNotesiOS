@@ -11,6 +11,7 @@ import WebKit
 import ReactiveSwift
 
 class WebViewController: UIViewController, WKNavigationDelegate {
+    let toolbarHeight: CGFloat = 45.0
     class Observer: WindowObserver {
         weak var viewController: WebViewController?
         init(viewController: WebViewController) {
@@ -57,10 +58,12 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         }
     }
     var appDelegate: AppDelegate { return UIApplication.shared.delegate as! AppDelegate }
-    var webView:     WKWebView?
-    var page: PageEntity?
-    var observer: Observer?
+    var webView:        WKWebView?
+    var page:           PageEntity?
+    var observer:       Observer?
     var messageHandler: MessageHandler?
+    var backButton:     UIBarButtonItem?
+    var forwardButton:  UIBarButtonItem?
     init(page: PageEntity) {
         self.page = page
         super.init(nibName: nil, bundle: nil)
@@ -82,8 +85,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         webView!.navigationDelegate = self
         messageHandler = MessageHandler(vc: self)
         webView!.configuration.userContentController.add(messageHandler!, name: "stickynotes")
-        let item = UIBarButtonItem(title: "Stickies", style: UIBarButtonItemStyle.plain, target: self, action: #selector(WebViewController.showStickies))
-        navigationItem.rightBarButtonItem = item
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "search"), style: .plain, target: self, action: "search")
         navigationItem.title = page!.title
 
         if let str = page?.url, let url = URL(string: str) {
@@ -100,6 +102,18 @@ class WebViewController: UIViewController, WKNavigationDelegate {
             default: break
             }
         }
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: view.frame.height - toolbarHeight, width: view.frame.width, height: toolbarHeight))
+        let back     = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(WebViewController.back))
+        let forward  = UIBarButtonItem(image: UIImage(named:"forward"), style: .plain, target: self, action: #selector(WebViewController.forward))
+        let space    = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let share    = UIBarButtonItem(barButtonSystemItem: .action, target: nil, action: nil)
+        let stickies = UIBarButtonItem(image: UIImage(named:"stickies"), style: .plain, target: self, action: #selector(WebViewController.showStickies(_:)))
+        toolbar.setItems([back, space, forward, space, share, space, stickies], animated: true)
+        backButton    = back
+        forwardButton = forward
+        back.isEnabled    = false
+        forward.isEnabled = false
+        view.addSubview(toolbar)
     }
     
     override func didReceiveMemoryWarning() {
@@ -134,7 +148,19 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         userContentController.addUserScript(script)
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = userContentController;
-        return WKWebView(frame: view.bounds, configuration: configuration)
+        return WKWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height - toolbarHeight), configuration: configuration)
+    }
+
+    func search() {
+        // TODO
+    }
+
+    func back() {
+        let _ = webView?.goBack()
+    }
+    
+    func forward() {
+        let _ = webView?.goForward()
     }
     
     fileprivate func getSource() -> String {
@@ -187,6 +213,11 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     // MARK: - WKNavigationDelegate
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {}
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.reloadStickies()
+        backButton?.isEnabled    = webView.canGoBack
+        forwardButton?.isEnabled = webView.canGoForward
+        guard let url = webView.url?.absoluteString else { return }
+        page = PageEntity.findOrCreateBy(url: url, title: webView.title ?? "")
+        navigationItem.title = webView.title ?? url
+        reloadStickies()
     }
 }
