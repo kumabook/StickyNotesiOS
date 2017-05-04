@@ -12,29 +12,36 @@ class PreferenceTableViewController: UITableViewController {
     enum Item: Int {
         case loginOrLogout = 0
         case sync          = 1
-        case support       = 2
-        case help          = 3
-        case version       = 4
-        case license       = 5
-        static let count   = 6
+        case help          = 2
+        case version       = 3
+        case license       = 4
+        case purchase      = 5
+        case restore       = 6
+        static let count   = 7
         var label: String {
             switch self {
             case .loginOrLogout:
                 if APIClient.sharedInstance.accessToken == nil {
-                    return "Login"
+                    return "ログイン"
                 } else {
-                    return "Logout"
+                    return "ログアウト"
                 }
             case .sync:
-                return "Sync (latest sync \(APIClient.sharedInstance.lastSyncedAt.passedTime))"
-            case .version:
-                return "Version information"
-            case .support:
-                return "Support StickyNotes"
+                if let lastSyncedAt = APIClient.sharedInstance.lastSyncedAt {
+                    return "同期 (\(lastSyncedAt) に実行)"
+                } else {
+                    return "同期"
+                }
             case .help:
-                return "Help"
+                return "ヘルプ"
+            case .version:
+                return "バージョン情報"
             case .license:
-                return "License information"
+                return "ライセンス情報"
+            case .purchase:
+                return "プレミアムサービスを購入"
+            case .restore:
+                return "購入を復元"
             }
         }
     }
@@ -66,9 +73,6 @@ class PreferenceTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if APIClient.sharedInstance.accessToken == nil {
-            return 1
-        }
         return Item.count
     }
 
@@ -104,7 +108,14 @@ class PreferenceTableViewController: UITableViewController {
 
             }
         case .sync:
-            Store.sharedInstance.dispatch(FetchStickiesAction())
+            if APIClient.sharedInstance.isLoggedIn {
+                Store.sharedInstance.dispatch(FetchStickiesAction())
+            } else {
+                let _ = UIAlertController.show(self, title: "ログインが必要です", message: "ログインをするとデバイス間でデータを共有することができます。") {_ in
+                    let vc = LoginViewController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
         default:
             break
         }
