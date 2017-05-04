@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import SDWebImage
 
 class PageTableViewController: UITableViewController {
     var cellHeight: CGFloat = 80
@@ -64,7 +65,7 @@ class PageTableViewController: UITableViewController {
         let page = pages[indexPath.item]
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for:indexPath) as! PageTableViewCell
         cell.titleLabel.text = page.title
-        cell.thumbImageView.image = UIImage(named: "no_image")
+        cell.thumbImageView.sd_setImage(with: page.visualUrl.flatMap({ URL(string: $0) }), placeholderImage: UIImage(named: "no_image"))
         cell.stickiesNumLabel.text = "\(page.stickies.count) stickies"
         return cell
     }

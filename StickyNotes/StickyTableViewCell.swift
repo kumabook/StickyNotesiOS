@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import SDWebImage
 
 class StickyTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var thumbImageView: UIImageView!
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var pageLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -43,6 +45,8 @@ class StickyTableViewCell: UITableViewCell {
         UITableView.appearance().separatorStyle = .singleLine
         UITableView.appearance().separatorInset = UIEdgeInsets.zero
         UITableViewCell.appearance().separatorInset = UIEdgeInsets.zero
+
+        thumbImageView.sd_setImage(with: sticky.page?.visualUrl.flatMap({ URL(string: $0) }), placeholderImage: UIImage(named: "no_image"))
 
         contentTextView.text = sticky.content
         contentTextView.textContainerInset = UIEdgeInsets.zero

@@ -1,59 +1,62 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="180" id="KGk-i7-Jjw" customClass="StickyTableViewCell" customModule="StickyNotes">
-            <rect key="frame" x="0.0" y="0.0" width="327" height="160"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="160" id="KGk-i7-Jjw" customClass="StickyTableViewCell" customModule="StickyNotes">
+            <rect key="frame" x="0.0" y="0.0" width="327" height="139"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="327" height="159"/>
+                <rect key="frame" x="0.0" y="0.0" width="327" height="138"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016/08/08 10:10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJS-6v-aZv">
-                        <rect key="frame" x="13" y="52" width="117" height="16"/>
+                        <rect key="frame" x="197" y="52" width="117" height="16"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                        <color key="textColor" red="0.040517241379310343" green="0.42411099137931035" blue="0.68434806034482754" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.040517241379310343" green="0.42411099137931035" blue="0.68434806034482754" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jI9-dh-nqh">
+                        <rect key="frame" x="13" y="8" width="80" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="80" id="XJw-qi-5Qr"/>
+                            <constraint firstAttribute="width" constant="80" id="lHh-Us-DgN"/>
+                        </constraints>
+                    </imageView>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" translatesAutoresizingMaskIntoConstraints="NO" id="IEI-V0-lSB">
+                        <rect key="frame" x="13" y="97" width="306" height="34"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="page title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3Y-Un-Neb">
-                        <rect key="frame" x="56" y="15" width="256" height="21"/>
+                        <rect key="frame" x="101" y="15" width="206" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="page" translatesAutoresizingMaskIntoConstraints="NO" id="jI9-dh-nqh">
-                        <rect key="frame" x="13" y="8" width="35" height="35"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="35" id="XJw-qi-5Qr"/>
-                            <constraint firstAttribute="width" constant="35" id="lHh-Us-DgN"/>
-                        </constraints>
-                    </imageView>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" translatesAutoresizingMaskIntoConstraints="NO" id="IEI-V0-lSB">
-                        <rect key="frame" x="13" y="76" width="304" height="43"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    </textView>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="o3Y-Un-Neb" secondAttribute="trailing" constant="12" id="42p-EM-g8g"/>
                     <constraint firstItem="o3Y-Un-Neb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="8pE-C0-I8C"/>
-                    <constraint firstItem="jI9-dh-nqh" firstAttribute="centerY" secondItem="o3Y-Un-Neb" secondAttribute="centerY" id="9wG-O8-CcA"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="VJS-6v-aZv" secondAttribute="leading" constant="-5" id="Erh-Gy-ihC"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="IEI-V0-lSB" secondAttribute="bottom" constant="32" id="G2z-d1-H3d"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="IEI-V0-lSB" secondAttribute="trailing" constant="2" id="Igj-ff-lDM"/>
+                    <constraint firstItem="jI9-dh-nqh" firstAttribute="centerY" secondItem="o3Y-Un-Neb" secondAttribute="centerY" constant="22.5" id="9wG-O8-CcA"/>
+                    <constraint firstItem="IEI-V0-lSB" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" constant="-104" id="CCd-yf-0rc"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="IEI-V0-lSB" secondAttribute="trailing" id="Igj-ff-lDM"/>
                     <constraint firstItem="o3Y-Un-Neb" firstAttribute="leading" secondItem="jI9-dh-nqh" secondAttribute="trailing" constant="8" id="RON-gi-Swu"/>
                     <constraint firstItem="jI9-dh-nqh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="bR3-sD-nji"/>
-                    <constraint firstItem="VJS-6v-aZv" firstAttribute="top" secondItem="jI9-dh-nqh" secondAttribute="bottom" constant="9" id="kVf-Yk-Fnr"/>
-                    <constraint firstItem="IEI-V0-lSB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="68" id="l5G-8u-jK2"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="o3Y-Un-Neb" secondAttribute="trailing" constant="7" id="npJ-jy-lKl"/>
-                    <constraint firstItem="o3Y-Un-Neb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="48" id="pOB-6o-K4P"/>
-                    <constraint firstItem="IEI-V0-lSB" firstAttribute="leading" secondItem="jI9-dh-nqh" secondAttribute="leading" id="qRu-fo-2BZ"/>
+                    <constraint firstItem="VJS-6v-aZv" firstAttribute="top" secondItem="jI9-dh-nqh" secondAttribute="bottom" constant="-36" id="kVf-Yk-Fnr"/>
+                    <constraint firstItem="IEI-V0-lSB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="89" id="l5G-8u-jK2"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="VJS-6v-aZv" secondAttribute="trailing" constant="5" id="mlN-u8-b7I"/>
+                    <constraint firstItem="o3Y-Un-Neb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="93" id="pOB-6o-K4P"/>
                     <constraint firstAttribute="leadingMargin" secondItem="IEI-V0-lSB" secondAttribute="leading" constant="-5" id="yT4-aO-bIU"/>
                 </constraints>
             </tableViewCellContentView>
@@ -61,11 +64,9 @@
                 <outlet property="contentTextView" destination="IEI-V0-lSB" id="536-y0-9zn"/>
                 <outlet property="dateLabel" destination="VJS-6v-aZv" id="wWX-em-XlS"/>
                 <outlet property="pageLabel" destination="o3Y-Un-Neb" id="M5k-Wl-HTl"/>
+                <outlet property="thumbnailImageView" destination="jI9-dh-nqh" id="WAC-Fk-1vk"/>
             </connections>
-            <point key="canvasLocation" x="343.5" y="362"/>
+            <point key="canvasLocation" x="343.5" y="351.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="page" width="21" height="21"/>
-    </resources>
 </document>

@@ -64,7 +64,7 @@ class TagStickyTableViewController: UITableViewController {
         let page = pages[indexPath.item]
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for:indexPath) as! PageTableViewCell
         cell.titleLabel.text = page.title
-        cell.thumbImageView.image = UIImage(named: "no_image")
+        cell.thumbImageView.sd_setImage(with: page.visualUrl.flatMap({ URL(string: $0) }), placeholderImage: UIImage(named: "no_image"))
         cell.stickiesNumLabel.text = "\(pageDict[page]!.count)/\(page.stickies.count) stickies"
         return cell
     }
