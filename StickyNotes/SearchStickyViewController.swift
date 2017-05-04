@@ -27,6 +27,8 @@ class SearchStickyViewController: StickyTableViewController, UISearchControllerD
         navigationItem.titleView = searchController.searchBar
 
         definesPresentationContext = true
+
+        automaticallyAdjustsScrollViewInsets = true
     }
 
     override func reload() {
