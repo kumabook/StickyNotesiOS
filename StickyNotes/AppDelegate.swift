@@ -45,6 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SlideMenuOptions.rightPanFromBezel = false
         let smc = SlideMenuController(mainViewController: UINavigationController(rootViewController: tbc),
                                  rightMenuViewController: stb)
+        tbc.navigationController?.navigationBar.tintColor = UIColor.ThemeColor()
+        tbc.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.ThemeColor()]
+        tbc.tabBar.tintColor = UIColor.ThemeColor()
         slideMenu = smc
         window = ObservableWindow(frame: UIScreen.main.bounds)
         window!.backgroundColor = UIColor.white

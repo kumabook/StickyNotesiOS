@@ -109,6 +109,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         let share    = UIBarButtonItem(barButtonSystemItem: .action, target: nil, action: nil)
         let stickies = UIBarButtonItem(image: UIImage(named:"stickies"), style: .plain, target: self, action: #selector(WebViewController.showStickies(_:)))
         toolbar.setItems([back, space, forward, space, share, space, stickies], animated: true)
+        toolbar.tintColor = UIColor.ThemeColor()
         backButton    = back
         forwardButton = forward
         back.isEnabled    = false
