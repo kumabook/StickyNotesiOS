@@ -84,6 +84,7 @@ extension WebViewController: UICollectionViewDataSource, UICollectionViewDelegat
                                            UIViewAutoresizing.flexibleRightMargin,
                                            UIViewAutoresizing.flexibleTopMargin,
                                            UIViewAutoresizing.flexibleBottomMargin]
+        collectionView.alwaysBounceVertical = true
         return collectionView
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
