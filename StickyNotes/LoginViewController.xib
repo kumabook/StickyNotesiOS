@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,6 +14,7 @@
                 <outlet property="emailTextField" destination="gyI-gl-uYm" id="3tE-sl-1gV"/>
                 <outlet property="loginButton" destination="oAI-A5-ggV" id="M8t-Pj-cYk"/>
                 <outlet property="passwordTextField" destination="bqb-Li-d6G" id="w7l-qD-maa"/>
+                <outlet property="registerButton" destination="6no-nl-dlh" id="7FP-mY-t77"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bqb-Li-d6G">
-                    <rect key="frame" x="37" y="171" width="300" height="30"/>
+                    <rect key="frame" x="47" y="171" width="280" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
@@ -35,7 +36,10 @@
                     </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gyI-gl-uYm">
-                    <rect key="frame" x="37" y="142" width="300" height="30"/>
+                    <rect key="frame" x="47.5" y="142" width="280" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="280" id="azz-s6-RyK"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                 </textField>
@@ -53,6 +57,9 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6no-nl-dlh">
                     <rect key="frame" x="126" y="259" width="123" height="30"/>
                     <state key="normal" title="アカウントを作成"/>
+                    <connections>
+                        <action selector="register:" destination="-1" eventType="touchUpInside" id="eMI-4T-r8n"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -66,12 +73,11 @@
                 <constraint firstItem="6no-nl-dlh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="NFE-FM-VaO"/>
                 <constraint firstItem="oAI-A5-ggV" firstAttribute="centerX" secondItem="gyI-gl-uYm" secondAttribute="centerX" id="Tnq-KA-dv8"/>
                 <constraint firstItem="jmd-bJ-AMn" firstAttribute="top" secondItem="6no-nl-dlh" secondAttribute="bottom" constant="-2" id="Ytt-MV-NOV"/>
+                <constraint firstItem="bqb-Li-d6G" firstAttribute="width" secondItem="gyI-gl-uYm" secondAttribute="width" id="Z9R-iL-8W7"/>
                 <constraint firstItem="oAI-A5-ggV" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="dfM-Qh-m3U"/>
                 <constraint firstItem="gyI-gl-uYm" firstAttribute="top" secondItem="bNw-Tm-5Cd" secondAttribute="bottom" constant="-3" id="itW-Ax-Eqo"/>
                 <constraint firstItem="oAI-A5-ggV" firstAttribute="top" secondItem="gyI-gl-uYm" secondAttribute="bottom" constant="41" id="j8D-2w-dbF"/>
                 <constraint firstItem="oAI-A5-ggV" firstAttribute="centerX" secondItem="bqb-Li-d6G" secondAttribute="centerX" id="jpp-A8-bjU"/>
-                <constraint firstItem="gyI-gl-uYm" firstAttribute="leading" secondItem="bqb-Li-d6G" secondAttribute="leading" id="oNM-5E-Y7G"/>
-                <constraint firstItem="gyI-gl-uYm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="37" id="oTp-GI-ut6"/>
                 <constraint firstItem="bNw-Tm-5Cd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="62" id="q0N-Gj-07P"/>
             </constraints>
             <point key="canvasLocation" x="292.5" y="360.5"/>
