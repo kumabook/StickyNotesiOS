@@ -19,7 +19,7 @@ extension UIColor {
     }
 
     static func ThemeColor() -> UIColor {
-        return UIColor(rgb: 0x87CEEB)
+        return UIColor(rgb: 0x3cb7e8)
     }
 
     static func ThemeLightColor() -> UIColor {
