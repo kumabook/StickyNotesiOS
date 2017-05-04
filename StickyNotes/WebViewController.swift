@@ -11,6 +11,10 @@ import WebKit
 import ReactiveSwift
 
 class WebViewController: UIViewController, WKNavigationDelegate {
+    enum Mode {
+        case view
+        case newPage
+    }
     let toolbarHeight: CGFloat = 45.0
     class Observer: WindowObserver {
         weak var viewController: WebViewController?
@@ -58,13 +62,29 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         }
     }
     var appDelegate: AppDelegate { return UIApplication.shared.delegate as! AppDelegate }
-    var webView:        WKWebView?
-    var page:           PageEntity?
-    var observer:       Observer?
-    var messageHandler: MessageHandler?
-    var backButton:     UIBarButtonItem?
-    var forwardButton:  UIBarButtonItem?
-    init(page: PageEntity) {
+    var mode:             Mode = .view {
+        didSet {
+            switch mode {
+            case .newPage:
+                enterNewPageMode()
+            case .view:
+                enterViewMode()
+            }
+        }
+    }
+    var webView:          WKWebView?
+    var page:             PageEntity? {
+        didSet {
+            mode = page == nil ? .newPage : .view
+        }
+    }
+    var observer:         Observer?
+    var messageHandler:   MessageHandler?
+    var backButton:       UIBarButtonItem?
+    var forwardButton:    UIBarButtonItem?
+    var searchController: UISearchController?
+    var collectionView:   UICollectionView?
+    init(page: PageEntity? = nil) {
         self.page = page
         super.init(nibName: nil, bundle: nil)
     }
@@ -74,19 +94,22 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     }
     
     deinit {
-        webView!.configuration.userContentController.removeScriptMessageHandler(forName: "stickynotes")
+        webView?.configuration.userContentController.removeScriptMessageHandler(forName: "stickynotes")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let _webView = createWebView()
-        view.addSubview(_webView)
-        webView = _webView
+        webView = createWebView()
+        view.addSubview(webView!)
+        view.autoresizesSubviews = true
+        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+
         webView!.navigationDelegate = self
         messageHandler = MessageHandler(vc: self)
         webView!.configuration.userContentController.add(messageHandler!, name: "stickynotes")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "search"), style: .plain, target: self, action: "search")
-        navigationItem.title = page!.title
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "search"), style: .plain, target: self, action: #selector(WebViewController.enterNewPageMode))
+        navigationItem.title = page?.title ?? ""
 
         if let str = page?.url, let url = URL(string: str) {
             let _ = webView?.load(URLRequest(url: url))
@@ -97,7 +120,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
             case .jumpSticky(let sticky):
                 strongSelf.jumpToSticky(sticky)
                 UIScheduler().schedule {
-                    Store.sharedInstance.dispatch(ShowingPageAction(page: strongSelf.page!))
+                    guard let page = strongSelf.page else { return }
+                    Store.sharedInstance.dispatch(ShowingPageAction(page: page))
                 }
             default: break
             }
@@ -133,6 +157,11 @@ class WebViewController: UIViewController, WKNavigationDelegate {
             }
         }
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        mode = page == nil ? .newPage : .view
+    }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -150,10 +179,6 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = userContentController;
         return WKWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height - toolbarHeight), configuration: configuration)
-    }
-
-    func search() {
-        // TODO
     }
 
     func back() {
