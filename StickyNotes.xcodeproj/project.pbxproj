@@ -145,6 +145,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				674293A01EBB716A00E95148 /* SnapKit.framework in CopyFiles */,
 				679A7E9A1EB5FDE90008EFBE /* SDWebImage.framework in CopyFiles */,
 				6780E38F1EB220B3002692E8 /* MBProgressHUD.framework in CopyFiles */,
 				67CF2B191EAD9C170094B25E /* ReactiveSwift.framework in CopyFiles */,
@@ -244,6 +245,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				674293A11EBB717A00E95148 /* SnapKit.framework in Frameworks */,
 				679A7E991EB5FDDC0008EFBE /* SDWebImage.framework in Frameworks */,
 				6780E38E1EB220A5002692E8 /* MBProgressHUD.framework in Frameworks */,
 				67CF2B181EAD9BFA0094B25E /* ReactiveSwift.framework in Frameworks */,
@@ -333,6 +335,7 @@
 		67FECF161D54EF740029440F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6742939F1EBB716A00E95148 /* SnapKit.framework */,
 				679A7E981EB5FDDC0008EFBE /* SDWebImage.framework */,
 				6780E38D1EB220A5002692E8 /* MBProgressHUD.framework */,
 				67CF2B171EAD9BFA0094B25E /* ReactiveSwift.framework */,
