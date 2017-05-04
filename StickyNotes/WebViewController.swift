@@ -210,8 +210,12 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     }
 
     func jumpToSticky(_ sticky: StickyEntity) {
-        try! webView?.evaluateJavaScript("StickyNotes.jumpToSticky(\(sticky.toJSONString()))") { (val, error) in
-            print("callback \(val) \(error)")
+        try? webView?.evaluateJavaScript("StickyNotes.jumpToSticky(\(sticky.toJSONString()))") { (val, error) in
+            if let error = error {
+                    print("callback \(error)")
+            } else if let val = val {
+                print("callback \(val)")
+            }
         }
     }
     
@@ -223,7 +227,11 @@ class WebViewController: UIViewController, WKNavigationDelegate {
             let data = try JSONSerialization.data(withJSONObject: objs, options: .prettyPrinted)
             let jsonString = String(data: data, encoding: String.Encoding.utf8)!
             webView?.evaluateJavaScript("StickyNotes.reloadStickies(\(jsonString))") { (val, error) in
-                print("callback \(val) \(error)")
+                if let error = error {
+                    print("callback \(error)")
+                } else if let val = val {
+                    print("callback \(val)")
+                }
             }
         } catch {
             print("Failed to reload stickies")
