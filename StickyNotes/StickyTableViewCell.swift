@@ -68,7 +68,7 @@ class StickyTableViewCell: UITableViewCell {
             pageLabel.text = ""
         }
         dateLabel.text = sticky.updatedAt.passedTime
-        dateLabel.textColor = UIColor.ThemeColor()
+        dateLabel.textColor = UIColor.themeColor
 
         tagLabels.forEach { $0.removeFromSuperview() }
         tagLabels.removeAll()
@@ -95,7 +95,7 @@ class TagLabel: UILabel {
         font = UIFont.boldSystemFont(ofSize: 14.0)
         layer.cornerRadius = 8
         textColor = UIColor.white
-        backgroundColor = UIColor.ThemeLightColor()
+        backgroundColor = UIColor.themeLightColor
         clipsToBounds = true
         numberOfLines = 1
     }

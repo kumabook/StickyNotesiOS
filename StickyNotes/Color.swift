@@ -18,11 +18,11 @@ extension UIColor {
         self.init(red: r, green: g, blue: b, alpha: 1.0)
     }
 
-    static func ThemeColor() -> UIColor {
+    static var themeColor: UIColor {
         return UIColor(rgb: 0x3cb7e8)
     }
 
-    static func ThemeLightColor() -> UIColor {
+    static var themeLightColor: UIColor {
         return UIColor(rgb: 0x87CEEB)
     }
 }

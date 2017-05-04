@@ -42,10 +42,10 @@ class PageStickyTableViewCell: UITableViewCell {
         contentTextView.isUserInteractionEnabled = false
 
         locationLabel.text = "position: (\(sticky.left),\(sticky.top))"
-        locationLabel.textColor = UIColor.ThemeColor()
+        locationLabel.textColor = UIColor.themeColor
 
         dateLabel.text = sticky.updatedAt.passedTime
-        dateLabel.textColor = UIColor.ThemeColor()
+        dateLabel.textColor = UIColor.themeColor
 
         tagLabels.forEach { $0.removeFromSuperview() }
         tagLabels.removeAll()
