@@ -9,6 +9,12 @@
 import UIKit
 
 class SearchStickyViewController: StickyTableViewController, UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+    enum Mode {
+        case wait
+        case searching
+        case result
+    }
+    var mode: Mode = .wait
     var searchController: UISearchController!
     var query: String?
 
@@ -28,33 +34,67 @@ class SearchStickyViewController: StickyTableViewController, UISearchControllerD
 
         definesPresentationContext = true
 
+        refreshControl = nil
         automaticallyAdjustsScrollViewInsets = true
     }
 
+    func createHeaderView(message: String) -> UIView {
+        let frame           = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height / 3)
+        let headerView      = UIView(frame: frame)
+        let label           = UILabel()
+        label.textAlignment = .center
+        label.frame         = frame
+        label.text          = message
+        headerView.addSubview(label)
+        return headerView
+    }
+
+    func createInstructionHeaderView() -> UIView {
+        return createHeaderView(message: "付箋の内容・タグ名・タイトルまたはURLで検索")
+    }
+
+    func createNoResultHeaderView() -> UIView {
+        return createHeaderView(message: "検索結果なし")
+    }
+
     override func reload() {
-        reloadData()
+        // do nothing
     }
 
     override func reloadData() {
-        if searchController?.isActive ?? false {
-            if let query = searchController?.searchBar.text, !query.isEmpty {
-                stickies = StickyEntity.search(by: query)
-                tableView.reloadData()
-                return
-            }
-        } else {
-            if let query = query, !query.isEmpty {
-                stickies = StickyEntity.search(by: query)
-                tableView.reloadData()
-                return
-            }
-        }
+        // do nothing
         stickies = StickyEntity.empty()
-        tableView.reloadData()
+        tableView.tableHeaderView = createInstructionHeaderView()
     }
 
     public func updateSearchResults(for searchController: UISearchController) {
-        reloadData()
+        switch mode {
+        case .searching:
+            if let query = searchController.searchBar.text, !query.isEmpty {
+                stickies = StickyEntity.search(by: query)
+                tableView.tableHeaderView = stickies.count == 0 ? createNoResultHeaderView() : nil
+            } else {
+                stickies = StickyEntity.empty()
+                tableView.tableHeaderView = createInstructionHeaderView()
+            }
+        case .result:
+            if let query = query {
+                stickies = StickyEntity.search(by: query)
+                tableView.tableHeaderView = stickies.count == 0 ? createNoResultHeaderView() : nil
+            } else {
+                stickies = StickyEntity.empty()
+                tableView.tableHeaderView = createNoResultHeaderView()
+            }
+        case .wait:
+            if let query = query {
+                stickies = StickyEntity.search(by: query)
+                tableView.tableHeaderView = stickies.count == 0 ? createNoResultHeaderView() : nil
+            } else {
+                stickies = StickyEntity.empty()
+                tableView.tableHeaderView = createInstructionHeaderView()
+            }
+        }
+        tableView.reloadData()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -66,18 +106,19 @@ class SearchStickyViewController: StickyTableViewController, UISearchControllerD
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         query = searchBar.text
+        mode = .result
         searchController.isActive = false
     }
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.text = query
+        mode = .searching
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.text = query
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = query
+        mode = .wait
     }
 }

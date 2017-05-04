@@ -30,12 +30,12 @@ class StickyTableViewController: UITableViewController {
 
     func reload() {
         reloadData()
+        tableView.reloadData()
         Store.sharedInstance.dispatch(FetchStickiesAction())
     }
     
     func reloadData() {
         stickies = Store.sharedInstance.state.value.stickiesRepository.items
-        tableView.reloadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +45,7 @@ class StickyTableViewController: UITableViewController {
             case .normal:
                 self?.refreshControl?.endRefreshing()
                 self?.reloadData()
+                self?.tableView.reloadData()
             case .fetching:
                 self?.refreshControl?.beginRefreshing()
             case .updating:
@@ -53,6 +54,7 @@ class StickyTableViewController: UITableViewController {
         }
         Store.sharedInstance.state.subscribe {[weak self] _ in
             self?.reloadData()
+            self?.tableView.reloadData()
         }
     }
 
