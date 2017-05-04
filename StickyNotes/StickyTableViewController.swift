@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 class StickyTableViewController: UITableViewController {
-    var cellHeight: CGFloat = 188
+    var cellHeight: CGFloat = 164
     let reuseIdentifier = "StickyTableViewCell"
     var stickies: Results<StickyEntity>!
     
@@ -21,9 +21,11 @@ class StickyTableViewController: UITableViewController {
     }
 
     override func viewDidLoad() {
+        self.automaticallyAdjustsScrollViewInsets = false
         super.viewDidLoad()
         let nib = UINib(nibName: "StickyTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: reuseIdentifier)
+        reloadData()
     }
 
     func reload() {
@@ -57,7 +59,8 @@ class StickyTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeight
+        let sticky = stickies[indexPath.item]
+        return cellHeight - (sticky.tags.count == 0 ? 36 : 0)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
