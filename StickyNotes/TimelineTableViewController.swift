@@ -13,6 +13,8 @@ class TimelineTableViewController: StickyTableViewController {
     func newPage() {
     }
     func search() {
+        let vc = SearchStickyViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     override func viewDidLoad() {
         super.viewDidLoad()

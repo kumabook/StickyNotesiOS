@@ -198,6 +198,10 @@ class StickyEntity: Object {
             query,
             query)
     }
+    static func empty() -> Results<StickyEntity> {
+        let realm: Realm = try! Realm()
+        return realm.objects(StickyEntity.self).filter("id == 0")
+    }
     func toParameter() -> [String:Any] {
         return  [
                     "id": id as Any,
