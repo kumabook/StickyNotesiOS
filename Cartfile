@@ -1,7 +1,7 @@
-github "ReactiveCocoa/ReactiveCocoa"
+github "ReactiveCocoa/ReactiveSwift"
 github "kumabook/Breit"
 github "realm/realm-cocoa"
-github "ishkawa/APIKit" ~> 2.0
+github "ishkawa/APIKit"
 github "ikesyo/Himotoki"
 github "thoughtbot/Delta" "swift-3.0"
 github "dekatotoro/SlideMenuControllerSwift"
