@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var observableWindow: ObservableWindow {
         return window as! ObservableWindow
     }
+    var paymentManager: PaymentManager?
     static var shared: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
