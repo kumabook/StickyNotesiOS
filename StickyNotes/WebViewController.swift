@@ -108,6 +108,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         messageHandler = MessageHandler(vc: self)
         webView!.configuration.userContentController.add(messageHandler!, name: "stickynotes")
 
+        navigationController?.navigationBar.topItem?.title = ""
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "search"), style: .plain, target: self, action: #selector(WebViewController.enterNewPageMode))
         navigationItem.title = page?.title ?? ""
 
