@@ -60,8 +60,8 @@ class LoginViewController: UIViewController {
     }
 
     func showAlert(error: SessionTaskError) {
-        let alert = UIAlertController(title: "Network error", message: error.localizedDescription, preferredStyle: .alert)
-        alert.present(self, animated: true, completion: nil)
+        let _ = UIAlertController.show(self, title: "Network error", message: error.localizedDescription) { _ in
+        }
     }
 
     @IBAction func login(_ sender: AnyObject) {
