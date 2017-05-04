@@ -93,7 +93,6 @@ class StickyRepository {
                 self.state.value = .normal
                 APIClient.sharedInstance.lastSyncedAt = Date()
                 callback(true)
-                print("stickies \(stickies)")
             case .failure(let error):
                 print("error: \(error)")
                 self.state.value = .normal
@@ -133,6 +132,7 @@ class StickyRepository {
         }
         return true
     }
+
     func clear() {
         do {
             try self.realm.write {
@@ -177,7 +177,7 @@ class StickyEntity: Object {
         createdAt = sticky.createdAt as Date
         updatedAt = sticky.updatedAt as Date
         userId    = sticky.userId
-        page      	= PageEntity(value: ["url": sticky.page.url, "title": sticky.page.title])
+        page      = PageEntity(value: ["url": sticky.page.url, "title": sticky.page.title, "visualUrl": sticky.page.visualUrl])
         tags.append(contentsOf: sticky.tags.map { TagEntity.findOrCreateBy(name: $0) })
     }
 
@@ -257,8 +257,9 @@ class TrashedStickyEntity: StickyEntity {
 }
 
 class PageEntity: Object {
-    dynamic var url:   String = ""
-    dynamic var title: String = ""
+    dynamic var url:       String  = ""
+    dynamic var title:     String  = ""
+    dynamic var visualUrl: String? = nil
     let _stickies = LinkingObjects(fromType: StickyEntity.self, property: "page")
     var stickies: Results<StickyEntity> { return _stickies.filter("state != 1") }
     override static func primaryKey() -> String? {

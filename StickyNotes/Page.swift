@@ -10,9 +10,10 @@ import Foundation
 import Himotoki
 
 struct Page: Decodable {
-    var url: String
-    var title: String
+    var url:       String
+    var title:     String
+    var visualUrl: String?
     static func decode(_ e: Extractor) throws -> Page {
-        return try Page(url: e <| "url", title: e <| "title")
+        return try Page(url: e <| "url", title: e <| "title", visualUrl: e <|? "visual_url")
     }
 }
