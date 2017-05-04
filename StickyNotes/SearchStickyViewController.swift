@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class SearchStickyViewController: StickyTableViewController, UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     enum Mode {
@@ -38,23 +39,27 @@ class SearchStickyViewController: StickyTableViewController, UISearchControllerD
         automaticallyAdjustsScrollViewInsets = true
     }
 
-    func createHeaderView(message: String) -> UIView {
-        let frame           = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height / 3)
-        let headerView      = UIView(frame: frame)
+    func createFooterView(message: String) -> UIView {
+        let footerView      = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height / 3))
         let label           = UILabel()
-        label.textAlignment = .center
-        label.frame         = frame
+        label.textAlignment = .left
         label.text          = message
-        headerView.addSubview(label)
-        return headerView
+        label.numberOfLines = 3
+        footerView.addSubview(label)
+        label.snp.makeConstraints { (make) in
+            make.height.equalTo(footerView)
+            make.center.equalTo(footerView)
+            make.leadingMargin.greaterThanOrEqualTo(10)
+        }
+        return footerView
     }
 
-    func createInstructionHeaderView() -> UIView {
-        return createHeaderView(message: "付箋の内容・タグ名・タイトルまたはURLで検索")
+    func createInstructionFooterView() -> UIView {
+        return createFooterView(message: "付箋の内容・タグ名・タイトルまたはURLで検索")
     }
 
-    func createNoResultHeaderView() -> UIView {
-        return createHeaderView(message: "検索結果なし")
+    func createNoResultFooterView() -> UIView {
+        return createFooterView(message: "検索結果なし")
     }
 
     override func reload() {
@@ -64,7 +69,7 @@ class SearchStickyViewController: StickyTableViewController, UISearchControllerD
     override func reloadData() {
         // do nothing
         stickies = StickyEntity.empty()
-        tableView.tableHeaderView = createInstructionHeaderView()
+        tableView.tableFooterView = createInstructionFooterView()
     }
 
     public func updateSearchResults(for searchController: UISearchController) {
@@ -72,26 +77,26 @@ class SearchStickyViewController: StickyTableViewController, UISearchControllerD
         case .searching:
             if let query = searchController.searchBar.text, !query.isEmpty {
                 stickies = StickyEntity.search(by: query)
-                tableView.tableHeaderView = stickies.count == 0 ? createNoResultHeaderView() : nil
+                tableView.tableFooterView = stickies.count == 0 ? createNoResultFooterView() : nil
             } else {
                 stickies = StickyEntity.empty()
-                tableView.tableHeaderView = createInstructionHeaderView()
+                tableView.tableFooterView = createInstructionFooterView()
             }
         case .result:
             if let query = query {
                 stickies = StickyEntity.search(by: query)
-                tableView.tableHeaderView = stickies.count == 0 ? createNoResultHeaderView() : nil
+                tableView.tableFooterView = stickies.count == 0 ? createNoResultFooterView() : nil
             } else {
                 stickies = StickyEntity.empty()
-                tableView.tableHeaderView = createNoResultHeaderView()
+                tableView.tableFooterView = createNoResultFooterView()
             }
         case .wait:
             if let query = query {
                 stickies = StickyEntity.search(by: query)
-                tableView.tableHeaderView = stickies.count == 0 ? createNoResultHeaderView() : nil
+                tableView.tableFooterView = stickies.count == 0 ? createNoResultFooterView() : nil
             } else {
                 stickies = StickyEntity.empty()
-                tableView.tableHeaderView = createInstructionHeaderView()
+                tableView.tableFooterView = createInstructionFooterView()
             }
         }
         tableView.reloadData()
