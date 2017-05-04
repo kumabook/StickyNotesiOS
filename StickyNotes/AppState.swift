@@ -8,13 +8,14 @@
 
 import Delta
 import ReactiveSwift
+import APIKit
 
 extension MutableProperty: ObservablePropertyType {
     public typealias ValueType = Value
 }
 
 struct AppState {
-    let accessToken: MutableProperty<AccessToken?>
+    let accountState: MutableProperty<AccountState>
     let stickiesRepository: StickyRepository
     let mode: MutableProperty<Mode>
 }
@@ -22,9 +23,9 @@ struct AppState {
 struct Store: StoreType {
     var state: ObservableProperty<AppState>
     static var sharedInstance: Store = Store(state:
-        ObservableProperty(AppState(accessToken: MutableProperty(APIClient.sharedInstance.accessToken),
-                             stickiesRepository: StickyRepository(),
-                                           mode: MutableProperty(.home)))
+        ObservableProperty(AppState(accountState: MutableProperty(AccountState.initial()),
+                              stickiesRepository: StickyRepository(),
+                                            mode: MutableProperty(.home)))
     )
 }
 
@@ -35,4 +36,19 @@ enum Mode {
     case listingSticky(page: PageEntity)
     case selectSticky(sticky: StickyEntity)
     case jumpSticky(sticky: StickyEntity)
+}
+
+enum AccountState {
+    case logout
+    case loggingIn
+    case login(AccessToken)
+    case failToLogin(SessionTaskError)
+    case loggingOut
+    static func initial() -> AccountState {
+        if let token = APIClient.sharedInstance.accessToken {
+            return .login(token)
+        } else {
+            return .logout
+        }
+    }
 }

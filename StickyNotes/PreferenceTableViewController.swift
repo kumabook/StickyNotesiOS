@@ -55,8 +55,9 @@ class PreferenceTableViewController: UITableViewController {
         tabBarController?.title = "設定"
         tabBarController?.navigationItem.leftBarButtonItem = nil
         tabBarController?.navigationItem.rightBarButtonItem = nil
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
+
 
     // MARK: - Table view data source
 

@@ -17,6 +17,7 @@ struct LoginAction: Delta.ActionType {
     
     func reduce(state: AppState) -> AppState {
         let request = AccessTokenRequest(email: email, password: password)
+        state.accountState.value = .loggingIn
         Session.send(request) { result in
             switch result {
             case .success(let accessToken):
@@ -24,7 +25,7 @@ struct LoginAction: Delta.ActionType {
                 Store.sharedInstance.dispatch(LoggedInAction(accessToken: accessToken))
                 Store.sharedInstance.dispatch(FetchStickiesAction())
             case .failure(let error):
-                print("error: \(error)")
+                Store.sharedInstance.dispatch(FailToLoginAction(error: error))
             }
         }
         return state
@@ -35,7 +36,16 @@ struct LoggedInAction: Delta.ActionType {
     typealias StateValueType = AppState
     let accessToken: AccessToken
     func reduce(state: AppState) -> AppState {
-        state.accessToken.value = accessToken
+        state.accountState.value = .login(accessToken)
+        return state
+    }
+}
+
+struct FailToLoginAction: Delta.ActionType {
+    typealias StateValueType = AppState
+    let error: SessionTaskError
+    func reduce(state: AppState) -> AppState {
+        state.accountState.value = .failToLogin(error)
         return state
     }
 }
@@ -46,7 +56,7 @@ struct LogoutAction: Delta.ActionType {
         APIClient.sharedInstance.accessToken = nil
         APIClient.sharedInstance.lastSyncedAt = Date(timeIntervalSince1970: 0)
         StickyRepository.sharedInstance.clear()
-        state.accessToken.value = nil
+        state.accountState.value = .logout
         return state
     }
 }
