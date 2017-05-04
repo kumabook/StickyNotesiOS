@@ -11,6 +11,8 @@ import Breit
 
 class TimelineTableViewController: StickyTableViewController {
     func newPage() {
+        let vc = WebViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     func search() {
         let vc = SearchStickyViewController()
