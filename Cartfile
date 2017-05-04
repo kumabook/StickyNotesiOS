@@ -5,3 +5,5 @@ github "ishkawa/APIKit" ~> 2.0
 github "ikesyo/Himotoki"
 github "thoughtbot/Delta" "swift-3.0"
 github "dekatotoro/SlideMenuControllerSwift"
+github "jdg/MBProgressHUD"
+github "rs/SDWebImage"
