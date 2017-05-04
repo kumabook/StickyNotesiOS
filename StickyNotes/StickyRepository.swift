@@ -11,6 +11,7 @@ import UIKit
 import RealmSwift
 import APIKit
 import ReactiveSwift
+import Breit
 
 class StickyRepository {
     enum State {
@@ -49,7 +50,8 @@ class StickyRepository {
     func updateStickies(_ callback: @escaping (Bool) -> ()) {
         if state.value == .updating { return }
         state.value = .updating
-        let predicate = NSPredicate(format: "updatedAt > %@", APIClient.sharedInstance.lastSyncedAt as NSDate)
+        let lastSyncedAt = APIClient.sharedInstance.lastSyncedAt ?? Date(timeIntervalSince1970: 0)
+        let predicate = NSPredicate(format: "updatedAt > %@", lastSyncedAt.timestamp)
         var stickies: [StickyEntity] = []
         stickies.append(contentsOf: realm.objects(StickyEntity.self).filter(predicate).map { $0 })
         stickies.append(contentsOf: realm.objects(TrashedStickyEntity.self).map { $0 })
@@ -70,7 +72,8 @@ class StickyRepository {
     func fetchStickies(_ callback: @escaping (Bool) -> ()) {
         if state.value == .fetching { return }
         state.value = .fetching
-        let request = StickiesRequest(newerThan: APIClient.sharedInstance.lastSyncedAt)
+        let lastSyncedAt = APIClient.sharedInstance.lastSyncedAt ?? Date(timeIntervalSince1970: 0)
+        let request = StickiesRequest(newerThan: lastSyncedAt)
         Session.send(request) { result in
             switch result {
             case .success(let stickies):

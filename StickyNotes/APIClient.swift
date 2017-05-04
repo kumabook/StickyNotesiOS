@@ -36,18 +36,15 @@ class APIClient {
             _accessToken = token
         }
     }
-    var _lastSyncedAt: Date?
-    var lastSyncedAt: Date {
+    var lastSyncedAt: Date? {
         get {
-            if let lastSyncedAt = _lastSyncedAt { return lastSyncedAt }
             if let date = APIClient.userDefaults.object(forKey: "last_synced_at") as? Date {
                 return date
             }
-            return Date(timeIntervalSince1970: 0)
+            return nil
         }
         set(date) {
             APIClient.userDefaults.set(date, forKey: "last_synced_at")
-            _lastSyncedAt = date
         }
     }
 }
