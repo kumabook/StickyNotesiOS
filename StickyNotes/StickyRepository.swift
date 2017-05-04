@@ -188,6 +188,16 @@ class StickyEntity: Object {
         }
         return nil
     }
+    static func search(by query: String) -> Results<StickyEntity> {
+        let realm: Realm = try! Realm()
+        return realm.objects(StickyEntity.self).filter(
+            "content        CONTAINS[c] %@ OR " +
+            "page.title     CONTAINS[c] %@ OR " +
+            "ANY tags.name  CONTAINS[c] %@",
+            query,
+            query,
+            query)
+    }
     func toParameter() -> [String:Any] {
         return  [
                     "id": id as Any,
