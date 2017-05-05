@@ -16,7 +16,7 @@ class DateFormatter {
         }()
     fileprivate static var dateFormatter = Foundation.DateFormatter()
     fileprivate static var onceToken : Int = 0
-    static var sharedInstance: Foundation.DateFormatter {
+    static var shared: Foundation.DateFormatter {
         _ = DateFormatter.__once
         return dateFormatter
     }

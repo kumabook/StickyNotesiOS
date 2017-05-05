@@ -125,7 +125,7 @@ struct StickiesRequest: StickyNoteRequest {
     var path: String { return "/api/v1/stickies.json" }
     var method: HTTPMethod { return .get }
     var parameters: Any? {
-        return ["newer_than": DateFormatter.sharedInstance.string(from: newerThan)]
+        return ["newer_than": DateFormatter.shared.string(from: newerThan)]
     }
     func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
         return StickiesResponse(value: try decodeArray(object))

@@ -50,8 +50,8 @@ struct Sticky: Decodable {
             content: e <| "content",
             color: e <| "color",
             state: State.fromRawValue(e <| "state"),
-            createdAt: DateFormatter.sharedInstance.date(from: e <| "created_at")!,
-            updatedAt: DateFormatter.sharedInstance.date(from: e <| "updated_at")!,
+            createdAt: DateFormatter.shared.date(from: e <| "created_at")!,
+            updatedAt: DateFormatter.shared.date(from: e <| "updated_at")!,
             userId: e <| "user_id",
             page: e <| "page",
             tags: e <|| "tags")
