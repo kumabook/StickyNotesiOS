@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -32,8 +32,8 @@
                         <constraint firstAttribute="height" constant="41" id="oGb-Z2-E5Z"/>
                     </constraints>
                 </imageView>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="No memo" translatesAutoresizingMaskIntoConstraints="NO" id="Kr7-rc-zcN">
-                    <rect key="frame" x="8" y="126" width="578" height="261"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="No memo" translatesAutoresizingMaskIntoConstraints="NO" id="Kr7-rc-zcN">
+                    <rect key="frame" x="8" y="126" width="353" height="328"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="311" id="KJU-dJ-t8L"/>
                     </constraints>
@@ -45,16 +45,16 @@
                         </mask>
                     </variation>
                 </textView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="tag" translatesAutoresizingMaskIntoConstraints="NO" id="lEX-Hn-xYw">
-                    <rect key="frame" x="8" y="503" width="35" height="35"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tag" translatesAutoresizingMaskIntoConstraints="NO" id="lEX-Hn-xYw">
+                    <rect key="frame" x="8" y="570" width="35" height="35"/>
                     <color key="tintColor" red="0.040517241379999999" green="0.42411099140000003" blue="0.68434806029999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="dbL-YG-wcB"/>
                         <constraint firstAttribute="width" constant="35" id="vPL-Da-WCz"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tags (comma separated)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Fs-Ui-Ums">
-                    <rect key="frame" x="51" y="513" width="182" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tags (comma separated)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Fs-Ui-Ums">
+                    <rect key="frame" x="51" y="580" width="182" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="182" id="Nfq-7P-hE5"/>
                     </constraints>
@@ -62,43 +62,43 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="color" translatesAutoresizingMaskIntoConstraints="NO" id="SIw-qc-jXY">
-                    <rect key="frame" x="8" y="404" width="40" height="40"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="color" translatesAutoresizingMaskIntoConstraints="NO" id="SIw-qc-jXY">
+                    <rect key="frame" x="8" y="471" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="IPx-eK-ta2"/>
                         <constraint firstAttribute="width" constant="40" id="NBh-rC-QPE"/>
                     </constraints>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="tag, ..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bfg-gc-Wgt">
-                    <rect key="frame" x="8" y="552" width="584" height="40"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="tag, ..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bfg-gc-Wgt">
+                    <rect key="frame" x="8" y="619" width="359" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="mbb-6e-7si"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wB4-Fo-clK">
-                    <rect key="frame" x="99" y="412" width="62" height="23"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wB4-Fo-clK">
+                    <rect key="frame" x="99" y="479.5" width="62" height="23"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="62" id="PYo-89-krD"/>
                         <constraint firstAttribute="height" constant="23" id="vf2-f9-gId"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Color" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYy-ph-7Le">
-                    <rect key="frame" x="56" y="415" width="35" height="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYy-ph-7Le">
+                    <rect key="frame" x="56" y="482.5" width="35" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LqH-o2-i7J">
-                    <rect key="frame" x="8" y="482" width="584" height="13"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LqH-o2-i7J">
+                    <rect key="frame" x="8" y="549" width="359" height="13"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="13" id="1UK-s5-zOH"/>
                     </constraints>
                 </imageView>
-                <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Pk0-Qf-ilz" customClass="ColorSlider" customModule="StickyNotes" customModuleProvider="target">
-                    <rect key="frame" x="6" y="456" width="588" height="31"/>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Pk0-Qf-ilz" customClass="ColorSlider" customModule="StickyNotes" customModuleProvider="target">
+                    <rect key="frame" x="6" y="523" width="363" height="31"/>
                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="minimumTrackTintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="maximumTrackTintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -107,8 +107,8 @@
                         <action selector="colorChanged:" destination="-1" eventType="valueChanged" id="wwZ-fi-InI"/>
                     </connections>
                 </slider>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dd9-3D-dEh">
-                    <rect key="frame" x="551" y="78" width="37" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dd9-3D-dEh">
+                    <rect key="frame" x="326" y="78" width="37" height="30"/>
                     <state key="normal" title="Enter"/>
                     <connections>
                         <action selector="keyboardButtonTapped:" destination="-1" eventType="touchUpInside" id="7Y9-hm-hcI"/>
