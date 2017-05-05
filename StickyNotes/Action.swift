@@ -55,7 +55,7 @@ struct LogoutAction: Delta.ActionType {
     func reduce(state: AppState) -> AppState {
         APIClient.shared.accessToken = nil
         APIClient.shared.lastSyncedAt = Date(timeIntervalSince1970: 0)
-        StickyRepository.sharedInstance.clear()
+        StickyRepository.shared.clear()
         state.accountState.value = .logout
         return state
     }
@@ -89,7 +89,7 @@ struct DeleteStickyAction: Delta.ActionType {
     typealias StateValueType = AppState
     let sticky: StickyEntity
     func reduce(state: AppState) -> AppState {
-        let _ = StickyRepository.sharedInstance.removeSticky(sticky)
+        let _ = StickyRepository.shared.removeSticky(sticky)
         return state
     }
 }
@@ -100,7 +100,7 @@ struct EditStickyAction: Delta.ActionType {
     let editSticky: StickyEntity
     func reduce(state: AppState) -> AppState {
         state.mode.value = Mode.listingSticky(page: sticky.page!)
-        let _ = StickyRepository.sharedInstance.saveSticky(sticky, newSticky: editSticky)
+        let _ = StickyRepository.shared.saveSticky(sticky, newSticky: editSticky)
         return state
     }
 }

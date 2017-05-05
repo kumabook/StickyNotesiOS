@@ -131,7 +131,7 @@ class PutStickyViewController: UIViewController {
                 })
         }
         print(sticky)
-        StickyRepository.sharedInstance.newStickies(sticky) { isSuccess in
+        StickyRepository.shared.newStickies(sticky) { isSuccess in
             self.complete()
             return
         }

@@ -15,7 +15,7 @@ class TagTableViewController: UITableViewController {
     var tags: Results<TagEntity>!
 
     func reloadData() {
-        tags = StickyRepository.sharedInstance.tags
+        tags = StickyRepository.shared.tags
         tableView.reloadData()
     }
 

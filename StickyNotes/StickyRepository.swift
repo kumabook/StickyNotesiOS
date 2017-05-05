@@ -21,7 +21,7 @@ class StickyRepository {
     }
     var state: MutableProperty<State> = MutableProperty(.normal)
     var realm: Realm = try! Realm()
-    static var sharedInstance: StickyRepository = StickyRepository()
+    static var shared: StickyRepository = StickyRepository()
     var items: Results<StickyEntity> {
         return realm.objects(StickyEntity.self).filter("state != 1").sorted(byKeyPath: "updatedAt", ascending: false)
     }
@@ -80,7 +80,7 @@ class StickyRepository {
                 stickies.value.forEach {
                     if $0.state == .deleted {
                         if let s = StickyEntity.findBy(uuid: $0.uuid) {
-                            let _ = StickyRepository.sharedInstance.removeSticky(s)
+                            let _ = StickyRepository.shared.removeSticky(s)
                         }
                         return
                     }
