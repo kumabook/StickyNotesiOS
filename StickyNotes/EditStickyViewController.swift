@@ -136,7 +136,7 @@ class EditStickyViewController: UIViewController, UITextFieldDelegate {
                 return TagEntity.findOrCreateBy(name: String($0))
             })
         }
-        Store.sharedInstance.dispatch(EditStickyAction(sticky: sticky, editSticky: editSticky))
+        Store.shared.dispatch(EditStickyAction(sticky: sticky, editSticky: editSticky))
         let _ = navigationController?.popViewController(animated: true)
     }
 

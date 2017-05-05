@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         emailTextField.becomeFirstResponder()
-        observer = Store.sharedInstance.state.value.accountState.signal.observe {
+        observer = Store.shared.state.value.accountState.signal.observe {
             guard let state = $0.value else { return }
             switch state {
             case .loggingIn, .loggingOut:
@@ -69,7 +69,7 @@ class LoginViewController: UIViewController {
     @IBAction func login(_ sender: AnyObject) {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
-        Store.sharedInstance.dispatch(LoginAction(email: email, password: password))
+        Store.shared.dispatch(LoginAction(email: email, password: password))
     }
 
     @IBAction func register(_ sender: Any) {

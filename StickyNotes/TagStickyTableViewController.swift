@@ -44,7 +44,7 @@ class TagStickyTableViewController: UITableViewController {
         let nib = UINib(nibName: "PageTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: reuseIdentifier)
         reloadData()
-        Store.sharedInstance.state.subscribe {[weak self] _ in
+        Store.shared.state.subscribe {[weak self] _ in
             self?.reloadData()
         }
     }

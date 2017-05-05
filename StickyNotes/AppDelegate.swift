@@ -57,13 +57,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.backgroundColor = UIColor.white
         window!.rootViewController = smc
         window!.makeKeyAndVisible()
-        Store.sharedInstance.state.value.mode.signal.observe(Observer(value: { mode in
+        Store.shared.state.value.mode.signal.observe(Observer(value: { mode in
             switch mode {
             case .listSticky(let page):
                 self.pageStickies?.page = page
                 self.slideMenu?.openRight()
                 DispatchQueue.main.async() {
-                    Store.sharedInstance.dispatch(ListingStickyAction(page: page))
+                    Store.shared.dispatch(ListingStickyAction(page: page))
                 }
             case .selectSticky(let sticky):
                 self.pageStickies?.page = sticky.page

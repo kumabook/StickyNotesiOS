@@ -27,7 +27,7 @@ class TagTableViewController: UITableViewController {
         tableView.register(nib, forCellReuseIdentifier: reuseIdentifier)
 
         reloadData()
-        Store.sharedInstance.state.subscribe {[weak self] _ in
+        Store.shared.state.subscribe {[weak self] _ in
             self?.reloadData()
         }
     }
@@ -36,7 +36,7 @@ class TagTableViewController: UITableViewController {
         tabBarController?.title = "タグ"
         tabBarController?.navigationItem.leftBarButtonItem = nil
         tabBarController?.navigationItem.rightBarButtonItem = nil
-        Store.sharedInstance.state.value.stickiesRepository.state.signal.observeValues() { [weak self] state in
+        Store.shared.state.value.stickiesRepository.state.signal.observeValues() { [weak self] state in
             switch state {
             case .normal:
                 self?.refreshControl?.endRefreshing()
@@ -47,7 +47,7 @@ class TagTableViewController: UITableViewController {
                 self?.refreshControl?.beginRefreshing()
             }
         }
-        Store.sharedInstance.state.subscribe {[weak self] _ in
+        Store.shared.state.subscribe {[weak self] _ in
             self?.reloadData()
         }
 

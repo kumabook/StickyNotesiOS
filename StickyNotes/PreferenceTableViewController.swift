@@ -48,7 +48,7 @@ class PreferenceTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        Store.sharedInstance.state.subscribe {[weak self] _ in
+        Store.shared.state.subscribe {[weak self] _ in
             self?.tableView.reloadData()
         }
     }
@@ -102,14 +102,14 @@ class PreferenceTableViewController: UITableViewController {
                 alertController.addAction(UIAlertAction(title: "いいえ", style: .cancel) { action in
                     })
                 alertController.addAction(UIAlertAction(title: "はい", style: .default) { action in
-                    Store.sharedInstance.dispatch(LogoutAction())
+                    Store.shared.dispatch(LogoutAction())
                     })
                 present(alertController, animated: true, completion: nil)
 
             }
         case .sync:
             if APIClient.sharedInstance.isLoggedIn {
-                Store.sharedInstance.dispatch(FetchStickiesAction())
+                Store.shared.dispatch(FetchStickiesAction())
             } else {
                 let _ = UIAlertController.show(self, title: "ログインが必要です", message: "ログインをするとデバイス間でデータを共有することができます。") {_ in
                     let vc = LoginViewController()

@@ -22,10 +22,10 @@ struct LoginAction: Delta.ActionType {
             switch result {
             case .success(let accessToken):
                 APIClient.sharedInstance.accessToken = accessToken
-                Store.sharedInstance.dispatch(LoggedInAction(accessToken: accessToken))
-                Store.sharedInstance.dispatch(FetchStickiesAction())
+                Store.shared.dispatch(LoggedInAction(accessToken: accessToken))
+                Store.shared.dispatch(FetchStickiesAction())
             case .failure(let error):
-                Store.sharedInstance.dispatch(FailToLoginAction(error: error))
+                Store.shared.dispatch(FailToLoginAction(error: error))
             }
         }
         return state
@@ -70,7 +70,7 @@ struct FetchStickiesAction: Delta.ActionType {
             }
             state.stickiesRepository.fetchStickies() { isSuccess in
                 if isSuccess {
-                    Store.sharedInstance.dispatch(FetchedStickiesAction())
+                    Store.shared.dispatch(FetchedStickiesAction())
                 }
             }
         }

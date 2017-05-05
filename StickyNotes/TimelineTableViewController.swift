@@ -29,7 +29,7 @@ class TimelineTableViewController: StickyTableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Store.sharedInstance.state.value.stickiesRepository.state.signal.observeValues() { [weak self] state in
+        Store.shared.state.value.stickiesRepository.state.signal.observeValues() { [weak self] state in
             switch state {
             case .normal:
                 self?.refreshControl?.endRefreshing()
@@ -40,7 +40,7 @@ class TimelineTableViewController: StickyTableViewController {
                 self?.refreshControl?.beginRefreshing()
             }
         }
-        Store.sharedInstance.state.subscribe {[weak self] _ in
+        Store.shared.state.subscribe {[weak self] _ in
             self?.reloadData()
         }
         tabBarController?.title = "タイムライン"

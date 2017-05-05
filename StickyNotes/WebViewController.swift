@@ -116,14 +116,14 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         if let str = page?.url, let url = URL(string: str) {
             let _ = webView?.load(URLRequest(url: url))
         }
-        Store.sharedInstance.state.subscribe {[weak self] state in
+        Store.shared.state.subscribe {[weak self] state in
             guard let strongSelf = self else { return }
             switch state.mode.value {
             case .jumpSticky(let sticky):
                 strongSelf.jumpToSticky(sticky)
                 UIScheduler().schedule {
                     guard let page = strongSelf.page else { return }
-                    Store.sharedInstance.dispatch(ShowingPageAction(page: page))
+                    Store.shared.dispatch(ShowingPageAction(page: page))
                 }
             default: break
             }
@@ -151,7 +151,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         super.viewWillAppear(animated)
         observer = Observer(viewController: self)
         appDelegate.observableWindow.addObserver(observer!)
-        Store.sharedInstance.state.subscribe {[weak self] state in
+        Store.shared.state.subscribe {[weak self] state in
             switch state.mode.value {
             default:
                 self?.reloadStickies()
@@ -202,13 +202,13 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     }
     
     func updateSticky(_ sticky: StickyEntity, editSticky: Sticky) {
-        Store.sharedInstance.dispatch(EditStickyAction(sticky: sticky,
+        Store.shared.dispatch(EditStickyAction(sticky: sticky,
                                                    editSticky: StickyEntity(sticky: editSticky)))
     }
 
     func showStickies(_ sticky: StickyEntity?) {
         guard let page = page else { return }
-        Store.sharedInstance.dispatch(ListStickyAction(page: page))
+        Store.shared.dispatch(ListStickyAction(page: page))
     }
 
     func jumpToSticky(_ sticky: StickyEntity) {

@@ -22,7 +22,7 @@ struct AppState {
 
 struct Store: StoreType {
     var state: ObservableProperty<AppState>
-    static var sharedInstance: Store = Store(state:
+    static var shared: Store = Store(state:
         ObservableProperty(AppState(accountState: MutableProperty(AccountState.initial()),
                               stickiesRepository: StickyRepository(),
                                             mode: MutableProperty(.home)))

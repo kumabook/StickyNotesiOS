@@ -27,7 +27,7 @@ class PageStickyTableViewController: UITableViewController {
         let nib = UINib(nibName: "PageStickyTableViewCell", bundle: nil)
         title = "Sticky list"
         tableView.register(nib, forCellReuseIdentifier: reuseIdentifier)
-        Store.sharedInstance.state.subscribe {[weak self] state in
+        Store.shared.state.subscribe {[weak self] state in
             switch state.mode.value {
             default:
                 self?.reloadData()
@@ -69,7 +69,7 @@ class PageStickyTableViewController: UITableViewController {
         guard let page = page else { return [] }
         let sticky = page.stickies[indexPath.item]
         let remove = UITableViewRowAction(style: .default, title: "Remove".localize()) { (action, indexPath) in
-            Store.sharedInstance.dispatch(DeleteStickyAction(sticky: sticky))
+            Store.shared.dispatch(DeleteStickyAction(sticky: sticky))
         }
         remove.backgroundColor = UIColor.red
         return [remove]
@@ -88,6 +88,6 @@ class PageStickyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let page = page else { return }
         let sticky = page.stickies[indexPath.item]
-        Store.sharedInstance.dispatch(JumpStickyAction(sticky: sticky))
+        Store.shared.dispatch(JumpStickyAction(sticky: sticky))
     }
 }

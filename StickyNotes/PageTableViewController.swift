@@ -21,7 +21,7 @@ class PageTableViewController: UITableViewController {
         let nib = UINib(nibName: "PageTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: reuseIdentifier)
         reloadData()
-        Store.sharedInstance.state.subscribe {[weak self] _ in
+        Store.shared.state.subscribe {[weak self] _ in
             self?.reloadData()
         }
     }
@@ -32,11 +32,11 @@ class PageTableViewController: UITableViewController {
 
     func reload() {
         reloadData()
-        Store.sharedInstance.dispatch(FetchStickiesAction())
+        Store.shared.dispatch(FetchStickiesAction())
     }
 
     func reloadData() {
-        pages = Store.sharedInstance.state.value.stickiesRepository.pages
+        pages = Store.shared.state.value.stickiesRepository.pages
         tableView.reloadData()
     }
 

@@ -32,19 +32,19 @@ class StickyTableViewController: UITableViewController {
         reloadData()
         tableView.reloadData()
         if APIClient.sharedInstance.isLoggedIn {
-            Store.sharedInstance.dispatch(FetchStickiesAction())
+            Store.shared.dispatch(FetchStickiesAction())
         } else {
             refreshControl?.endRefreshing()
         }
     }
     
     func reloadData() {
-        stickies = Store.sharedInstance.state.value.stickiesRepository.items
+        stickies = Store.shared.state.value.stickiesRepository.items
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Store.sharedInstance.state.value.stickiesRepository.state.signal.observeValues() { [weak self] state in
+        Store.shared.state.value.stickiesRepository.state.signal.observeValues() { [weak self] state in
             switch state {
             case .normal:
                 self?.refreshControl?.endRefreshing()
@@ -56,7 +56,7 @@ class StickyTableViewController: UITableViewController {
                 self?.refreshControl?.beginRefreshing()
             }
         }
-        Store.sharedInstance.state.subscribe {[weak self] _ in
+        Store.shared.state.subscribe {[weak self] _ in
             self?.reloadData()
             self?.tableView.reloadData()
         }
