@@ -31,6 +31,7 @@ class APIClient {
             } else {
                 APIClient.userDefaults.set(nil, forKey: "access_token")
             }
+            APIClient.userDefaults.synchronize()
         }
     }
     var lastSyncedAt: Date? {
@@ -42,6 +43,7 @@ class APIClient {
         }
         set(date) {
             APIClient.userDefaults.set(date, forKey: "last_synced_at")
+            APIClient.userDefaults.synchronize()
         }
     }
 }
