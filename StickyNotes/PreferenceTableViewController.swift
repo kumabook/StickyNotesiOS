@@ -28,7 +28,7 @@ class PreferenceTableViewController: UITableViewController {
                 }
             case .sync:
                 if let lastSyncedAt = APIClient.shared.lastSyncedAt {
-                    return "同期 (\(lastSyncedAt) に実行)"
+                    return "同期 (\(lastSyncedAt.passedTime) に実行)"
                 } else {
                     return "同期"
                 }

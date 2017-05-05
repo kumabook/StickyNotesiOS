@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Breit
 
 class DateFormatter {
     private static var __once: () = {
@@ -19,5 +20,11 @@ class DateFormatter {
     static var shared: Foundation.DateFormatter {
         _ = DateFormatter.__once
         return dateFormatter
+    }
+}
+
+extension Date {
+    var passedTime: String {
+        return "\(elapsedTime.value) \(elapsedTime.unit.rawValue.localize()) \("ago".localize())"
     }
 }

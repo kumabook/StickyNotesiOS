@@ -1,0 +1,14 @@
+/*
+  Localizable.strings
+  StickyNotes
+
+  Created by Hiroki Kumamoto on 2017/05/06.
+  Copyright © 2017 kumabook. All rights reserved.
+*/
+
+"second" = "秒";
+"minute" = "分";
+"hour"   = "時間";
+"day"    = "日";
+
+"ago"    = "前";
