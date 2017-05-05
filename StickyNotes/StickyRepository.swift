@@ -51,7 +51,7 @@ class StickyRepository {
         if state.value == .updating { return }
         state.value = .updating
         let lastSyncedAt = APIClient.shared.lastSyncedAt ?? Date(timeIntervalSince1970: 0)
-        let predicate = NSPredicate(format: "updatedAt > %@", lastSyncedAt.timestamp)
+        let predicate = NSPredicate(format: "updatedAt > %@", lastSyncedAt as NSDate)
         var stickies: [StickyEntity] = []
         stickies.append(contentsOf: realm.objects(StickyEntity.self).filter(predicate).map { $0 })
         stickies.append(contentsOf: realm.objects(TrashedStickyEntity.self).map { $0 })
