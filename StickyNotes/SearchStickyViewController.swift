@@ -118,6 +118,11 @@ class SearchStickyViewController: StickyTableViewController, UISearchControllerD
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.text = query
         mode = .searching
+        #if !DEBUG
+            if !PaymentManager.shared.isSyncEnabled {
+                let _ = UIAlertController.showPurchaseAlert(self)
+            }
+        #endif
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
