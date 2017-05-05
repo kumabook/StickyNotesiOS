@@ -41,6 +41,8 @@ class LoginViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }
         }
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -73,5 +75,9 @@ class LoginViewController: UIViewController {
     @IBAction func register(_ sender: Any) {
         let vc = UserRegistrationViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return [.portrait, .portraitUpsideDown]
     }
 }
