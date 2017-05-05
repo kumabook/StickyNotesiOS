@@ -50,7 +50,7 @@ class StickyRepository {
     func updateStickies(_ callback: @escaping (Bool) -> ()) {
         if state.value == .updating { return }
         state.value = .updating
-        let lastSyncedAt = APIClient.sharedInstance.lastSyncedAt ?? Date(timeIntervalSince1970: 0)
+        let lastSyncedAt = APIClient.shared.lastSyncedAt ?? Date(timeIntervalSince1970: 0)
         let predicate = NSPredicate(format: "updatedAt > %@", lastSyncedAt.timestamp)
         var stickies: [StickyEntity] = []
         stickies.append(contentsOf: realm.objects(StickyEntity.self).filter(predicate).map { $0 })
@@ -72,7 +72,7 @@ class StickyRepository {
     func fetchStickies(_ callback: @escaping (Bool) -> ()) {
         if state.value == .fetching { return }
         state.value = .fetching
-        let lastSyncedAt = APIClient.sharedInstance.lastSyncedAt ?? Date(timeIntervalSince1970: 0)
+        let lastSyncedAt = APIClient.shared.lastSyncedAt ?? Date(timeIntervalSince1970: 0)
         let request = StickiesRequest(newerThan: lastSyncedAt)
         Session.send(request) { result in
             switch result {
@@ -94,7 +94,7 @@ class StickyRepository {
                     }
                 }
                 self.state.value = .normal
-                APIClient.sharedInstance.lastSyncedAt = Date()
+                APIClient.shared.lastSyncedAt = Date()
                 callback(true)
             case .failure(let error):
                 print("error: \(error)")

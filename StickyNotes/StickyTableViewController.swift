@@ -31,7 +31,7 @@ class StickyTableViewController: UITableViewController {
     func reload() {
         reloadData()
         tableView.reloadData()
-        if APIClient.sharedInstance.isLoggedIn {
+        if APIClient.shared.isLoggedIn {
             Store.shared.dispatch(FetchStickiesAction())
         } else {
             refreshControl?.endRefreshing()

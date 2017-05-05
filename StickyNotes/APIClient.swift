@@ -14,7 +14,7 @@ class APIClient {
     let client_id = "7ec2c1d36bfb9335d5779362efe27acf1108430969c30edbf60e27f6e1bcbfbb"
     let client_secret = "8d5f20e78956b51e1e4a6213a7d4d8e0e7c1eefce7c0a9ac500e2ec93f6b439b"
     let baseUrl = "https://stickynotes-backend.herokuapp.com"
-    static var sharedInstance: APIClient = APIClient()
+    static var shared: APIClient = APIClient()
 
     fileprivate static let userDefaults: UserDefaults! = UserDefaults(suiteName: "group.io.kumabook.StickyNotes")
     var isLoggedIn: Bool { return accessToken != nil }
@@ -54,7 +54,7 @@ protocol StickyNoteRequest: Request {
 
 extension StickyNoteRequest {
     var baseURL: URL {
-        return URL(string: APIClient.sharedInstance.baseUrl)!
+        return URL(string: APIClient.shared.baseUrl)!
     }
 }
 
@@ -63,7 +63,7 @@ extension StickyNoteRequest where Response: Decodable {
         return try decodeValue(object)
     }
     var headerFields: [String : String] {
-        if let token = APIClient.sharedInstance.accessToken {
+        if let token = APIClient.shared.accessToken {
             return ["Authorization": "Bearer \(token.accessToken)"]
         } else {
             return [:]
@@ -80,8 +80,8 @@ struct AccessTokenRequest: StickyNoteRequest {
     var method: HTTPMethod { return .post }
     var parameters: Any? {
         return ["grant_type": "password",
-                "client_id": APIClient.sharedInstance.client_id,
-                "client_secret": APIClient.sharedInstance.client_secret,
+                "client_id": APIClient.shared.client_id,
+                "client_secret": APIClient.shared.client_secret,
                 "username": email,
                 "password": password]
     }

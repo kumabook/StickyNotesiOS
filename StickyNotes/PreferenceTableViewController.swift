@@ -21,13 +21,13 @@ class PreferenceTableViewController: UITableViewController {
         var label: String {
             switch self {
             case .loginOrLogout:
-                if APIClient.sharedInstance.accessToken == nil {
+                if APIClient.shared.accessToken == nil {
                     return "ログイン"
                 } else {
                     return "ログアウト"
                 }
             case .sync:
-                if let lastSyncedAt = APIClient.sharedInstance.lastSyncedAt {
+                if let lastSyncedAt = APIClient.shared.lastSyncedAt {
                     return "同期 (\(lastSyncedAt) に実行)"
                 } else {
                     return "同期"
@@ -92,7 +92,7 @@ class PreferenceTableViewController: UITableViewController {
         guard let item = Item(rawValue: indexPath.item) else { return }
         switch item {
         case .loginOrLogout:
-            if APIClient.sharedInstance.accessToken == nil {
+            if APIClient.shared.accessToken == nil {
                 let vc = LoginViewController()
                 navigationController?.pushViewController(vc, animated: true)
             } else {
@@ -108,7 +108,7 @@ class PreferenceTableViewController: UITableViewController {
 
             }
         case .sync:
-            if APIClient.sharedInstance.isLoggedIn {
+            if APIClient.shared.isLoggedIn {
                 Store.shared.dispatch(FetchStickiesAction())
             } else {
                 let _ = UIAlertController.show(self, title: "ログインが必要です", message: "ログインをするとデバイス間でデータを共有することができます。") {_ in

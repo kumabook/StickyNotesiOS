@@ -21,7 +21,7 @@ struct LoginAction: Delta.ActionType {
         Session.send(request) { result in
             switch result {
             case .success(let accessToken):
-                APIClient.sharedInstance.accessToken = accessToken
+                APIClient.shared.accessToken = accessToken
                 Store.shared.dispatch(LoggedInAction(accessToken: accessToken))
                 Store.shared.dispatch(FetchStickiesAction())
             case .failure(let error):
@@ -53,8 +53,8 @@ struct FailToLoginAction: Delta.ActionType {
 struct LogoutAction: Delta.ActionType {
     typealias StateValueType = AppState
     func reduce(state: AppState) -> AppState {
-        APIClient.sharedInstance.accessToken = nil
-        APIClient.sharedInstance.lastSyncedAt = Date(timeIntervalSince1970: 0)
+        APIClient.shared.accessToken = nil
+        APIClient.shared.lastSyncedAt = Date(timeIntervalSince1970: 0)
         StickyRepository.sharedInstance.clear()
         state.accountState.value = .logout
         return state

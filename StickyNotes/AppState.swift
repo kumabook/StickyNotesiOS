@@ -45,7 +45,7 @@ enum AccountState {
     case failToLogin(SessionTaskError)
     case loggingOut
     static func initial() -> AccountState {
-        if let token = APIClient.sharedInstance.accessToken {
+        if let token = APIClient.shared.accessToken {
             return .login(token)
         } else {
             return .logout

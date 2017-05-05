@@ -27,7 +27,7 @@ class PutStickyViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if APIClient.sharedInstance.isLoggedIn {
+        if APIClient.shared.isLoggedIn {
             needLoginMessageView.isHidden = true
             putButton.addTarget(self, action: #selector(PutStickyViewController.putSticky), for: .touchUpInside)
             cancelButton.addTarget(self, action: #selector(PutStickyViewController.cancel), for: .touchUpInside)
@@ -38,7 +38,7 @@ class PutStickyViewController: UIViewController {
         self.view.transform = CGAffineTransform(translationX: 0, y: self.view.frame.size.height)
         UIView.animate(withDuration: 1.0, animations: {
             self.view.transform = CGAffineTransform.identity;
-            if APIClient.sharedInstance.isLoggedIn {
+            if APIClient.shared.isLoggedIn {
                 return
             }
             let queue = DispatchQueue.main
