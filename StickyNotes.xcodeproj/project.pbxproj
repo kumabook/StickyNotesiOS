@@ -35,6 +35,9 @@
 		6742939E1EBB5FE700E95148 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6742939D1EBB5FE700E95148 /* UIAlertControllerExtension.swift */; };
 		674293A01EBB716A00E95148 /* SnapKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6742939F1EBB716A00E95148 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		674293A11EBB717A00E95148 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6742939F1EBB716A00E95148 /* SnapKit.framework */; };
+		674293AC1EBB866000E95148 /* UserRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674293AA1EBB866000E95148 /* UserRegistrationViewController.swift */; };
+		674293AD1EBB866000E95148 /* UserRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 674293AB1EBB866000E95148 /* UserRegistrationViewController.xib */; };
+		674293AF1EBB938100E95148 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674293AE1EBB938100E95148 /* UINavigationController.swift */; };
 		6761525F1EB090C9002E556D /* PaymentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6761525E1EB090C9002E556D /* PaymentManager.swift */; };
 		6780E38E1EB220A5002692E8 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6780E38D1EB220A5002692E8 /* MBProgressHUD.framework */; };
 		6780E38F1EB220B3002692E8 /* MBProgressHUD.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6780E38D1EB220A5002692E8 /* MBProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -179,6 +182,9 @@
 		6742939B1EBB5F1D00E95148 /* MBProgressHUDExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBProgressHUDExtension.swift; sourceTree = "<group>"; };
 		6742939D1EBB5FE700E95148 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 		6742939F1EBB716A00E95148 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		674293AA1EBB866000E95148 /* UserRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegistrationViewController.swift; sourceTree = "<group>"; };
+		674293AB1EBB866000E95148 /* UserRegistrationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserRegistrationViewController.xib; sourceTree = "<group>"; };
+		674293AE1EBB938100E95148 /* UINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		6761525E1EB090C9002E556D /* PaymentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentManager.swift; sourceTree = "<group>"; };
 		6780E38D1EB220A5002692E8 /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = Carthage/Build/iOS/MBProgressHUD.framework; sourceTree = "<group>"; };
 		679A7E8D1EB2F8260008EFBE /* SearchStickyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStickyViewController.swift; sourceTree = "<group>"; };
@@ -376,6 +382,8 @@
 				67FECF641D5F0D220029440F /* PageStickyTableViewController.swift */,
 				67FECF6C1D62237E0029440F /* EditStickyViewController.swift */,
 				67FECF6D1D62237E0029440F /* EditStickyViewController.xib */,
+				674293AA1EBB866000E95148 /* UserRegistrationViewController.swift */,
+				674293AB1EBB866000E95148 /* UserRegistrationViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -425,6 +433,7 @@
 				6761525E1EB090C9002E556D /* PaymentManager.swift */,
 				6742939B1EBB5F1D00E95148 /* MBProgressHUDExtension.swift */,
 				6742939D1EBB5FE700E95148 /* UIAlertControllerExtension.swift */,
+				674293AE1EBB938100E95148 /* UINavigationController.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -559,6 +568,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				674293AD1EBB866000E95148 /* UserRegistrationViewController.xib in Resources */,
 				67FECF401D580FC70029440F /* StickyTableViewCell.xib in Resources */,
 				67FECEF11D5399BC0029440F /* LaunchScreen.storyboard in Resources */,
 				67FECEEE1D5399BC0029440F /* Assets.xcassets in Resources */,
@@ -607,6 +617,8 @@
 				6761525F1EB090C9002E556D /* PaymentManager.swift in Sources */,
 				67FECF531D5CB6780029440F /* Action.swift in Sources */,
 				679A7E921EB33DF80008EFBE /* WebViewController+NewPage.swift in Sources */,
+				674293AF1EBB938100E95148 /* UINavigationController.swift in Sources */,
+				674293AC1EBB866000E95148 /* UserRegistrationViewController.swift in Sources */,
 				67FECF421D58AA1E0029440F /* WebViewController.swift in Sources */,
 				67FECF271D5576E30029440F /* PreferenceTableViewController.swift in Sources */,
 				67FECF4F1D5C05060029440F /* TagStickyTableViewController.swift in Sources */,
