@@ -54,7 +54,7 @@ struct LogoutAction: Delta.ActionType {
     typealias StateValueType = AppState
     func reduce(state: AppState) -> AppState {
         APIClient.shared.accessToken = nil
-        APIClient.shared.lastSyncedAt = Date(timeIntervalSince1970: 0)
+        APIClient.shared.lastSyncedAt = nil
         StickyRepository.shared.clear()
         state.accountState.value = .logout
         return state

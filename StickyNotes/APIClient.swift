@@ -18,10 +18,8 @@ class APIClient {
 
     fileprivate static let userDefaults: UserDefaults! = UserDefaults(suiteName: "group.io.kumabook.StickyNotes")
     var isLoggedIn: Bool { return accessToken != nil }
-    var _accessToken: AccessToken?
     var accessToken: AccessToken? {
         get {
-            if let token = _accessToken { return token }
             if let decoded = APIClient.userDefaults.object(forKey: "access_token") as? [String: AnyObject] {
                 return AccessToken(decoded: decoded)
             }
@@ -31,9 +29,8 @@ class APIClient {
             if let token = token {
                 APIClient.userDefaults.set(token.encode(), forKey: "access_token")
             } else {
-                APIClient.userDefaults.removeObject(forKey: "access_token")
+                APIClient.userDefaults.set(nil, forKey: "access_token")
             }
-            _accessToken = token
         }
     }
     var lastSyncedAt: Date? {
