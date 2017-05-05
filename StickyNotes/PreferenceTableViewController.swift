@@ -51,6 +51,10 @@ class PreferenceTableViewController: UITableViewController {
         Store.shared.state.subscribe {[weak self] _ in
             self?.tableView.reloadData()
         }
+        Store.shared.state.value.accountState.signal.observe {[weak self] state in
+            guard let _ = state.value else { return }
+            self?.tableView.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
