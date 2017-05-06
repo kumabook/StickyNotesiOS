@@ -36,7 +36,7 @@ class SearchStickyViewController: StickyTableViewController, UISearchControllerD
         definesPresentationContext = true
 
         refreshControl = nil
-        automaticallyAdjustsScrollViewInsets = true
+        tableView.contentInset.bottom += tabBarController?.tabBar.frame.height ?? 0
     }
 
     func createFooterView(message: String) -> UIView {

@@ -24,6 +24,7 @@ class PageTableViewController: UITableViewController {
         Store.shared.state.subscribe {[weak self] _ in
             self?.reloadData()
         }
+        tableView.contentInset.bottom += tabBarController?.tabBar.frame.height ?? 0
     }
 
     override func didReceiveMemoryWarning() {

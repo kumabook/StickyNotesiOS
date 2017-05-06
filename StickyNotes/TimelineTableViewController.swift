@@ -25,6 +25,7 @@ class TimelineTableViewController: StickyTableViewController {
         reloadData()
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(TimelineTableViewController.reload), for: .valueChanged)
+        tableView.contentInset.bottom += tabBarController?.tabBar.frame.height ?? 0
     }
 
     override func viewWillAppear(_ animated: Bool) {

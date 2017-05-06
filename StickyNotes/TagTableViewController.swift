@@ -30,6 +30,7 @@ class TagTableViewController: UITableViewController {
         Store.shared.state.subscribe {[weak self] _ in
             self?.reloadData()
         }
+        tableView.contentInset.bottom += tabBarController?.tabBar.frame.height ?? 0
     }
 
     override func viewWillAppear(_ animated: Bool) {
