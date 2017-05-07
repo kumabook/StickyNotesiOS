@@ -16,6 +16,10 @@ class StickyTableViewController: UITableViewController {
     let reuseIdentifierForAd = "tableViewCellForAdView"
     var stickies: Results<StickyEntity>!
     var frequencyAdsInCells = 5
+
+    var showAd: Bool {
+        return !PaymentManager.shared.isPremiumUser
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -67,7 +71,7 @@ class StickyTableViewController: UITableViewController {
 
     func getSticky(at indexPath: IndexPath) -> StickyEntity {
         let index = indexPath.row
-        if !PaymentManager.shared.isPremiumUser {
+        if showAd {
             return stickies[index - index / frequencyAdsInCells]
         }
         return stickies[index]
@@ -76,7 +80,7 @@ class StickyTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if !PaymentManager.shared.isPremiumUser && indexPath.row % frequencyAdsInCells == 0 {
+        if showAd && indexPath.row % frequencyAdsInCells == 0 {
             return cellHeight
         }
         let sticky = getSticky(at: indexPath)
@@ -88,14 +92,14 @@ class StickyTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !PaymentManager.shared.isPremiumUser {
+        if showAd {
             return stickies.count + (stickies.count / frequencyAdsInCells)
         }
         return stickies.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row % frequencyAdsInCells == 0 {
+        if showAd && indexPath.row % frequencyAdsInCells == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierForAd, for:indexPath)
             let size = GADAdSizeFromCGSize(CGSize(width: view.frame.width, height: cellHeight))
             if cell.contentView.subviews.count == 0, let adView = GADNativeExpressAdView(adSize: size) {
@@ -121,7 +125,7 @@ class StickyTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row % frequencyAdsInCells == 0 {
+        if showAd && indexPath.row % frequencyAdsInCells == 0 {
             return
         }
         let sticky = getSticky(at: indexPath)
