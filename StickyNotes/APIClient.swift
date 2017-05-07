@@ -11,9 +11,9 @@ import APIKit
 import Himotoki
 
 class APIClient {
-    let client_id = "7ec2c1d36bfb9335d5779362efe27acf1108430969c30edbf60e27f6e1bcbfbb"
-    let client_secret = "8d5f20e78956b51e1e4a6213a7d4d8e0e7c1eefce7c0a9ac500e2ec93f6b439b"
-    let baseUrl = "https://stickynotes-backend.herokuapp.com"
+    var clientId     = "xxxxx"
+    var clientSecret = "xxxxx"
+    var baseUrl      = "https://stickynotes-backend.herokuapp.com"
     static var shared: APIClient = APIClient()
 
     fileprivate static let userDefaults: UserDefaults! = UserDefaults(suiteName: "group.io.kumabook.StickyNotes")
@@ -79,8 +79,8 @@ struct AccessTokenRequest: StickyNoteRequest {
     var method: HTTPMethod { return .post }
     var parameters: Any? {
         return ["grant_type": "password",
-                "client_id": APIClient.shared.client_id,
-                "client_secret": APIClient.shared.client_secret,
+                "client_id": APIClient.shared.clientId,
+                "client_secret": APIClient.shared.clientSecret,
                 "username": email,
                 "password": password]
     }
