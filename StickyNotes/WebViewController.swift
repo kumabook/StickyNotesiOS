@@ -146,7 +146,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
             default: break
             }
         }
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: view.frame.height - toolbarHeight, width: view.frame.width, height: toolbarHeight))
+        let toolbar = UIToolbar()
         let back     = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(WebViewController.back))
         let forward  = UIBarButtonItem(image: UIImage(named:"forward"), style: .plain, target: self, action: #selector(WebViewController.forward))
         let space    = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -159,6 +159,12 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         back.isEnabled    = false
         forward.isEnabled = false
         view.addSubview(toolbar)
+        toolbar.snp.makeConstraints { make in
+            make.bottom.equalTo(view)
+            make.left.equalTo(view)
+            make.right.equalTo(view)
+            make.height.equalTo(toolbarHeight)
+        }
     }
     
     override func didReceiveMemoryWarning() {
