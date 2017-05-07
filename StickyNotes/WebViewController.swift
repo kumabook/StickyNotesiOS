@@ -105,26 +105,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var bottomMargin = toolbarHeight
-        if showAd {
-            let bannerView = createBannerView()
-            bottomMargin += bannerView.frame.height
-            view.addSubview(bannerView)
-            bannerView.snp.makeConstraints({ make in
-                make.bottom.equalTo(view).offset(-toolbarHeight)
-                make.height.equalTo(bannerView.frame.height)
-                make.left.equalTo(view)
-                make.right.equalTo(view)
-            })
-        }
         webView = createWebView()
         view.addSubview(webView!)
-        webView!.snp.makeConstraints { make in
-            make.top.equalTo(view)
-            make.bottom.equalTo(view).offset(-bottomMargin)
-            make.left.equalTo(view)
-            make.right.equalTo(view)
-        }
         webView!.navigationDelegate = self
         messageHandler = MessageHandler(vc: self)
         webView!.configuration.userContentController.add(messageHandler!, name: "stickynotes")
@@ -173,6 +155,30 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+
+    func updateConstraints() {
+        bannerView?.constraints.forEach { bannerView?.removeConstraint($0) }
+        webView?.constraints.forEach { webView?.removeConstraint($0) }
+        var bottomMargin = toolbarHeight
+        if showAd {
+            let bannerView = createBannerView()
+            bottomMargin += bannerView.frame.height
+            view.addSubview(bannerView)
+            bannerView.snp.makeConstraints({ make in
+                make.bottom.equalTo(view).offset(-toolbarHeight)
+                make.height.equalTo(bannerView.frame.height)
+                make.left.equalTo(view)
+                make.right.equalTo(view)
+            })
+            self.bannerView = bannerView
+        }
+        webView!.snp.makeConstraints { make in
+            make.top.equalTo(view)
+            make.bottom.equalTo(view).offset(-bottomMargin)
+            make.left.equalTo(view)
+            make.right.equalTo(view)
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -190,12 +196,14 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         mode = page == nil ? .newPage : .view
+        updateConstraints()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         webView?.navigationDelegate = nil
         webView?.removeFromSuperview()
+        bannerView?.removeFromSuperview()
         if let observer = observer {
             appDelegate.observableWindow.removeObserver(observer)
         }
