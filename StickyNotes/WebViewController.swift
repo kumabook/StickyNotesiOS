@@ -18,6 +18,9 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         case newPage
     }
     let toolbarHeight: CGFloat = 45.0
+    var showAd: Bool {
+        return !PaymentManager.shared.isPremiumUser
+    }
     class Observer: WindowObserver {
         weak var viewController: WebViewController?
         init(viewController: WebViewController) {
@@ -103,7 +106,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         var bottomMargin = toolbarHeight
-        if !PaymentManager.shared.isPremiumUser {
+        if showAd {
             let bannerView = createBannerView()
             bottomMargin += bannerView.frame.height
             view.addSubview(bannerView)
