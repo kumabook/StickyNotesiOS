@@ -72,7 +72,7 @@ class StickyTableViewController: UITableViewController {
     func getSticky(at indexPath: IndexPath) -> StickyEntity {
         let index = indexPath.row
         if showAd {
-            return stickies[index - index / frequencyAdsInCells]
+            return stickies[index - (index / frequencyAdsInCells + 1)]
         }
         return stickies[index]
     }
