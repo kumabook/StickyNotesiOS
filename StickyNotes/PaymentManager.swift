@@ -20,7 +20,7 @@ class PaymentManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
     weak var viewController: UIViewController?
     weak var progressHUD: MBProgressHUD?
     static var shared = PaymentManager()
-    var isSyncEnabled: Bool {
+    var isPremiumUser: Bool {
         get      { return userDefaults.bool(forKey: "is_sync_enabled") }
         set(val) {
             userDefaults.set(val, forKey: "is_sync_enabled")
@@ -85,7 +85,7 @@ class PaymentManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
         if let type = ProductType(rawValue: productIdentifier) {
             switch type {
             case .sync:
-                isSyncEnabled = true
+                isPremiumUser = true
             }
         }
     }
