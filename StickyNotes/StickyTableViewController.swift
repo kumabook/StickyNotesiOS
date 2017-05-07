@@ -16,6 +16,7 @@ class StickyTableViewController: UITableViewController {
     let reuseIdentifierForAd = "tableViewCellForAdView"
     var stickies: Results<StickyEntity>!
     var frequencyAdsInCells = 5
+    var adOffset            = 3
 
     var showAd: Bool {
         return !PaymentManager.shared.isPremiumUser
@@ -71,8 +72,10 @@ class StickyTableViewController: UITableViewController {
 
     func getSticky(at indexPath: IndexPath) -> StickyEntity {
         let index = indexPath.row
+        let offset = index % frequencyAdsInCells
+        let d      = offset > adOffset ? 1 : 0
         if showAd {
-            return stickies[index - (index / frequencyAdsInCells + 1)]
+            return stickies[index - index / frequencyAdsInCells - d]
         }
         return stickies[index]
     }
@@ -80,7 +83,7 @@ class StickyTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if showAd && indexPath.row % frequencyAdsInCells == 0 {
+        if showAd && indexPath.row % frequencyAdsInCells == adOffset {
             return cellHeight
         }
         let sticky = getSticky(at: indexPath)
@@ -99,7 +102,7 @@ class StickyTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if showAd && indexPath.row % frequencyAdsInCells == 0 {
+        if showAd && indexPath.row % frequencyAdsInCells == adOffset {
             let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierForAd, for:indexPath)
             let size = GADAdSizeFromCGSize(CGSize(width: view.frame.width, height: cellHeight))
             if cell.contentView.subviews.count == 0, let adView = GADNativeExpressAdView(adSize: size) {
@@ -125,7 +128,7 @@ class StickyTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if showAd && indexPath.row % frequencyAdsInCells == 0 {
+        if showAd && indexPath.row % frequencyAdsInCells == adOffset {
             return
         }
         let sticky = getSticky(at: indexPath)
