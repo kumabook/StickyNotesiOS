@@ -32,8 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             APIClient.shared.clientSecret = config.clientSecret
             APIClient.shared.baseUrl      = config.baseUrl
         }
-        // Override point for customization after application launch.
-        let tbc = UITabBarController()
+        let tbc = TabBarController()
 
         let timeline = TimelineTableViewController()
         timeline.tabBarItem = UITabBarItem(title: "Stickies", image: UIImage(named: "content"), selectedImage: nil)
