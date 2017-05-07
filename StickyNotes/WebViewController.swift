@@ -9,6 +9,8 @@
 import UIKit
 import WebKit
 import ReactiveSwift
+import SnapKit
+import GoogleMobileAds
 
 class WebViewController: UIViewController, WKNavigationDelegate {
     enum Mode {
@@ -73,6 +75,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         }
     }
     var webView:          WKWebView?
+    var bannerView:       GADBannerView?
     var page:             PageEntity? {
         didSet {
             mode = page == nil ? .newPage : .view
@@ -99,11 +102,26 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var bottomMargin = toolbarHeight
+        if !PaymentManager.shared.isPremiumUser {
+            let bannerView = createBannerView()
+            bottomMargin += bannerView.frame.height
+            view.addSubview(bannerView)
+            bannerView.snp.makeConstraints({ make in
+                make.bottom.equalTo(view).offset(-toolbarHeight)
+                make.height.equalTo(bannerView.frame.height)
+                make.left.equalTo(view)
+                make.right.equalTo(view)
+            })
+        }
         webView = createWebView()
         view.addSubview(webView!)
-        view.autoresizesSubviews = true
-        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-
+        webView!.snp.makeConstraints { make in
+            make.top.equalTo(view)
+            make.bottom.equalTo(view).offset(-bottomMargin)
+            make.left.equalTo(view)
+            make.right.equalTo(view)
+        }
         webView!.navigationDelegate = self
         messageHandler = MessageHandler(vc: self)
         webView!.configuration.userContentController.add(messageHandler!, name: "stickynotes")
@@ -175,12 +193,21 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     }
     
     fileprivate func createWebView() -> WKWebView {
-        let script = WKUserScript(source: getSource(), injectionTime: WKUserScriptInjectionTime.atDocumentEnd, forMainFrameOnly: false)
+        let script = WKUserScript(source: getSource(), injectionTime: .atDocumentEnd, forMainFrameOnly: false)
         let userContentController = WKUserContentController()
         userContentController.addUserScript(script)
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = userContentController;
-        return WKWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height - toolbarHeight), configuration: configuration)
+        return WKWebView(frame: view.frame, configuration: configuration)
+    }
+
+    fileprivate func createBannerView() -> GADBannerView {
+        let bannerView                = GADBannerView()
+        bannerView.adUnitID           = Config.default?.admobBannerAdUnitID ?? ""
+        bannerView.rootViewController = self
+        bannerView.adSize             = kGADAdSizeSmartBannerPortrait
+        bannerView.load(GADRequest())
+        return bannerView
     }
 
     func back() {
