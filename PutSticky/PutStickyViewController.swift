@@ -26,6 +26,11 @@ class PutStickyViewController: UIViewController {
     var color: Color = Color.values[3]
 
     override func viewDidLoad() {
+        if let config = Config.default {
+            APIClient.shared.clientId     = config.clientId
+            APIClient.shared.clientSecret = config.clientSecret
+            APIClient.shared.baseUrl      = config.baseUrl
+        }
         super.viewDidLoad()
         if APIClient.shared.isLoggedIn {
             needLoginMessageView.isHidden = true
@@ -130,7 +135,6 @@ class PutStickyViewController: UIViewController {
                 return tag
                 })
         }
-        print(sticky)
         StickyRepository.shared.newStickies(sticky) { isSuccess in
             self.complete()
             return
