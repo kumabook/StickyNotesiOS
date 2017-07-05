@@ -49,6 +49,7 @@
 		674293BB1EBEF07400E95148 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674293B91EBEF07400E95148 /* Config.swift */; };
 		674293BF1EBF4A0700E95148 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674293BE1EBF4A0700E95148 /* MessageView.swift */; };
 		67484C901EC0009000E72224 /* StickyEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67484C8F1EC0009000E72224 /* StickyEditor.swift */; };
+		674DA6CF1F0CD7AE00E2BEE0 /* StickyEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67484C8F1EC0009000E72224 /* StickyEditor.swift */; };
 		6761525F1EB090C9002E556D /* PaymentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6761525E1EB090C9002E556D /* PaymentManager.swift */; };
 		6780E38E1EB220A5002692E8 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6780E38D1EB220A5002692E8 /* MBProgressHUD.framework */; };
 		6780E38F1EB220B3002692E8 /* MBProgressHUD.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6780E38D1EB220A5002692E8 /* MBProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -781,6 +782,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				674DA6CF1F0CD7AE00E2BEE0 /* StickyEditor.swift in Sources */,
 				67059A0E1D87E5830085FCAC /* ColorSlider.swift in Sources */,
 				67059A061D838C9D0085FCAC /* DateFormatter.swift in Sources */,
 				67059A051D838C940085FCAC /* StickyRepository.swift in Sources */,
