@@ -17,6 +17,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         case view
         case newPage
     }
+    static let processPool: WKProcessPool = WKProcessPool()
     let toolbarHeight: CGFloat = 45.0
     var showAd: Bool {
         return !PaymentManager.shared.isPremiumUser
@@ -222,6 +223,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         let userContentController = WKUserContentController()
         userContentController.addUserScript(script)
         let configuration = WKWebViewConfiguration()
+        configuration.processPool = WebViewController.processPool
         configuration.userContentController = userContentController;
         return WKWebView(frame: view.frame, configuration: configuration)
     }
