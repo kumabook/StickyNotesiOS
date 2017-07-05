@@ -85,6 +85,15 @@ struct FetchedStickiesAction: Delta.ActionType {
     }
 }
 
+struct CreateStickyAction: Delta.ActionType {
+    typealias StateValueType = AppState
+    let sticky: StickyEntity
+    func reduce(state: AppState) -> AppState {
+        let _ = StickyRepository.shared.createSticky(sticky)
+        return state
+    }
+}
+
 struct DeleteStickyAction: Delta.ActionType {
     typealias StateValueType = AppState
     let sticky: StickyEntity

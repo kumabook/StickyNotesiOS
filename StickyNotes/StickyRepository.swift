@@ -104,6 +104,17 @@ class StickyRepository {
         }
     }
 
+    func createSticky(_ sticky: StickyEntity) -> Bool {
+        do {
+            try self.realm.write {
+                realm.add(sticky)
+            }
+        } catch {
+            return false
+        }
+        return true
+    }
+
     func saveSticky(_ sticky: StickyEntity, newSticky: StickyEntity) -> Bool {
         do {
             try self.realm.write {

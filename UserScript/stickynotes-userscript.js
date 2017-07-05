@@ -13,9 +13,19 @@ StickyNotes.postMessage = function(message) {
 
 document.addEventListener('touchstart', function(e) {
   var isCanceled = false;
+  var touches = e.changedTouches;
+  if (touches.length === 0) {
+    return;
+  }
+  var touch  = touches[0];
+  var dom    = e.target;
+  var origX  = dom.offsetLeft;
+  var origY  = dom.offsetTop;
+  var startX = touch.clientX;
+  var startY = touch.clientY;
   setTimeout(function() {
     if (!isCanceled) {
-      StickyNotes.postMessage({type: 'create-sticky'});
+      StickyNotes.postMessage({type: 'create-sticky', x: origX + startX, y: origY + startY });
     }
   }, 1000);
   function cancel() {

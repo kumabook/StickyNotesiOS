@@ -50,10 +50,12 @@ class WebViewController: UIViewController, WKNavigationDelegate {
             if message.name != "stickynotes" { return }
             let json: AnyObject? = try! JSONSerialization.jsonObject(with: body.data(using: String.Encoding.utf8)!, options: JSONSerialization.ReadingOptions.allowFragments) as AnyObject?
             guard let dic = json as? [String: AnyObject] else { return }
-            guard let type = dic["type"] as?  String else { return }
+            guard let type = dic["type"] as? String else { return }
             switch type {
             case "create-sticky":
-                vc?.createSticky()
+                let x = dic["x"] as? Int
+                let y = dic["y"] as? Int
+                vc?.createSticky(x: x ?? 0, y: y ?? 0)
             case "update-sticky":
                 guard let editSticky = getSticky(dic) else { return }
                 guard let sticky = getStickyEntity(dic) else { return }
@@ -79,6 +81,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     }
     var webView:          WKWebView?
     var bannerView:       GADBannerView?
+    var editorContainer:  UIView!
+    var stickyEditor:     StickyEditor?
     var page:             PageEntity? {
         didSet {
             mode = page == nil ? .newPage : .view
@@ -106,7 +110,11 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         webView = createWebView()
+        editorContainer = UIView(frame: view.frame)
+        editorContainer?.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        editorContainer?.isHidden = true
         view.addSubview(webView!)
+        view.addSubview(editorContainer)
         webView!.navigationDelegate = self
         messageHandler = MessageHandler(vc: self)
         webView!.configuration.userContentController.add(messageHandler!, name: "stickynotes")
@@ -241,8 +249,49 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         return try! String(contentsOfFile: userScriptPath)
     }
     
-    func createSticky() {
-        // TODO
+    func createSticky(x: Int, y: Int) {
+        let height: CGFloat = 300
+        stickyEditor?.dispose()
+        stickyEditor = StickyEditor(frame: CGRect(x: 0, y: 0, width: 300, height: height))
+        stickyEditor?.delegate = self
+        stickyEditor?.center = view.center
+        editorContainer?.isHidden = false
+        editorContainer?.addSubview(stickyEditor!)
+        view.layoutIfNeeded()
+        stickyEditor?.updateView()
+        NotificationCenter.default.reactive.notifications(forName: .UIKeyboardDidShow).observe { [weak self] notification in
+            guard let strongSelf = self else { return }
+            guard let stickyEditor =  strongSelf.stickyEditor else { return }
+            guard let info  = notification.value?.userInfo else { return }
+            let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey] as AnyObject
+            guard let rawFrame = value.cgRectValue else { return }
+            let height =  strongSelf.view.frame.height - rawFrame.height
+            UIView.animate(withDuration: 0.25) {
+                 strongSelf.stickyEditor?.center = CGPoint(x:  strongSelf.view.center.x,
+                                                           y:  strongSelf.view.center.y - (height - stickyEditor.frame.height) / 2 - 24)
+            }
+        }
+        NotificationCenter.default.reactive.notifications(forName: .UIKeyboardDidHide).observe { [weak self] notification in
+            guard let strongSelf = self else { return }
+            UIView.animate(withDuration: 0.25) {
+                strongSelf.stickyEditor?.center = strongSelf.view.center
+            }
+        }
+        let sticky = StickyEntity()
+        sticky.id      = 0
+        sticky.uuid    = UUID().uuidString
+        sticky.left    = x
+        sticky.top     = y
+        sticky.width   = 100
+        sticky.height  = 100
+        sticky.userId  = 0
+        sticky.page    = PageEntity()
+
+        sticky.page?.title = webView?.title ?? ""
+        if let url = webView?.url {
+            sticky.page?.url   = url.absoluteString
+        }
+        stickyEditor?.sticky = sticky
     }
     
     func updateSticky(_ sticky: StickyEntity, editSticky: Sticky) {
@@ -299,5 +348,18 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         page = PageEntity.findOrCreateBy(url: url, title: webView.title ?? "")
         navigationItem.title = webView.title ?? url
         reloadStickies()
+    }
+}
+
+
+extension WebViewController: StickyEditorDelegate {
+    func cancelStickyEditor() {
+        editorContainer?.isHidden = true
+        stickyEditor?.dispose()
+    }
+    func completeStickyEditor(sticky: StickyEntity) {
+        stickyEditor?.dispose()
+        editorContainer?.isHidden = true
+        Store.shared.dispatch(CreateStickyAction(sticky: sticky))
     }
 }
