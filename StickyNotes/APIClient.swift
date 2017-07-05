@@ -143,7 +143,7 @@ struct UpdateStickiesRequest: StickyNoteRequest {
     var stickies: [StickyEntity]
 
     var path: String { return "/api/v1/stickies.json" }
-    var method: HTTPMethod { return .get }
+    var method: HTTPMethod { return .post }
     var parameters: Any? {
         return ["stickies": stickies.map { $0.toParameter() }]
     }
