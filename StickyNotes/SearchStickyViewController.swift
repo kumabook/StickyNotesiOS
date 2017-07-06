@@ -36,6 +36,9 @@ class SearchStickyViewController: StickyTableViewController, UISearchControllerD
         definesPresentationContext = true
 
         refreshControl = nil
+        let statusBarSize = UIApplication.shared.statusBarFrame.size
+        tableView.contentInset.top += navigationController?.navigationBar.frame.height ?? 0
+        tableView.contentInset.top += statusBarSize.height
         tableView.contentInset.bottom += tabBarController?.tabBar.frame.height ?? 0
     }
 
