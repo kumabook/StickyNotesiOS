@@ -78,29 +78,16 @@ class SearchStickyViewController: StickyTableViewController, UISearchControllerD
     public func updateSearchResults(for searchController: UISearchController) {
         switch mode {
         case .searching:
-            if let query = searchController.searchBar.text, !query.isEmpty {
-                stickies = StickyEntity.search(by: query)
-                tableView.tableFooterView = stickies.count == 0 ? createNoResultFooterView() : nil
-            } else {
-                stickies = StickyEntity.empty()
-                tableView.tableFooterView = createInstructionFooterView()
-            }
-        case .result:
-            if let query = query {
-                stickies = StickyEntity.search(by: query)
-                tableView.tableFooterView = stickies.count == 0 ? createNoResultFooterView() : nil
-            } else {
-                stickies = StickyEntity.empty()
-                tableView.tableFooterView = createNoResultFooterView()
-            }
-        case .wait:
-            if let query = query {
-                stickies = StickyEntity.search(by: query)
-                tableView.tableFooterView = stickies.count == 0 ? createNoResultFooterView() : nil
-            } else {
-                stickies = StickyEntity.empty()
-                tableView.tableFooterView = createInstructionFooterView()
-            }
+            query = searchController.searchBar.text
+        default:
+            break
+        }
+        if let query = query, !query.isEmpty {
+            stickies = StickyEntity.search(by: query)
+            tableView.tableFooterView = stickies.count == 0 ? createNoResultFooterView() : nil
+        } else {
+            stickies = StickyEntity.empty()
+            tableView.tableFooterView = createInstructionFooterView()
         }
         tableView.reloadData()
     }
@@ -129,6 +116,7 @@ class SearchStickyViewController: StickyTableViewController, UISearchControllerD
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.text = query
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
