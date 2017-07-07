@@ -50,6 +50,7 @@
 		674293BF1EBF4A0700E95148 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674293BE1EBF4A0700E95148 /* MessageView.swift */; };
 		67484C901EC0009000E72224 /* StickyEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67484C8F1EC0009000E72224 /* StickyEditor.swift */; };
 		674DA6CF1F0CD7AE00E2BEE0 /* StickyEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67484C8F1EC0009000E72224 /* StickyEditor.swift */; };
+		674DA6D51F0DD75000E2BEE0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 674DA6D41F0DD75000E2BEE0 /* Settings.bundle */; };
 		6761525F1EB090C9002E556D /* PaymentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6761525E1EB090C9002E556D /* PaymentManager.swift */; };
 		6780E38E1EB220A5002692E8 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6780E38D1EB220A5002692E8 /* MBProgressHUD.framework */; };
 		6780E38F1EB220B3002692E8 /* MBProgressHUD.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6780E38D1EB220A5002692E8 /* MBProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -205,6 +206,7 @@
 		674293B91EBEF07400E95148 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		674293BE1EBF4A0700E95148 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		67484C8F1EC0009000E72224 /* StickyEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickyEditor.swift; sourceTree = "<group>"; };
+		674DA6D41F0DD75000E2BEE0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		6761525E1EB090C9002E556D /* PaymentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentManager.swift; sourceTree = "<group>"; };
 		6780E38D1EB220A5002692E8 /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = Carthage/Build/iOS/MBProgressHUD.framework; sourceTree = "<group>"; };
 		679A7E8D1EB2F8260008EFBE /* SearchStickyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStickyViewController.swift; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 		67FECED81D5399BC0029440F = {
 			isa = PBXGroup;
 			children = (
+				674DA6D41F0DD75000E2BEE0 /* Settings.bundle */,
 				67FECF451D58ACBA0029440F /* UserScript */,
 				67FECEE31D5399BC0029440F /* StickyNotes */,
 				670599E51D8195BA0085FCAC /* PutSticky */,
@@ -632,6 +635,7 @@
 			files = (
 				674293AD1EBB866000E95148 /* UserRegistrationViewController.xib in Resources */,
 				67FECF401D580FC70029440F /* StickyTableViewCell.xib in Resources */,
+				674DA6D51F0DD75000E2BEE0 /* Settings.bundle in Resources */,
 				674293B31EBD93DD00E95148 /* Localizable.strings in Resources */,
 				67FECEF11D5399BC0029440F /* LaunchScreen.storyboard in Resources */,
 				674293B71EBEEFCA00E95148 /* config.json in Resources */,

@@ -1,0 +1,44 @@
+name: Firebase, nameSpecified: 
+body: Copyright 2017 Googl…
+
+name: FirebaseAnalytics, nameSpecified: 
+body: Copyright 2017 Googl…
+
+name: FirebaseCore, nameSpecified: 
+body: Copyright 2017 Googl…
+
+name: FirebaseInstanceID, nameSpecified: 
+body: Copyright 2017 Googl…
+
+name: Google-Mobile-Ads-SDK, nameSpecified: 
+body: Copyright 2017 Googl…
+
+name: GoogleToolboxForMac, nameSpecified: 
+body: 
+                   …
+
+name: ReactiveSwift, nameSpecified: , owner: ReactiveCocoa, version: 1.1.1
+
+name: SnapKit, nameSpecified: , owner: SnapKit, version: 3.2.0
+
+name: Result, nameSpecified: , owner: antitypical, version: 3.2.1
+
+name: SlideMenuControllerSwift, nameSpecified: , owner: dekatotoro, version: 3.0.1
+
+name: Himotoki, nameSpecified: , owner: ikesyo, version: 3.0.1
+
+name: APIKit, nameSpecified: , owner: ishkawa, version: 3.1.2
+
+name: MBProgressHUD, nameSpecified: , owner: jdg, version: 1.0.0
+
+name: Breit, nameSpecified: , owner: kumabook, version: 0.4.1
+
+name: realm-cocoa, nameSpecified: , owner: realm, version: v2.7.0
+
+name: SDWebImage, nameSpecified: , owner: rs, version: 4.0.0
+
+name: Delta, nameSpecified: , owner: thoughtbot, version: 540b638
+
+add-version-numbers: false
+
+LicensePlist Version: 1.4.5
