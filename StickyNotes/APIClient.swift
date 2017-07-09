@@ -42,7 +42,11 @@ class APIClient {
             return nil
         }
         set(date) {
-            APIClient.userDefaults.set(date, forKey: "last_synced_at")
+            if let date = date {
+                APIClient.userDefaults.set(date, forKey: "last_synced_at")
+            } else {
+                APIClient.userDefaults.removeObject(forKey: "last_synced_at")
+            }
             APIClient.userDefaults.synchronize()
         }
     }

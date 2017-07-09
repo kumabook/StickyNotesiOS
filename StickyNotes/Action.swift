@@ -64,17 +64,17 @@ struct LogoutAction: Delta.ActionType {
 struct FetchStickiesAction: Delta.ActionType {
     typealias StateValueType = AppState
     func reduce(state: AppState) -> AppState {
-        state.stickiesRepository.updateStickies() {isSuccess in
-            if !isSuccess {
-                return
-            }
-            state.stickiesRepository.fetchStickies() { isSuccess in
-                state.stickiesRepository.fetchPages() { isSuccess in
-                    if isSuccess {
-                        Store.shared.dispatch(FetchedStickiesAction())
-                    }
+        state.stickiesRepository.updateStickies()
+            .flatMap(FlattenStrategy.concat) {
+                return state.stickiesRepository.fetchStickies()
+            }.flatMap(FlattenStrategy.concat) {
+                return state.stickiesRepository.fetchPages()
+            }.startWithResult { result in
+                if let _ = result.value {
+                    Store.shared.dispatch(FetchedStickiesAction(isSuccess: true))
+                } else {
+                    Store.shared.dispatch(FetchedStickiesAction(isSuccess: false))
                 }
-            }
         }
         return state
     }
@@ -82,6 +82,7 @@ struct FetchStickiesAction: Delta.ActionType {
 
 struct FetchedStickiesAction: Delta.ActionType {
     typealias StateValueType = AppState
+    var isSuccess: Bool
     func reduce(state: AppState) -> AppState {
         APIClient.shared.lastSyncedAt = Date()
         return state

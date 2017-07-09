@@ -47,58 +47,64 @@ class StickyRepository {
         }
     }
 
-    func updateStickies(_ callback: @escaping (Bool) -> ()) {
-        if state.value == .updating { return }
+    func updateStickies() -> SignalProducer<Void, NSError> {
+        if state.value == .updating { return SignalProducer<Void, NSError>.empty }
         state.value = .updating
-        let lastSyncedAt = APIClient.shared.lastSyncedAt ?? Date(timeIntervalSince1970: 0)
-        let predicate = NSPredicate(format: "updatedAt > %@", lastSyncedAt as NSDate)
-        var stickies: [StickyEntity] = []
-        stickies.append(contentsOf: realm.objects(StickyEntity.self).filter(predicate).map { $0 })
-        stickies.append(contentsOf: realm.objects(TrashedStickyEntity.self).map { $0 })
-        let request = UpdateStickiesRequest(stickies: stickies)
-        Session.send(request) { result in
-            switch result {
-            case .success:
-                self.state.value = .normal
-                callback(true)
-            case .failure(let error):
-                print("failure: \(error)")
-                self.state.value = .normal
-                callback(false)
+        return SignalProducer<Void, NSError> { (observer, disposable) in
+            let lastSyncedAt = APIClient.shared.lastSyncedAt ?? Date(timeIntervalSince1970: 0)
+            let predicate = NSPredicate(format: "updatedAt > %@", lastSyncedAt as NSDate)
+            var stickies: [StickyEntity] = []
+            stickies.append(contentsOf: self.realm.objects(StickyEntity.self).filter(predicate).map { $0 })
+            stickies.append(contentsOf: self.realm.objects(TrashedStickyEntity.self).map { $0 })
+            let request = UpdateStickiesRequest(stickies: stickies)
+            Session.send(request) { result in
+                switch result {
+                case .success:
+                    self.state.value = .normal
+                    observer.send(value: ())
+                    observer.sendCompleted()
+                case .failure(let error):
+                    print("failure: \(error)")
+                    self.state.value = .normal
+                    observer.send(error: error as NSError)
+                }
             }
         }
     }
 
-    func fetchStickies(_ callback: @escaping (Bool) -> ()) {
-        if state.value == .fetching { return }
+    func fetchStickies() -> SignalProducer<Void, NSError> {
+        if state.value == .fetching { return SignalProducer<Void, NSError>.empty }
         state.value = .fetching
-        let lastSyncedAt = APIClient.shared.lastSyncedAt ?? Date(timeIntervalSince1970: 0)
-        let request = StickiesRequest(newerThan: lastSyncedAt)
-        Session.send(request) { result in
-            switch result {
-            case .success(let stickies):
-                stickies.value.forEach {
-                    if $0.state == .deleted {
-                        if let s = StickyEntity.findBy(uuid: $0.uuid) {
-                            let _ = StickyRepository.shared.removeSticky(s)
+        return SignalProducer<Void, NSError> { (observer, disposable) in
+            let lastSyncedAt = APIClient.shared.lastSyncedAt ?? Date(timeIntervalSince1970: 0)
+            let request = StickiesRequest(newerThan: lastSyncedAt)
+            Session.send(request) { result in
+                switch result {
+                case .success(let stickies):
+                    stickies.value.forEach {
+                        if $0.state == .deleted {
+                            if let s = StickyEntity.findBy(uuid: $0.uuid) {
+                                let _ = StickyRepository.shared.removeSticky(s)
+                            }
+                            return
                         }
-                        return
-                    }
-                    do {
-                        let entity = StickyEntity(sticky: $0)
-                        try self.realm.write {
-                            self.realm.add(entity, update: true)
+                        do {
+                            let entity = StickyEntity(sticky: $0)
+                            try self.realm.write {
+                                self.realm.add(entity, update: true)
+                            }
+                        } catch  {
+                            print("error")
                         }
-                    } catch  {
-                        print("error")
                     }
+                    self.state.value = .normal
+                    observer.send(value: ())
+                    observer.sendCompleted()
+                case .failure(let error):
+                    print("error: \(error)")
+                    self.state.value = .normal
+                    observer.send(error: error as NSError)
                 }
-                self.state.value = .normal
-                callback(true)
-            case .failure(let error):
-                print("error: \(error)")
-                self.state.value = .normal
-                callback(false)
             }
         }
     }
@@ -115,25 +121,28 @@ class StickyRepository {
         return true
     }
 
-    func fetchPages(_ callback: @escaping (Bool) -> ()) {
-        if state.value == .fetching { return }
+    func fetchPages() -> SignalProducer<Void, NSError> {
+        if state.value == .fetching { return SignalProducer<Void, NSError>.empty }
         state.value = .fetching
-        let lastSyncedAt = APIClient.shared.lastSyncedAt ?? Date(timeIntervalSince1970: 0)
-        let request = PagesRequest(newerThan: lastSyncedAt)
-        Session.send(request) { result in
-            switch result {
-            case .success(let pages):
-                pages.value.forEach {
-                    if let pageEntity = PageEntity.findBy(url: $0.url) {
-                        let _ = StickyRepository.shared.updatePage(pageEntity, newPage: $0)
+        return SignalProducer<Void, NSError> { (observer, disposable) in
+            let lastSyncedAt = APIClient.shared.lastSyncedAt ?? Date(timeIntervalSince1970: 0)
+            let request = PagesRequest(newerThan: lastSyncedAt)
+            Session.send(request) { result in
+                switch result {
+                case .success(let pages):
+                    pages.value.forEach {
+                        if let pageEntity = PageEntity.findBy(url: $0.url) {
+                            let _ = StickyRepository.shared.updatePage(pageEntity, newPage: $0)
+                        }
                     }
+                    self.state.value = .normal
+                    observer.send(value: ())
+                    observer.sendCompleted()
+                case .failure(let error):
+                    print("error: \(error)")
+                    self.state.value = .normal
+                    observer.send(error: error as NSError)
                 }
-                self.state.value = .normal
-                callback(true)
-            case .failure(let error):
-                print("error: \(error)")
-                self.state.value = .normal
-                callback(false)
             }
         }
     }
