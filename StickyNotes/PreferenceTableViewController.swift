@@ -13,11 +13,9 @@ class PreferenceTableViewController: UITableViewController {
         case loginOrLogout = 0
         case sync          = 1
         case help          = 2
-        case version       = 3
-        case license       = 4
-        case purchase      = 5
-        case restore       = 6
-        static let count   = 7
+        case purchase      = 3
+        case restore       = 4
+        static let count   = 5
         var label: String {
             switch self {
             case .loginOrLogout:
@@ -34,10 +32,6 @@ class PreferenceTableViewController: UITableViewController {
                 }
             case .help:
                 return "ヘルプ"
-            case .version:
-                return "バージョン情報"
-            case .license:
-                return "ライセンス情報"
             case .purchase:
                 return "プレミアムサービスを購入"
             case .restore:
@@ -120,8 +114,15 @@ class PreferenceTableViewController: UITableViewController {
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }
-        default:
-            break
+        case .help:
+            if let url = URL(string: "http://kumabook.github.io/stickynotes/index.html") {
+                let vc = SNWebViewController(url: url)
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        case .purchase:
+            let _ = UIAlertController.showPurchaseAlert(self)
+        case .restore:
+            PaymentManager.shared.restorePurchase()
         }
     }
 }

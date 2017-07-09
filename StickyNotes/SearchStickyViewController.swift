@@ -109,8 +109,8 @@ class SearchStickyViewController: StickyTableViewController, UISearchControllerD
         searchBar.text = query
         mode = .searching
         #if !DEBUG
-            if !PaymentManager.shared.isSyncEnabled {
-                let _ = UIAlertController.showPurchaseAlert(self)
+            if !PaymentManager.shared.isPremiumUser {
+                let _ = UIAlertController.showPurchaseAlertToUse(self)
             }
         #endif
     }

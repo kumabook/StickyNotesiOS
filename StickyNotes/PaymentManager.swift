@@ -12,7 +12,7 @@ import StoreKit
 
 class PaymentManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     enum ProductType: String {
-        case sync = "io.stickynotes.sync"
+        case sync = "io.stickynotes.premium"
     }
     
     fileprivate let userDefaults = UserDefaults.standard
@@ -21,9 +21,9 @@ class PaymentManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
     weak var progressHUD: MBProgressHUD?
     static var shared = PaymentManager()
     var isPremiumUser: Bool {
-        get      { return userDefaults.bool(forKey: "is_sync_enabled") }
+        get      { return userDefaults.bool(forKey: "is_premium") }
         set(val) {
-            userDefaults.set(val, forKey: "is_sync_enabled")
+            userDefaults.set(val, forKey: "is_premium")
         }
     }
     
@@ -49,7 +49,7 @@ class PaymentManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
         progressHUD = nil
     }
     
-    func purchaseMultiDeviceSync() {
+    func purchasePremium() {
         if SKPaymentQueue.canMakePayments() {
             let productsRequest = SKProductsRequest(productIdentifiers: [ProductType.sync.rawValue])
             productsRequest.delegate = self
