@@ -69,8 +69,10 @@ struct FetchStickiesAction: Delta.ActionType {
                 return
             }
             state.stickiesRepository.fetchStickies() { isSuccess in
-                if isSuccess {
-                    Store.shared.dispatch(FetchedStickiesAction())
+                state.stickiesRepository.fetchPages() { isSuccess in
+                    if isSuccess {
+                        Store.shared.dispatch(FetchedStickiesAction())
+                    }
                 }
             }
         }
@@ -81,6 +83,7 @@ struct FetchStickiesAction: Delta.ActionType {
 struct FetchedStickiesAction: Delta.ActionType {
     typealias StateValueType = AppState
     func reduce(state: AppState) -> AppState {
+        APIClient.shared.lastSyncedAt = Date()
         return state
     }
 }

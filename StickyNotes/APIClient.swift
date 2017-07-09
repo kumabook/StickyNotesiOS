@@ -157,3 +157,24 @@ struct UpdateStickiesResponse: Decodable {
         return UpdateStickiesResponse()
     }
 }
+
+struct PagesRequest: StickyNoteRequest {
+    typealias Response = PagesResponse
+    var newerThan: Date
+    var path: String { return "/api/v1/pages.json" }
+    var method: HTTPMethod { return .get }
+    var parameters: Any? {
+        return ["newer_than": DateFormatter.shared.string(from: newerThan)]
+    }
+    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
+        return PagesResponse(value: try decodeArray(object))
+    }
+}
+
+struct PagesResponse: Decodable {
+    var value: [Page]
+    static func decode(_ e: Extractor) throws -> PagesResponse {
+        return PagesResponse(value: try e.array(KeyPath.empty))
+    }
+}
+

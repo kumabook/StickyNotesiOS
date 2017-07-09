@@ -94,7 +94,41 @@ class StickyRepository {
                     }
                 }
                 self.state.value = .normal
-                APIClient.shared.lastSyncedAt = Date()
+                callback(true)
+            case .failure(let error):
+                print("error: \(error)")
+                self.state.value = .normal
+                callback(false)
+            }
+        }
+    }
+
+    func updatePage(_ page: PageEntity, newPage: Page) -> Bool {
+        do {
+            try self.realm.write {
+                page.title = newPage.title
+                page.visualUrl = newPage.visualUrl
+            }
+        } catch {
+            return false
+        }
+        return true
+    }
+
+    func fetchPages(_ callback: @escaping (Bool) -> ()) {
+        if state.value == .fetching { return }
+        state.value = .fetching
+        let lastSyncedAt = APIClient.shared.lastSyncedAt ?? Date(timeIntervalSince1970: 0)
+        let request = PagesRequest(newerThan: lastSyncedAt)
+        Session.send(request) { result in
+            switch result {
+            case .success(let pages):
+                pages.value.forEach {
+                    if let pageEntity = PageEntity.findBy(url: $0.url) {
+                        let _ = StickyRepository.shared.updatePage(pageEntity, newPage: $0)
+                    }
+                }
+                self.state.value = .normal
                 callback(true)
             case .failure(let error):
                 print("error: \(error)")
