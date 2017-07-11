@@ -424,6 +424,8 @@
 				674293AA1EBB866000E95148 /* UserRegistrationViewController.swift */,
 				674293AB1EBB866000E95148 /* UserRegistrationViewController.xib */,
 				674293B41EBDA80000E95148 /* TabBarController.swift */,
+				674DA6D01F0DCAAF00E2BEE0 /* SNWebViewController.swift */,
+				67A4D4DE1F12188A00487D49 /* TutorialViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";

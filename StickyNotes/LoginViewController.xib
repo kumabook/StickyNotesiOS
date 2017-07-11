@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -51,11 +51,14 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jmd-bJ-AMn">
-                    <rect key="frame" x="99" y="287" width="176" height="30"/>
+                    <rect key="frame" x="16" y="287" width="343" height="30"/>
                     <state key="normal" title="パスワードを忘れた場合?"/>
+                    <connections>
+                        <action selector="resetPassword:" destination="-1" eventType="touchUpInside" id="Ghs-6S-axB"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6no-nl-dlh">
-                    <rect key="frame" x="126" y="259" width="123" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6no-nl-dlh">
+                    <rect key="frame" x="16" y="259" width="343" height="30"/>
                     <state key="normal" title="アカウントを作成"/>
                     <connections>
                         <action selector="register:" destination="-1" eventType="touchUpInside" id="eMI-4T-r8n"/>
@@ -67,18 +70,21 @@
                 <constraint firstItem="jmd-bJ-AMn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="1GV-Gd-trk"/>
                 <constraint firstItem="oAI-A5-ggV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="213" id="3du-pw-YhJ"/>
                 <constraint firstItem="bNw-Tm-5Cd" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9H9-fE-kXk"/>
-                <constraint firstItem="6no-nl-dlh" firstAttribute="leading" secondItem="jmd-bJ-AMn" secondAttribute="trailing" constant="-149" id="Aeq-Wf-f2q"/>
                 <constraint firstItem="oAI-A5-ggV" firstAttribute="top" secondItem="bqb-Li-d6G" secondAttribute="bottom" constant="12" id="BvG-V9-NEx"/>
                 <constraint firstItem="6no-nl-dlh" firstAttribute="top" secondItem="oAI-A5-ggV" secondAttribute="bottom" constant="16" id="E6k-Zf-KKx"/>
+                <constraint firstItem="6no-nl-dlh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="Fh6-GC-uax"/>
                 <constraint firstItem="6no-nl-dlh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="NFE-FM-VaO"/>
+                <constraint firstItem="jmd-bJ-AMn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="Q44-Om-DvJ"/>
                 <constraint firstItem="oAI-A5-ggV" firstAttribute="centerX" secondItem="gyI-gl-uYm" secondAttribute="centerX" id="Tnq-KA-dv8"/>
                 <constraint firstItem="jmd-bJ-AMn" firstAttribute="top" secondItem="6no-nl-dlh" secondAttribute="bottom" constant="-2" id="Ytt-MV-NOV"/>
                 <constraint firstItem="bqb-Li-d6G" firstAttribute="width" secondItem="gyI-gl-uYm" secondAttribute="width" id="Z9R-iL-8W7"/>
                 <constraint firstItem="oAI-A5-ggV" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="dfM-Qh-m3U"/>
+                <constraint firstAttribute="trailing" secondItem="jmd-bJ-AMn" secondAttribute="trailing" constant="16" id="h7V-vR-Dpn"/>
                 <constraint firstItem="gyI-gl-uYm" firstAttribute="top" secondItem="bNw-Tm-5Cd" secondAttribute="bottom" constant="-3" id="itW-Ax-Eqo"/>
                 <constraint firstItem="oAI-A5-ggV" firstAttribute="top" secondItem="gyI-gl-uYm" secondAttribute="bottom" constant="41" id="j8D-2w-dbF"/>
                 <constraint firstItem="oAI-A5-ggV" firstAttribute="centerX" secondItem="bqb-Li-d6G" secondAttribute="centerX" id="jpp-A8-bjU"/>
                 <constraint firstItem="bNw-Tm-5Cd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="62" id="q0N-Gj-07P"/>
+                <constraint firstAttribute="trailing" secondItem="6no-nl-dlh" secondAttribute="trailing" constant="16" id="sDd-30-P5P"/>
             </constraints>
             <point key="canvasLocation" x="292.5" y="360.5"/>
         </view>

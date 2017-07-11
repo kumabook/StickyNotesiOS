@@ -10,6 +10,46 @@ import ReactiveSwift
 import Delta
 import APIKit
 
+struct CreateUserAction: Delta.ActionType {
+    typealias StateValueType = AppState
+    let email: String
+    let password: String
+    let passwordConfirmation: String
+
+    func reduce(state: AppState) -> AppState {
+        let request = CreateUserRequest(email: email, password: password, passwordConfirmation: passwordConfirmation)
+        state.accountState.value = .creating
+        Session.send(request) { result in
+            switch result {
+            case .success(_):
+                Store.shared.dispatch(CreatedUserAction())
+                Store.shared.dispatch(LoginAction(email: self.email, password: self.password))
+            case .failure(let error):
+                print("\(error.localizedDescription)")
+                Store.shared.dispatch(FailToCreateUserAction(error: error))
+            }
+        }
+        return state
+    }
+}
+
+struct CreatedUserAction: Delta.ActionType {
+    typealias StateValueType = AppState
+    func reduce(state: AppState) -> AppState {
+        state.accountState.value = .created
+        return state
+    }
+}
+
+struct FailToCreateUserAction: Delta.ActionType {
+    typealias StateValueType = AppState
+    let error: SessionTaskError
+    func reduce(state: AppState) -> AppState {
+        state.accountState.value = .failToCreate(error)
+        return state
+    }
+}
+
 struct LoginAction: Delta.ActionType {
     typealias StateValueType = AppState
     let email: String

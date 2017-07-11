@@ -15,6 +15,10 @@ class APIClient {
     var clientSecret = "xxxxx"
     var baseUrl      = "https://stickynotes-backend.herokuapp.com"
     static var shared: APIClient = APIClient()
+    
+    var passwordResetURL: URL? {
+        return URL(string: "\(baseUrl)/password_resets/new")
+    }
 
     fileprivate static let userDefaults: UserDefaults! = UserDefaults(suiteName: "group.io.kumabook.StickyNotes")
     var isLoggedIn: Bool { return accessToken != nil }
@@ -182,3 +186,22 @@ struct PagesResponse: Decodable {
     }
 }
 
+struct CreateUserRequest: StickyNoteRequest {
+    var path: String { return "/api/v1/users.json" }
+    typealias Response = CreateUserResponse
+    var email: String
+    var password: String
+    var passwordConfirmation: String
+    var method: HTTPMethod { return .post }
+    var parameters: Any? {
+        return ["email": email, "password": password, "password_confirmation": passwordConfirmation]
+    }
+}
+
+struct CreateUserResponse: Decodable {
+    var id:    Int
+    var email: String
+    static func decode(_ e: Extractor) throws -> CreateUserResponse {
+        return try CreateUserResponse(id: e.value("id"), email: e.value("email"))
+    }
+}

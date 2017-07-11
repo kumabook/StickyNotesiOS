@@ -39,6 +39,9 @@ enum Mode {
 }
 
 enum AccountState {
+    case creating
+    case created
+    case failToCreate(SessionTaskError)
     case logout
     case loggingIn
     case login(AccessToken)

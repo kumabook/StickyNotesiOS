@@ -39,10 +39,18 @@ class LoginViewController: UIViewController {
             case .login, .logout:
                 self.hideProgress()
                 self.navigationController?.popViewController(animated: true)
+            default:
+                break
             }
         }
         let value = UIInterfaceOrientation.portrait.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
+        switch Store.shared.state.value.accountState.value {
+        case .login(_):
+            self.navigationController?.popViewController(animated: true)
+        default:
+            break
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -77,6 +85,11 @@ class LoginViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
 
+    @IBAction func resetPassword(_ sender: Any) {
+        if let url = APIClient.shared.passwordResetURL {
+            UIApplication.shared.openURL(url)
+        }
+    }
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return [.portrait, .portraitUpsideDown]
     }
