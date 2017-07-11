@@ -11,8 +11,9 @@ StickyNotes.postMessage = function(message) {
   }
 };
 
+var touchCount = 0;
+
 document.addEventListener('touchstart', function(e) {
-  var isCanceled = false;
   var touches = e.changedTouches;
   if (touches.length === 0) {
     return;
@@ -23,17 +24,17 @@ document.addEventListener('touchstart', function(e) {
   var origY  = dom.offsetTop;
   var startX = touch.clientX;
   var startY = touch.clientY;
-  setTimeout(function() {
-    if (!isCanceled) {
-      StickyNotes.postMessage({type: 'create-sticky', x: origX + startX, y: origY + startY });
-    }
-  }, 1000);
-  function cancel() {
-    isCanceled = true;
-    document.removeEventListener(cancel);
+  touchCount++;
+  if (touchCount >= 3) {
+    StickyNotes.postMessage({
+      type: 'create-sticky',
+      x: origX + startX,
+      y: origY + startY
+    });
   }
-  document.addEventListener('touchend',    cancel);
-  document.addEventListener('touchcancel', cancel);
+  setTimeout(function() {
+    touchCount = 0;
+  }, 500);
 });
 
 StickyNotes.PREFIX = '__stickynotes_';
@@ -58,9 +59,6 @@ StickyNotes.addSticky = function(sticky) {
   dom.style.borderRadius = '10px';
   dom.style.textOverflow = 'ellipsis';
   dom.style.padding = '10px';
-  dom.addEventListener('click', function() {
-    StickyNotes.postMessage({ type: 'select-sticky', sticky: sticky });
-  });
   var startX;
   var startY;
   var origX;
@@ -73,6 +71,7 @@ StickyNotes.addSticky = function(sticky) {
       return;
     }
     var touch = touches[0];
+    e.preventDefault();
     e.stopPropagation();
     origX  = dom.offsetLeft;
     origY  = dom.offsetTop;
@@ -98,11 +97,17 @@ StickyNotes.addSticky = function(sticky) {
   };
 
   function onTouchEnd(e) {
+    e.preventDefault();
     e.stopPropagation();
     cancel();
-    sticky.top = parseInt(dom.style.top);
-    sticky.left = parseInt(dom.style.left);
-    StickyNotes.postMessage({type: 'update-sticky', sticky: sticky});
+    if (Math.abs(sticky.top - parseInt(dom.style.top)) < 5 &&
+        Math.abs(sticky.left - parseInt(dom.style.left)) < 5) {
+      StickyNotes.postMessage({ type: 'select-sticky', sticky: sticky });
+    } else {
+      sticky.top = parseInt(dom.style.top);
+      sticky.left = parseInt(dom.style.left);
+      StickyNotes.postMessage({type: 'update-sticky', sticky: sticky});
+    }
   };
   function cancel() {
     dom.removeEventListener('touchmove', onTouchMove);
