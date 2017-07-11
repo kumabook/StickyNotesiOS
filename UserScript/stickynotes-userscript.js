@@ -40,7 +40,7 @@ document.addEventListener('touchstart', function(e) {
 StickyNotes.PREFIX = '__stickynotes_';
 StickyNotes.stickies = [];
 StickyNotes.getDom = function(sticky) {
-  return document.getElementById(StickyNotes.PREFIX + sticky.id);
+  return document.getElementById(StickyNotes.PREFIX + sticky.uuid);
 };
 
 StickyNotes.addSticky = function(sticky) {
@@ -48,7 +48,7 @@ StickyNotes.addSticky = function(sticky) {
     return StickyNotes.Result.Failure;
   }
   var dom = document.createElement('div');
-  dom.id = StickyNotes.PREFIX + sticky.id;
+  dom.id = StickyNotes.PREFIX + sticky.uuid;
   dom.style.position = 'absolute';
   dom.style.top    = sticky.top + 'px';
   dom.style.left   = sticky.left + 'px';
@@ -94,7 +94,7 @@ StickyNotes.addSticky = function(sticky) {
     e.preventDefault();
     dom.style.left = (touch.clientX - deltaX) + 'px';
     dom.style.top  = (touch.clientY - deltaY) + 'px';
-  };
+  }
 
   function onTouchEnd(e) {
     e.preventDefault();
