@@ -20,11 +20,13 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
+  - Instructions (1.0.0)
 
 DEPENDENCIES:
   - EAIntroView
   - Firebase/AdMob
   - Firebase/Core
+  - Instructions (~> 1.0.0)
 
 SPEC CHECKSUMS:
   EAIntroView: 3494b7bbd1212e3a4f7e8d16194a1b00e7b9abb2
@@ -35,7 +37,8 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
   Google-Mobile-Ads-SDK: 43ac87810e4961f5093024d3525bfe022f956da3
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  Instructions: 11b6744e572b8cab6f61e9445403cb95fcde68f1
 
-PODFILE CHECKSUM: 77da7422a653d18b6da96ee57ee0ac1252281966
+PODFILE CHECKSUM: e132e2f86fce3524f3248d730001bbdb7b59cbb5
 
 COCOAPODS: 1.2.1

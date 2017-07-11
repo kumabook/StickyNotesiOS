@@ -16,6 +16,7 @@ target 'StickyNotes' do
   pod 'Firebase/Core'
   pod 'Firebase/AdMob'
   pod 'EAIntroView'
+  pod 'Instructions', '~> 1.0.0'
 
   target 'StickyNotesTests' do
     inherit! :search_paths
