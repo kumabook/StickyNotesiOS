@@ -8,9 +8,13 @@
 
 import Foundation
 import UIKit
+import SlideMenuControllerSwift
 import EAIntroView
 
-extension UIViewController: EAIntroDelegate {
+extension SlideMenuController: EAIntroDelegate {
+    func needTutorial() -> Bool {
+        return !UserDefaults.standard.bool(forKey: "tutorial_finish")
+    }
     func showTutorial() {
         let titlePage            = EAIntroPage()
         titlePage.titleIconView  = UIImageView(image: UIImage(named: "title_icon"))
@@ -43,5 +47,17 @@ extension UIViewController: EAIntroDelegate {
         let intro = EAIntroView(frame: view.bounds, andPages: [titlePage, page2, page3, page4])
         intro?.delegate = self
         intro?.show(in: view, animateDuration: 0.25)
+    }
+    public func introWillFinish(_ introView: EAIntroView!, wasSkipped: Bool) {
+        UserDefaults.standard.set(true, forKey: "tutorial_finish")
+        if let nav = mainViewController as? UINavigationController,
+           let tbc = nav.visibleViewController as? UITabBarController {
+            tbc.selectedIndex = 0
+        }
+        if !UserDefaults.standard.bool(forKey: "login_finish") {
+            let vc = UINavigationController(rootViewController: LoginViewController())
+            present(vc, animated: true, completion: nil)
+            UserDefaults.standard.set(true, forKey: "login_finish")
+        }
     }
 }
