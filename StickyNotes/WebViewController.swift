@@ -11,6 +11,7 @@ import WebKit
 import ReactiveSwift
 import SnapKit
 import GoogleMobileAds
+import Instructions
 
 class WebViewController: UIViewController, WKNavigationDelegate {
     enum Mode {
@@ -18,6 +19,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         case newPage
     }
     static let processPool: WKProcessPool = WKProcessPool()
+    let coachMarksController = CoachMarksController()
     let toolbarHeight: CGFloat = 45.0
     var showAd: Bool {
         return !PaymentManager.shared.isPremiumUser
@@ -43,7 +45,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         func getStickyEntity(_ dic: [String:AnyObject]) -> StickyEntity? {
             guard let s = getSticky(dic) else { return nil }
             guard let stickies = vc?.page?.stickies else { return nil }
-            guard let sticky = stickies.map({ $0 }).filter({ $0.id == s.id }).first else { return nil }
+            guard let sticky = stickies.map({ $0 }).filter({ $0.uuid == s.uuid }).first else { return nil }
             return sticky
         }
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -93,6 +95,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     var messageHandler:   MessageHandler?
     var backButton:       UIBarButtonItem?
     var forwardButton:    UIBarButtonItem?
+    var stickiesButton:   UIBarButtonItem?
     var searchController: UISearchController?
     var collectionView:   UICollectionView?
     init(page: PageEntity? = nil) {
@@ -148,8 +151,9 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         let stickies = UIBarButtonItem(image: UIImage(named:"stickies"), style: .plain, target: self, action: #selector(WebViewController.showStickies(_:)))
         toolbar.setItems([back, space, forward, space, share, space, stickies], animated: true)
         toolbar.tintColor = UIColor.themeColor
-        backButton    = back
-        forwardButton = forward
+        backButton        = back
+        forwardButton     = forward
+        stickiesButton    = stickies
         back.isEnabled    = false
         forward.isEnabled = false
         view.addSubview(toolbar)
@@ -159,6 +163,9 @@ class WebViewController: UIViewController, WKNavigationDelegate {
             make.right.equalTo(view)
             make.height.equalTo(toolbarHeight)
         }
+        coachMarksController.delegate = self
+        coachMarksController.dataSource = self
+        coachMarksController.overlay.color = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
     }
     
     override func didReceiveMemoryWarning() {
@@ -287,11 +294,10 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         sticky.width   = 100
         sticky.height  = 100
         sticky.userId  = 0
-        sticky.page    = PageEntity()
-
-        sticky.page?.title = webView?.title ?? ""
         if let url = webView?.url {
-            sticky.page?.url   = url.absoluteString
+            sticky.page = PageEntity.findOrCreateBy(url: url.absoluteString, title: webView?.title ?? "")
+        } else {
+            sticky.page = page
         }
         stickyEditor?.sticky = sticky
     }
@@ -350,6 +356,9 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         page = PageEntity.findOrCreateBy(url: url, title: webView.title ?? "")
         navigationItem.title = webView.title ?? url
         reloadStickies()
+        if needCoach() {
+            coachMarksController.start(on: self)
+        }
     }
 }
 
@@ -363,5 +372,54 @@ extension WebViewController: StickyEditorDelegate {
         stickyEditor?.dispose()
         editorContainer?.isHidden = true
         Store.shared.dispatch(CreateStickyAction(sticky: sticky))
+    }
+}
+
+extension WebViewController: CoachMarksControllerDelegate {
+    func needCoach() -> Bool {
+        return !UserDefaults.standard.bool(forKey: "webview_coach_finish")
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController, didEndShowingBySkipping skipped: Bool) {
+        UserDefaults.standard.set(true, forKey: "webview_coach_finish")
+    }
+}
+
+extension WebViewController: CoachMarksControllerDataSource {
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+        return 2
+    }
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+        switch index {
+        case 0:
+            var mark = coachMarksController.helper.makeCoachMark(for: view)
+            mark.pointOfInterest = CGPoint(x: view.center.x, y: view.center.y * 3 / 4)
+            mark.cutoutPath = UIBezierPath(rect: CGRect(x: mark.pointOfInterest!.x,
+                                                        y: mark.pointOfInterest!.y,
+                                                    width: 0,
+                                                   height: 0))
+            return mark
+        case 1:
+            if let view = stickiesButton?.value(forKey: "view") as? UIView {
+                return coachMarksController.helper.makeCoachMark(for: view)
+            }
+        default:
+            break
+        }
+        return coachMarksController.helper.makeCoachMark()
+    }
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
+        switch index {
+        case 0:
+            coachViews.bodyView.hintLabel.text = "三回連続でタップすると付箋を作成できます。"
+            coachViews.bodyView.nextLabel.text = "OK"
+        case 1:
+            coachViews.bodyView.hintLabel.text = "このページに貼り付けた付箋の一覧が表示されます。"
+            coachViews.bodyView.nextLabel.text = "OK"
+        default:
+            break
+        }
+        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
 }
