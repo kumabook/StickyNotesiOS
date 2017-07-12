@@ -23,6 +23,9 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         title = "Login"
+        if navigationController?.viewControllers.count == 1 {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.done, target: self, action: #selector(LoginViewController.close))
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -72,6 +75,10 @@ class LoginViewController: UIViewController {
     func showAlert(error: SessionTaskError) {
         let _ = UIAlertController.show(self, title: "Network error", message: error.localizedDescription) { _ in
         }
+    }
+
+    func close() {
+        dismiss(animated: true, completion: nil)
     }
 
     @IBAction func login(_ sender: AnyObject) {
