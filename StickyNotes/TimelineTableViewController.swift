@@ -60,6 +60,20 @@ class TimelineTableViewController: StickyTableViewController {
             coachMarksController.start(on: self)
         }
     }
+    override func reloadData() {
+        super.reloadData()
+        if stickies.count == 0 {
+            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+            let label = UILabel(frame: CGRect(x: 0, y: view.frame.height / 3, width: view.frame.width, height: 100))
+            label.textAlignment = .center
+            label.textColor = UIColor.themeColor
+            label.text = "リストは空です。付箋を作りましょう。"
+            headerView.addSubview(label)
+            tableView.tableHeaderView = headerView
+        } else {
+            tableView.tableHeaderView = nil
+        }
+    }
 }
 
 extension TimelineTableViewController: CoachMarksControllerDelegate {
