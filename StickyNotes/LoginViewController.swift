@@ -17,15 +17,19 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var resetPasswordButton: UIButton!
     var hud: MBProgressHUD?
     var observer: Disposable?
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Login"
+        title = "Login".localize()
         if navigationController?.viewControllers.count == 1 {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.done, target: self, action: #selector(LoginViewController.close))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close".localize(), style: UIBarButtonItemStyle.done, target: self, action: #selector(LoginViewController.close))
         }
+        loginButton.titleLabel?.text = "Login".localize()
+        registerButton.titleLabel?.text = "Sign up".localize()
+        resetPasswordButton.titleLabel?.text = "Forgot password?".localize()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,7 +77,7 @@ class LoginViewController: UIViewController {
     }
 
     func showAlert(error: SessionTaskError) {
-        let _ = UIAlertController.show(self, title: "Network error", message: error.localizedDescription) { _ in
+        let _ = UIAlertController.show(self, title: "Network error".localize(), message: error.localizedDescription) { _ in
         }
     }
 

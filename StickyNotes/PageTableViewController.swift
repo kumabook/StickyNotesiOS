@@ -16,7 +16,6 @@ class PageTableViewController: UITableViewController {
     var pages: Results<PageEntity>!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Pages"
 
         let nib = UINib(nibName: "PageTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: reuseIdentifier)
@@ -43,7 +42,7 @@ class PageTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tabBarController?.title = "ページ"
+        tabBarController?.title = "Pages".localize()
         tabBarController?.navigationItem.leftBarButtonItem = nil
         tabBarController?.navigationItem.rightBarButtonItem = nil
     }

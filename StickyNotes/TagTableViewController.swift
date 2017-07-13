@@ -21,7 +21,7 @@ class TagTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Tags"
+        self.title = "Tags".localize()
         
         let nib = UINib(nibName: "TabTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: reuseIdentifier)
@@ -34,7 +34,7 @@ class TagTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        tabBarController?.title = "タグ"
+        tabBarController?.title = "Tags".localize()
         tabBarController?.navigationItem.leftBarButtonItem = nil
         tabBarController?.navigationItem.rightBarButtonItem = nil
         Store.shared.state.value.stickiesRepository.state.signal.observeValues() { [weak self] state in

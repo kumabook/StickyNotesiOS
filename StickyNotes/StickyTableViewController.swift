@@ -114,7 +114,7 @@ class StickyTableViewController: UITableViewController {
                 cell.contentView.addSubview(adView)
                 adView.snp.makeConstraints() { make in
                     make.top.equalTo(cell.contentView)
-                    make.bottom.equalTo(cell.contentView)
+                    make.height.equalTo(cellHeight)
                     make.left.equalTo(cell.contentView)
                     make.right.equalTo(cell.contentView)
                 }

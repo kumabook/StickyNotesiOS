@@ -1,4 +1,4 @@
-//
+    //
 //  AppDelegate.swift
 //  StickyNotes
 //
@@ -35,19 +35,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tbc = TabBarController()
 
         let timeline = TimelineTableViewController()
-        timeline.tabBarItem = UITabBarItem(title: "Stickies", image: UIImage(named: "content"), selectedImage: nil)
+        timeline.tabBarItem = UITabBarItem(title: "Timeline".localize(), image: UIImage(named: "content"), selectedImage: nil)
         tbc.addChildViewController(timeline)
 
         let tag = TagTableViewController()
-        tag.tabBarItem = UITabBarItem(title: "Tags", image: UIImage(named: "tag"), selectedImage: nil)
+        tag.tabBarItem = UITabBarItem(title: "Tags".localize(), image: UIImage(named: "tag"), selectedImage: nil)
         tbc.addChildViewController(tag)
 
         let page = PageTableViewController()
-        page.tabBarItem = UITabBarItem(title: "Pages", image: UIImage(named: "page"), selectedImage: nil)
+        page.tabBarItem = UITabBarItem(title: "Pages".localize(), image: UIImage(named: "page"), selectedImage: nil)
         tbc.addChildViewController(page)
 
         let profile = PreferenceTableViewController()
-        profile.tabBarItem = UITabBarItem(title: "Preference", image: UIImage(named: "profile"), selectedImage: nil)
+        profile.tabBarItem = UITabBarItem(title: "Preferences".localize(), image: UIImage(named: "profile"), selectedImage: nil)
         tbc.addChildViewController(profile)
         let pageStickies = PageStickyTableViewController()
         self.pageStickies = pageStickies

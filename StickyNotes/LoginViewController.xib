@@ -15,6 +15,7 @@
                 <outlet property="loginButton" destination="oAI-A5-ggV" id="M8t-Pj-cYk"/>
                 <outlet property="passwordTextField" destination="bqb-Li-d6G" id="w7l-qD-maa"/>
                 <outlet property="registerButton" destination="6no-nl-dlh" id="7FP-mY-t77"/>
+                <outlet property="resetPasswordButton" destination="jmd-bJ-AMn" id="zRk-11-tsg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -29,8 +30,8 @@
                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oAI-A5-ggV">
-                    <rect key="frame" x="156" y="213" width="62" height="30"/>
-                    <state key="normal" title="ログイン"/>
+                    <rect key="frame" x="168" y="213" width="38" height="30"/>
+                    <state key="normal" title="Login"/>
                     <connections>
                         <action selector="login:" destination="-1" eventType="touchUpInside" id="P22-uC-pxz"/>
                     </connections>
@@ -52,14 +53,14 @@
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jmd-bJ-AMn">
                     <rect key="frame" x="16" y="287" width="343" height="30"/>
-                    <state key="normal" title="パスワードを忘れた場合?"/>
+                    <state key="normal" title="Forgot password?"/>
                     <connections>
                         <action selector="resetPassword:" destination="-1" eventType="touchUpInside" id="Ghs-6S-axB"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6no-nl-dlh">
                     <rect key="frame" x="16" y="259" width="343" height="30"/>
-                    <state key="normal" title="アカウントを作成"/>
+                    <state key="normal" title="Signup"/>
                     <connections>
                         <action selector="register:" destination="-1" eventType="touchUpInside" id="eMI-4T-r8n"/>
                     </connections>

@@ -23,7 +23,6 @@ class TimelineTableViewController: StickyTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Stickies"
         reloadData()
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(TimelineTableViewController.reload), for: .valueChanged)
@@ -50,7 +49,7 @@ class TimelineTableViewController: StickyTableViewController {
         Store.shared.state.subscribe {[weak self] _ in
             self?.reloadData()
         }
-        tabBarController?.title = "タイムライン"
+        tabBarController?.title = "Timeline".localize()
         tabBarController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "new_page"), style: .plain, target: self, action: #selector(TimelineTableViewController.newPage))
         tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "search"), style: .plain, target: self, action: #selector(TimelineTableViewController.search))
     }
@@ -67,7 +66,7 @@ class TimelineTableViewController: StickyTableViewController {
             let label = UILabel(frame: CGRect(x: 0, y: view.frame.height / 3, width: view.frame.width, height: 100))
             label.textAlignment = .center
             label.textColor = UIColor.themeColor
-            label.text = "リストは空です。付箋を作りましょう。"
+            label.text = "The list is empty. Let's create stickies".localize()
             headerView.addSubview(label)
             tableView.tableHeaderView = headerView
         } else {
@@ -109,10 +108,10 @@ extension TimelineTableViewController: CoachMarksControllerDataSource {
         let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
         switch index {
         case 0:
-            coachViews.bodyView.hintLabel.text = "アプリ内ブラウザもしくはSafariなどの共有拡張機能から付箋を作成できます。"
+            coachViews.bodyView.hintLabel.text = "With In-App Browser or share extension of Safari, you can create a sticky".localize()
             coachViews.bodyView.nextLabel.text = "OK"
         case 1:
-            coachViews.bodyView.hintLabel.text = "メモの内容・タグ名・ページ名で検索ができます。"
+            coachViews.bodyView.hintLabel.text = "You can search stickies with memo or tag or page title".localize()
             coachViews.bodyView.nextLabel.text = "OK"
         default:
             break

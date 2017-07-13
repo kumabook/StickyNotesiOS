@@ -17,13 +17,13 @@ class UserRegistrationViewController: UIViewController {
     @IBOutlet weak var passwordTextField:             UITextField!
     @IBOutlet weak var passwordConfirmationTextField: UITextField!
     @IBOutlet weak var registerButton:                UIButton!
-    @IBOutlet weak var cancelButton:                  UIButton!
 
     var hud: MBProgressHUD?
     var observer: Disposable?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        registerButton.titleLabel?.text = "Sign up".localize()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -68,7 +68,7 @@ class UserRegistrationViewController: UIViewController {
     }
 
     func showAlert(error: SessionTaskError) {
-        let _ = UIAlertController.show(self, title: "Network error", message: error.localizedDescription) { _ in
+        let _ = UIAlertController.show(self, title: "Network error".localize(), message: error.localizedDescription) { _ in
         }
     }
 
@@ -77,10 +77,6 @@ class UserRegistrationViewController: UIViewController {
         guard let password = passwordTextField.text else { return }
         guard let passwordConfirmation = passwordConfirmationTextField.text else { return }
         Store.shared.dispatch(CreateUserAction(email: email, password: password, passwordConfirmation: passwordConfirmation))
-    }
-
-    @IBAction func cancel(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

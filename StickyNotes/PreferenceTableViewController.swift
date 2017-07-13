@@ -12,7 +12,7 @@ class PreferenceTableViewController: UITableViewController {
     enum Item: Int {
         case loginOrLogout = 0
         case sync          = 1
-        case help          = 2
+        case tutorial      = 2
         case purchase      = 3
         case restore       = 4
         static let count   = 5
@@ -20,22 +20,23 @@ class PreferenceTableViewController: UITableViewController {
             switch self {
             case .loginOrLogout:
                 if APIClient.shared.accessToken == nil {
-                    return "ログイン"
+                    return "Login".localize()
                 } else {
-                    return "ログアウト"
+                    return "Logout".localize()
                 }
             case .sync:
+                let sync = "Sync".localize()
                 if let lastSyncedAt = APIClient.shared.lastSyncedAt {
-                    return "同期 (\(lastSyncedAt.passedTime) に実行)"
+                    return String(format: "%@ (%@ ago)".localize(), sync, lastSyncedAt.passedTime)
                 } else {
-                    return "同期"
+                    return sync
                 }
-            case .help:
-                return "ヘルプ"
+            case .tutorial:
+                return "Tutorial".localize()
             case .purchase:
-                return "プレミアムサービスを購入"
+                return "Upgrade to Premium".localize()
             case .restore:
-                return "購入を復元"
+                return "Restore purchases".localize()
             }
         }
     }
@@ -57,7 +58,7 @@ class PreferenceTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tabBarController?.title = "設定"
+        tabBarController?.title = "Preferences".localize()
         tabBarController?.navigationItem.leftBarButtonItem = nil
         tabBarController?.navigationItem.rightBarButtonItem = nil
         tableView.reloadData()
@@ -94,12 +95,12 @@ class PreferenceTableViewController: UITableViewController {
                 let vc = LoginViewController()
                 navigationController?.pushViewController(vc, animated: true)
             } else {
-                let alertController = UIAlertController(title: "Logout",
-                                                      message: "ログアウトしますか?",
+                let alertController = UIAlertController(title: "Logout".localize(),
+                                                      message: "Are you sure you want to logout?".localize(),
                                                preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "いいえ", style: .cancel) { action in
+                alertController.addAction(UIAlertAction(title: "No".localize(), style: .cancel) { action in
                     })
-                alertController.addAction(UIAlertAction(title: "はい", style: .default) { action in
+                alertController.addAction(UIAlertAction(title: "Yes".localize(), style: .default) { action in
                     Store.shared.dispatch(LogoutAction())
                     })
                 present(alertController, animated: true, completion: nil)
@@ -109,16 +110,15 @@ class PreferenceTableViewController: UITableViewController {
             if APIClient.shared.isLoggedIn {
                 Store.shared.dispatch(FetchStickiesAction())
             } else {
-                let _ = UIAlertController.show(self, title: "ログインが必要です", message: "ログインをするとデバイス間でデータを共有することができます。") {_ in
+                let _ = UIAlertController.show(self, title: "Login is required".localize(), message: "You can sync stickies between multiple devices".localize()) {_ in
                     let vc = LoginViewController()
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }
-        case .help:
-            if let url = URL(string: "http://kumabook.github.io/stickynotes/index.html") {
-                let vc = SNWebViewController(url: url)
-                navigationController?.pushViewController(vc, animated: true)
-            }
+        case .tutorial:
+            UserDefaults.standard.set(false, forKey: "webview_coach_finish")
+            UserDefaults.standard.set(false, forKey: "timeline_coach_finish")
+            AppDelegate.shared.slideMenu?.showTutorial()
         case .purchase:
             let _ = UIAlertController.showPurchaseAlert(self)
         case .restore:

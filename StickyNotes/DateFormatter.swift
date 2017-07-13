@@ -25,6 +25,6 @@ class DateFormatter {
 
 extension Date {
     var passedTime: String {
-        return "\(elapsedTime.value) \(elapsedTime.unit.rawValue.localize()) \("ago".localize())"
+        return "\(elapsedTime.value) \(elapsedTime.unit.rawValue.localize())"
     }
 }

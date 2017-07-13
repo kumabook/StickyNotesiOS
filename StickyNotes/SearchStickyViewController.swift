@@ -58,11 +58,11 @@ class SearchStickyViewController: StickyTableViewController, UISearchControllerD
     }
 
     func createInstructionFooterView() -> UIView {
-        return createFooterView(message: "付箋の内容・タグ名・タイトルまたはURLで検索")
+        return createFooterView(message: "Search stickies with memo or tag or page title".localize())
     }
 
     func createNoResultFooterView() -> UIView {
-        return createFooterView(message: "検索結果なし")
+        return createFooterView(message: "No results".localize())
     }
 
     override func reload() {

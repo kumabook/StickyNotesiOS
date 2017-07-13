@@ -6,9 +6,61 @@
   Copyright © 2017 kumabook. All rights reserved.
 */
 
+"Login"              = "ログイン";
+"Logout"             = "ログアウト";
+"Sync"               = "同期";
+"Help"               = "ヘルプ";
+"Tutorial"           = "チュートリアル";
+"Close"              = "閉じる";
+"Remove"             = "削除";
+"Timeline"           = "タイムライン";
+"Tags"               = "タグ";
+"Pages"              = "ページ";
+"Upgrade to Premium" = "プレミアムにアップグレード";
+"Restore purchases"  = "購入を復元";
+"Preferences"        = "設定";
+"Network error"      = "通信エラー";
+"Sign up"            = "アカウント作成";
+"Forgot password?"   = "パスワードを忘れた場合";
+
+
+
 "second" = "秒";
 "minute" = "分";
 "hour"   = "時間";
 "day"    = "日";
 
 "ago"    = "前";
+
+/*
+ TimelineTableViewController
+ */
+
+"The list is empty. Let's create stickies" = "リストは空です。付箋を作りましょう。";
+"With In-App Browser or share extension of Safari, you can create a sticky" = "アプリ内ブラウザもしくはSafariなどの共有拡張機能から付箋を作成できます。";
+"You can search stickies with memo or tag or page title" = "メモの内容・タグ名・ページ名で検索ができます。";
+
+/*
+ PreferenceTableViewController
+*/
+"Login is required" = "ログインが必要です";
+"You can sync stickies between multiple devices" = "ログインをするとデバイス間で付箋を共有することができます。";
+"Are you sure you want to logout?" = "ログアウトしますか?";
+"%@ (%@ ago)" = "%@ (%@前に実行)";
+
+/*
+ SearchStickyViewController
+ */
+"No results" = "検索結果なし";
+"Search stickies with memo or tag or page title" = "付箋の内容・タグ名・タイトルまたはURLで検索";
+
+/*
+ Tutorial
+ */
+
+"Put a sticky on a web page" = "ウェブページに付箋を貼り付けよう";
+"You can create a sticky with triple tap on web page in In-App Broswer." = "アプリ内ブラウザのウェブページ上で三回連続でタップすると付箋を作成できます。付箋にはメモを残したり、タグ付けして管理することができます。";
+"Enable the StickyNotes share extension to put the sticky from Safari or your favorite apps." = "StickyNotesの共有拡張機能を有効にすると、Safariなどの別のアプリから付箋を作成できます。";
+"Sync with PC" = "PCとも同期";
+"If you use firefox addon of this app, you can sync stickies with PC." = "PCのFirefox のAddonをインストールすると保存した付箋をPCとの間で同期することができます。";
+

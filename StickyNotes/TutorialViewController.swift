@@ -27,21 +27,21 @@ extension SlideMenuController: EAIntroDelegate {
 
         let page2 = EAIntroPage()
         page2.titleIconView = UIImageView(image: UIImage(named: "tutorial_put"))
-        page2.title = "ウェブページに付箋を貼り付けよう"
-        page2.desc  = "アプリ内ブラウザのウェブページ上で三回連続でタップすると付箋を作成できます。付箋にはメモを残したり、タグ付けして管理することができます。"
+        page2.title = "Put a sticky on a web page".localize()
+        page2.desc  = "You can create a sticky with triple tap on web page in In-App Broswer.".localize()
         page2.bgColor = Color.get("olive")?.backgroundColor ?? UIColor.cyan
         
         let page3 = EAIntroPage()
         page3.titleIconView = UIImageView(image: UIImage(named: "tutorial_share"))
-        page3.title = "ウェブページに付箋を貼り付けよう"
-        page3.desc  = "StickyNotesの共有拡張機能を有効にすると、Safariなどの別のアプリから付箋を作成できます。"
+        page3.title = "Put a sticky on a web page".localize()
+        page3.desc  = "Enable the StickyNotes share extension to put the sticky from Safari or your favorite apps."
         page3.bgColor = UIColor.themeColor
 
 
         let page4 = EAIntroPage()
         page4.titleIconView = UIImageView(image: UIImage(named: "tutorial_sync"))
-        page4.title = "PCとも同期"
-        page4.desc  = "PCのFirefox のAddonをインストールすると保存した付箋をPCとの間で同期することができます。"
+        page4.title = "Sync with PC"
+        page4.desc  = "If you use firefox addon of this app, you can sync stickies with PC."
         page4.bgColor = Color.get("olive")?.backgroundColor ?? UIColor.cyan
 
         let intro = EAIntroView(frame: view.bounds, andPages: [titlePage, page2, page3, page4])
