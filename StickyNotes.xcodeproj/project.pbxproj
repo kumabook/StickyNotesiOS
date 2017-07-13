@@ -22,21 +22,15 @@
 		670599FE1D838C2C0085FCAC /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67FECF061D54EF2C0029440F /* APIKit.framework */; };
 		670599FF1D838C2F0085FCAC /* Himotoki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67FECF081D54EF2C0029440F /* Himotoki.framework */; };
 		67059A001D838C3F0085FCAC /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67FECF0C1D54EF2C0029440F /* Result.framework */; };
-		67059A021D838C790085FCAC /* APIKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF061D54EF2C0029440F /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		67059A031D838C790085FCAC /* Himotoki.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF081D54EF2C0029440F /* Himotoki.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		67059A041D838C790085FCAC /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF0C1D54EF2C0029440F /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		67059A051D838C940085FCAC /* StickyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF3A1D5613240029440F /* StickyRepository.swift */; };
 		67059A061D838C9D0085FCAC /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF6A1D60840A0029440F /* DateFormatter.swift */; };
 		67059A071D838CBC0085FCAC /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67FECF0B1D54EF2C0029440F /* RealmSwift.framework */; };
 		67059A081D838CC70085FCAC /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67FECF091D54EF2C0029440F /* ReactiveCocoa.framework */; };
-		67059A091D838CCB0085FCAC /* ReactiveCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF091D54EF2C0029440F /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		67059A0A1D838CD00085FCAC /* RealmSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF0B1D54EF2C0029440F /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		67059A0C1D87E5580085FCAC /* ColorSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67059A0B1D87E5580085FCAC /* ColorSlider.swift */; };
 		67059A0E1D87E5830085FCAC /* ColorSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67059A0B1D87E5580085FCAC /* ColorSlider.swift */; };
 		67059A101D87E72E0085FCAC /* GetPage.js in Resources */ = {isa = PBXBuildFile; fileRef = 67059A0F1D87E72E0085FCAC /* GetPage.js */; };
 		6742939C1EBB5F1D00E95148 /* MBProgressHUDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6742939B1EBB5F1D00E95148 /* MBProgressHUDExtension.swift */; };
 		6742939E1EBB5FE700E95148 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6742939D1EBB5FE700E95148 /* UIAlertControllerExtension.swift */; };
-		674293A01EBB716A00E95148 /* SnapKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6742939F1EBB716A00E95148 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		674293A11EBB717A00E95148 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6742939F1EBB716A00E95148 /* SnapKit.framework */; };
 		674293AC1EBB866000E95148 /* UserRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674293AA1EBB866000E95148 /* UserRegistrationViewController.swift */; };
 		674293AD1EBB866000E95148 /* UserRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 674293AB1EBB866000E95148 /* UserRegistrationViewController.xib */; };
@@ -50,18 +44,17 @@
 		674293BF1EBF4A0700E95148 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674293BE1EBF4A0700E95148 /* MessageView.swift */; };
 		67484C901EC0009000E72224 /* StickyEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67484C8F1EC0009000E72224 /* StickyEditor.swift */; };
 		674DA6CF1F0CD7AE00E2BEE0 /* StickyEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67484C8F1EC0009000E72224 /* StickyEditor.swift */; };
+		674DA6D11F0DCAAF00E2BEE0 /* SNWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674DA6D01F0DCAAF00E2BEE0 /* SNWebViewController.swift */; };
 		674DA6D51F0DD75000E2BEE0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 674DA6D41F0DD75000E2BEE0 /* Settings.bundle */; };
 		6761525F1EB090C9002E556D /* PaymentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6761525E1EB090C9002E556D /* PaymentManager.swift */; };
 		6780E38E1EB220A5002692E8 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6780E38D1EB220A5002692E8 /* MBProgressHUD.framework */; };
-		6780E38F1EB220B3002692E8 /* MBProgressHUD.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6780E38D1EB220A5002692E8 /* MBProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		679A7E8E1EB2F8260008EFBE /* SearchStickyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679A7E8D1EB2F8260008EFBE /* SearchStickyViewController.swift */; };
 		679A7E921EB33DF80008EFBE /* WebViewController+NewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679A7E911EB33DF80008EFBE /* WebViewController+NewPage.swift */; };
 		679A7E941EB38B6B0008EFBE /* SiteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679A7E931EB38B6B0008EFBE /* SiteCollectionViewCell.swift */; };
 		679A7E971EB3AE540008EFBE /* Site.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679A7E961EB3AE540008EFBE /* Site.swift */; };
 		679A7E991EB5FDDC0008EFBE /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 679A7E981EB5FDDC0008EFBE /* SDWebImage.framework */; };
-		679A7E9A1EB5FDE90008EFBE /* SDWebImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 679A7E981EB5FDDC0008EFBE /* SDWebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		67A4D4DF1F12188A00487D49 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A4D4DE1F12188A00487D49 /* TutorialViewController.swift */; };
 		67CF2B181EAD9BFA0094B25E /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67CF2B171EAD9BFA0094B25E /* ReactiveSwift.framework */; };
-		67CF2B191EAD9C170094B25E /* ReactiveSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67CF2B171EAD9BFA0094B25E /* ReactiveSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		67FECEE51D5399BC0029440F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECEE41D5399BC0029440F /* AppDelegate.swift */; };
 		67FECEEE1D5399BC0029440F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67FECEED1D5399BC0029440F /* Assets.xcassets */; };
 		67FECEF11D5399BC0029440F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67FECEEF1D5399BC0029440F /* LaunchScreen.storyboard */; };
@@ -73,14 +66,6 @@
 		67FECF121D54EF2C0029440F /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67FECF0B1D54EF2C0029440F /* RealmSwift.framework */; };
 		67FECF131D54EF2C0029440F /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67FECF0C1D54EF2C0029440F /* Result.framework */; };
 		67FECF151D54EF6A0029440F /* Delta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67FECF141D54EF6A0029440F /* Delta.framework */; };
-		67FECF181D54EFAA0029440F /* Delta.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF141D54EF6A0029440F /* Delta.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		67FECF191D54EFAA0029440F /* APIKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF061D54EF2C0029440F /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		67FECF1A1D54EFAA0029440F /* Breit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF071D54EF2C0029440F /* Breit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		67FECF1B1D54EFAA0029440F /* Himotoki.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF081D54EF2C0029440F /* Himotoki.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		67FECF1C1D54EFAA0029440F /* ReactiveCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF091D54EF2C0029440F /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		67FECF1D1D54EFAA0029440F /* Realm.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF0A1D54EF2C0029440F /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		67FECF1E1D54EFAA0029440F /* RealmSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF0B1D54EF2C0029440F /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		67FECF1F1D54EFAA0029440F /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF0C1D54EF2C0029440F /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		67FECF251D556CCA0029440F /* TimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF241D556CCA0029440F /* TimelineTableViewController.swift */; };
 		67FECF271D5576E30029440F /* PreferenceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF261D5576E30029440F /* PreferenceTableViewController.swift */; };
 		67FECF2A1D5577B00029440F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF281D5577B00029440F /* LoginViewController.swift */; };
@@ -107,7 +92,6 @@
 		67FECF5F1D5EAEE90029440F /* PageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF5D1D5EAEE90029440F /* PageTableViewCell.swift */; };
 		67FECF601D5EAEE90029440F /* PageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67FECF5E1D5EAEE90029440F /* PageTableViewCell.xib */; };
 		67FECF621D5F05370029440F /* SlideMenuControllerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67FECF611D5F05370029440F /* SlideMenuControllerSwift.framework */; };
-		67FECF631D5F053F0029440F /* SlideMenuControllerSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 67FECF611D5F05370029440F /* SlideMenuControllerSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		67FECF651D5F0D220029440F /* PageStickyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF641D5F0D220029440F /* PageStickyTableViewController.swift */; };
 		67FECF681D5F47380029440F /* PageStickyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECF661D5F47380029440F /* PageStickyTableViewCell.swift */; };
 		67FECF691D5F47380029440F /* PageStickyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67FECF671D5F47380029440F /* PageStickyTableViewCell.xib */; };
@@ -145,42 +129,6 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		67059A011D838C650085FCAC /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				67059A021D838C790085FCAC /* APIKit.framework in CopyFiles */,
-				67059A031D838C790085FCAC /* Himotoki.framework in CopyFiles */,
-				67059A041D838C790085FCAC /* Result.framework in CopyFiles */,
-				67059A0A1D838CD00085FCAC /* RealmSwift.framework in CopyFiles */,
-				67059A091D838CCB0085FCAC /* ReactiveCocoa.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		67FECF171D54EF9D0029440F /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				674293A01EBB716A00E95148 /* SnapKit.framework in CopyFiles */,
-				679A7E9A1EB5FDE90008EFBE /* SDWebImage.framework in CopyFiles */,
-				6780E38F1EB220B3002692E8 /* MBProgressHUD.framework in CopyFiles */,
-				67CF2B191EAD9C170094B25E /* ReactiveSwift.framework in CopyFiles */,
-				67FECF631D5F053F0029440F /* SlideMenuControllerSwift.framework in CopyFiles */,
-				67FECF181D54EFAA0029440F /* Delta.framework in CopyFiles */,
-				67FECF191D54EFAA0029440F /* APIKit.framework in CopyFiles */,
-				67FECF1A1D54EFAA0029440F /* Breit.framework in CopyFiles */,
-				67FECF1B1D54EFAA0029440F /* Himotoki.framework in CopyFiles */,
-				67FECF1C1D54EFAA0029440F /* ReactiveCocoa.framework in CopyFiles */,
-				67FECF1D1D54EFAA0029440F /* Realm.framework in CopyFiles */,
-				67FECF1E1D54EFAA0029440F /* RealmSwift.framework in CopyFiles */,
-				67FECF1F1D54EFAA0029440F /* Result.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -206,6 +154,7 @@
 		674293B91EBEF07400E95148 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		674293BE1EBF4A0700E95148 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		67484C8F1EC0009000E72224 /* StickyEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickyEditor.swift; sourceTree = "<group>"; };
+		674DA6D01F0DCAAF00E2BEE0 /* SNWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNWebViewController.swift; sourceTree = "<group>"; };
 		674DA6D41F0DD75000E2BEE0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		6761525E1EB090C9002E556D /* PaymentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentManager.swift; sourceTree = "<group>"; };
 		6780E38D1EB220A5002692E8 /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = Carthage/Build/iOS/MBProgressHUD.framework; sourceTree = "<group>"; };
@@ -214,6 +163,7 @@
 		679A7E931EB38B6B0008EFBE /* SiteCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteCollectionViewCell.swift; sourceTree = "<group>"; };
 		679A7E961EB3AE540008EFBE /* Site.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Site.swift; sourceTree = "<group>"; };
 		679A7E981EB5FDDC0008EFBE /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
+		67A4D4DE1F12188A00487D49 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		67CF2B171EAD9BFA0094B25E /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
 		67FECEE11D5399BC0029440F /* StickyNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickyNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67FECEE41D5399BC0029440F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -507,7 +457,6 @@
 				670599E01D8195BA0085FCAC /* Sources */,
 				670599E11D8195BA0085FCAC /* Frameworks */,
 				670599E21D8195BA0085FCAC /* Resources */,
-				67059A011D838C650085FCAC /* CopyFiles */,
 				EFBDB6901C2E8DFD4B090C27 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -527,10 +476,10 @@
 				67FECEDD1D5399BC0029440F /* Sources */,
 				67FECEDE1D5399BC0029440F /* Frameworks */,
 				67FECEDF1D5399BC0029440F /* Resources */,
-				67FECF171D54EF9D0029440F /* CopyFiles */,
 				670599CB1D808EDE0085FCAC /* Embed App Extensions */,
 				FD7AB26533E6448BB0D18FBE /* [CP] Embed Pods Frameworks */,
 				2022AA622CF013A91AB9061D /* [CP] Copy Pods Resources */,
+				674DA6DB1F0FA10A00E2BEE0 /* carthage copy-frameworks */,
 			);
 			buildRules = (
 			);
@@ -590,6 +539,9 @@
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 0;
 							};
 						};
 					};
@@ -690,6 +642,33 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		674DA6DB1F0FA10A00E2BEE0 /* carthage copy-frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/MBProgressHUD.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SDWebImage.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SlideMenuControllerSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Delta.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/APIKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Breit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Himotoki.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+			);
+			name = "carthage copy-frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 		8481FE8BC65E87821005C117 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -818,6 +797,7 @@
 				67FECF271D5576E30029440F /* PreferenceTableViewController.swift in Sources */,
 				67FECF4F1D5C05060029440F /* TagStickyTableViewController.swift in Sources */,
 				67FECF3F1D580FC70029440F /* StickyTableViewCell.swift in Sources */,
+				674DA6D11F0DCAAF00E2BEE0 /* SNWebViewController.swift in Sources */,
 				67FECF4D1D5BFA010029440F /* StickyTableViewController.swift in Sources */,
 				67FECF5F1D5EAEE90029440F /* PageTableViewCell.swift in Sources */,
 				67FECF5C1D5EA4FD0029440F /* Color.swift in Sources */,
@@ -830,6 +810,7 @@
 				674293B51EBDA80000E95148 /* TabBarController.swift in Sources */,
 				679A7E971EB3AE540008EFBE /* Site.swift in Sources */,
 				67FECF491D5B80230029440F /* TagTableViewController.swift in Sources */,
+				67A4D4DF1F12188A00487D49 /* TutorialViewController.swift in Sources */,
 				67FECF6E1D62237E0029440F /* EditStickyViewController.swift in Sources */,
 				67FECF341D55C47A0029440F /* Tag.swift in Sources */,
 				67FECF681D5F47380029440F /* PageStickyTableViewCell.swift in Sources */,
