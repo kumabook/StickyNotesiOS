@@ -20,11 +20,15 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var resetPasswordButton: UIButton!
     var hud: MBProgressHUD?
     var observer: Disposable?
+    var isModal: Bool {
+        return navigationController?.viewControllers.count == 1
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Login".localize()
-        if navigationController?.viewControllers.count == 1 {
+        if isModal {
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close".localize(), style: UIBarButtonItemStyle.done, target: self, action: #selector(LoginViewController.close))
         }
         loginButton.titleLabel?.text = "Login".localize()
@@ -45,7 +49,7 @@ class LoginViewController: UIViewController {
                 self.showAlert(error: e)
             case .login, .logout:
                 self.hideProgress()
-                self.navigationController?.popViewController(animated: true)
+                self.close()
             default:
                 break
             }
@@ -54,7 +58,7 @@ class LoginViewController: UIViewController {
         UIDevice.current.setValue(value, forKey: "orientation")
         switch Store.shared.state.value.accountState.value {
         case .login(_):
-            self.navigationController?.popViewController(animated: true)
+            self.close()
         default:
             break
         }
@@ -82,7 +86,11 @@ class LoginViewController: UIViewController {
     }
 
     func close() {
-        dismiss(animated: true, completion: nil)
+        if isModal {
+            dismiss(animated: true, completion: nil)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
 
     @IBAction func login(_ sender: AnyObject) {
