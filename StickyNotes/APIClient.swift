@@ -40,7 +40,7 @@ class APIClient {
     }
     var lastSyncedAt: Date? {
         get {
-            if let date = APIClient.userDefaults.object(forKey: "last_synced_at") as? Date {
+            if isLoggedIn, let date = APIClient.userDefaults.object(forKey: "last_synced_at") as? Date {
                 return date
             }
             return nil
