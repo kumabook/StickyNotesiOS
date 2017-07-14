@@ -15,7 +15,8 @@ class PreferenceTableViewController: UITableViewController {
         case tutorial      = 2
         case purchase      = 3
         case restore       = 4
-        static let count   = 5
+        case support       = 5
+        static let count   = 6
         var label: String {
             switch self {
             case .loginOrLogout:
@@ -37,6 +38,8 @@ class PreferenceTableViewController: UITableViewController {
                 return "Upgrade to Premium".localize()
             case .restore:
                 return "Restore purchases".localize()
+            case .support:
+                return "Support".localize()
             }
         }
     }
@@ -123,6 +126,9 @@ class PreferenceTableViewController: UITableViewController {
             let _ = UIAlertController.showPurchaseAlert(self)
         case .restore:
             PaymentManager.shared.restorePurchase()
+        case .support:
+            guard let url = URL(string: "https://twitter.com/stickynotesjp") else { return }
+            UIApplication.shared.openURL(url)
         }
     }
 }
