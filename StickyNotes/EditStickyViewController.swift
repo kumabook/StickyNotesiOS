@@ -34,7 +34,7 @@ class EditStickyViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(EditStickyViewController.save))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save".localize(), style: .plain, target: self, action: #selector(EditStickyViewController.save))
 
         hideKeyboardButton.isHidden = true
         tagTextField.text = sticky.tags.map { $0.name }.joined(separator: ",")

@@ -36,7 +36,7 @@ class PageStickyTableViewCell: UITableViewCell {
         preservesSuperviewLayoutMargins = false
         layoutMargins = UIEdgeInsets.zero
 
-        contentTextView.text = sticky.content.characters.count > 0 ? sticky.content : "No content"
+        contentTextView.text = sticky.content.characters.count > 0 ? sticky.content : "Insert a note here".localize()
         contentTextView.textContainerInset = UIEdgeInsets.zero
         contentTextView.textContainer.lineFragmentPadding = 0
         contentTextView.isUserInteractionEnabled = false
@@ -60,5 +60,6 @@ class PageStickyTableViewCell: UITableViewCell {
             label.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
             return (anchor: label.trailingAnchor, margin: 8.0)
         }
+        editButton.titleLabel?.text = "Edit".localize()
     }
 }

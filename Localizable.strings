@@ -12,7 +12,9 @@
 "Help"               = "ヘルプ";
 "Tutorial"           = "チュートリアル";
 "Close"              = "閉じる";
+"Edit"               = "編集";
 "Remove"             = "削除";
+"Save"               = "保存";
 "Timeline"           = "タイムライン";
 "Tags"               = "タグ";
 "Pages"              = "ページ";
@@ -22,6 +24,7 @@
 "Network error"      = "通信エラー";
 "Sign up"            = "アカウント作成";
 "Forgot password?"   = "パスワードを忘れた場合";
+"Insert a note here" = "ここにメモを挿入";
 
 
 
