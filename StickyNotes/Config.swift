@@ -16,6 +16,7 @@ struct Config: Decodable {
     var admobApplicationID:         String
     var admobTableViewCellAdUnitID: String
     var admobBannerAdUnitID:        String
+    var fabricApiKey:               String
 
     static private var defaultConfig: Config? = nil
 
@@ -36,7 +37,8 @@ struct Config: Decodable {
             clientSecret:               e <| "clientSecret",
             admobApplicationID:         e <| "admobApplicationID",
             admobTableViewCellAdUnitID: e <| "abmobTableViewCellAdUnitID",
-            admobBannerAdUnitID:        e <| "admobBannerAdUnitID"
+            admobBannerAdUnitID:        e <| "admobBannerAdUnitID",
+            fabricApiKey:               e <| "fabricApiKey"
         )
     }
 }

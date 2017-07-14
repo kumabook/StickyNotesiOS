@@ -13,6 +13,8 @@ target 'StickyNotes' do
   platform :ios, '9.3'
   use_frameworks!
 
+  pod 'Fabric'
+  pod 'Crashlytics'
   pod 'Firebase/Core'
   pod 'Firebase/AdMob'
   pod 'EAIntroView'

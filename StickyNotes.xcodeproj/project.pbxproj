@@ -479,6 +479,7 @@
 				670599CB1D808EDE0085FCAC /* Embed App Extensions */,
 				FD7AB26533E6448BB0D18FBE /* [CP] Embed Pods Frameworks */,
 				2022AA622CF013A91AB9061D /* [CP] Copy Pods Resources */,
+				67D4EF3D1F197DB90010C264 /* Fabric */,
 				674DA6DB1F0FA10A00E2BEE0 /* carthage copy-frameworks */,
 			);
 			buildRules = (
@@ -669,6 +670,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		67D4EF3D1F197DB90010C264 /* Fabric */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Fabric;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -e StickyNotes/config.json ]; then\n  ruby fabric.rb\nelse\n  echo \"Running StickyNotes/config.json is not found, do nothing.\"\nfi\n";
 		};
 		8481FE8BC65E87821005C117 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1000,6 +1015,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = StickyNotes/StickyNotes.entitlements;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

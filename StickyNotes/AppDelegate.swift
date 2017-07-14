@@ -10,6 +10,8 @@ import UIKit
 import SlideMenuControllerSwift
 import ReactiveSwift
 import GoogleMobileAds
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,7 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             APIClient.shared.clientId     = config.clientId
             APIClient.shared.clientSecret = config.clientSecret
             APIClient.shared.baseUrl      = config.baseUrl
+            Crashlytics.start(withAPIKey: config.fabricApiKey)
         }
+        Fabric.with([Crashlytics.self])
         let tbc = TabBarController()
 
         let timeline = TimelineTableViewController()
