@@ -70,9 +70,14 @@ class SearchStickyViewController: StickyTableViewController, UISearchControllerD
     }
 
     override func reloadData() {
-        // do nothing
-        stickies = StickyEntity.empty()
-        tableView.tableFooterView = createInstructionFooterView()
+        if let query = query, !query.isEmpty {
+            stickies = StickyEntity.search(by: query)
+            tableView.tableFooterView = stickies.count == 0 ? createNoResultFooterView() : nil
+        } else {
+            stickies = StickyEntity.empty()
+            tableView.tableFooterView = createInstructionFooterView()
+        }
+        tableView.reloadData()
     }
 
     public func updateSearchResults(for searchController: UISearchController) {
@@ -82,14 +87,7 @@ class SearchStickyViewController: StickyTableViewController, UISearchControllerD
         default:
             break
         }
-        if let query = query, !query.isEmpty {
-            stickies = StickyEntity.search(by: query)
-            tableView.tableFooterView = stickies.count == 0 ? createNoResultFooterView() : nil
-        } else {
-            stickies = StickyEntity.empty()
-            tableView.tableFooterView = createInstructionFooterView()
-        }
-        tableView.reloadData()
+        reloadData()
     }
 
     override func viewDidAppear(_ animated: Bool) {

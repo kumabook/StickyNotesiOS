@@ -137,4 +137,13 @@ class StickyTableViewController: UITableViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
+
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let sticky = getSticky(at: indexPath)
+        let remove = UITableViewRowAction(style: .default, title: "Remove".localize()) { (action, indexPath) in
+            Store.shared.dispatch(DeleteStickyAction(sticky: sticky))
+        }
+        remove.backgroundColor = UIColor.red
+        return [remove]
+    }
 }
