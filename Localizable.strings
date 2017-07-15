@@ -57,7 +57,11 @@
  */
 "No results" = "検索結果なし";
 "Search stickies with memo or tag or page title" = "付箋の内容・タグ名・タイトルまたはURLで検索";
-
+/*
+  WebViewController
+ */
+"Create sticky with triple tap." = "三回連続でタップすると付箋を作成できます。";
+"List stickies in this page." = "このページに貼り付けた付箋の一覧が表示されます。";
 /*
  Tutorial
  */

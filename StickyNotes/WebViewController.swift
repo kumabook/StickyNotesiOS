@@ -412,10 +412,10 @@ extension WebViewController: CoachMarksControllerDataSource {
         let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
         switch index {
         case 0:
-            coachViews.bodyView.hintLabel.text = "三回連続でタップすると付箋を作成できます。"
+            coachViews.bodyView.hintLabel.text = "Create sticky with triple tap.".localize()
             coachViews.bodyView.nextLabel.text = "OK"
         case 1:
-            coachViews.bodyView.hintLabel.text = "このページに貼り付けた付箋の一覧が表示されます。"
+            coachViews.bodyView.hintLabel.text = "List stickies in this page.".localize()
             coachViews.bodyView.nextLabel.text = "OK"
         default:
             break
