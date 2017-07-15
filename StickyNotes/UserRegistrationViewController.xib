@@ -11,7 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserRegistrationViewController" customModule="StickyNotes" customModuleProvider="target">
             <connections>
-                <outlet property="cancelButton" destination="Pxg-23-ogF" id="KU2-DG-CO0"/>
                 <outlet property="emailTextField" destination="Yiw-PV-bgC" id="mdd-rL-iu1"/>
                 <outlet property="passwordConfirmationTextField" destination="O2s-j7-49f" id="yIY-Fu-TIH"/>
                 <outlet property="passwordTextField" destination="p5C-3V-alT" id="tw8-C1-99D"/>
@@ -56,13 +55,6 @@
                         <action selector="register:" destination="-1" eventType="touchUpInside" id="LI4-Ck-CGX"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pxg-23-ogF">
-                    <rect key="frame" x="113" y="310" width="150" height="30"/>
-                    <state key="normal" title="Cancel"/>
-                    <connections>
-                        <action selector="cancel:" destination="-1" eventType="touchUpInside" id="QPs-WS-k8u"/>
-                    </connections>
-                </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password confirmation" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O2s-j7-49f">
                     <rect key="frame" x="48" y="208" width="280" height="30"/>
                     <nil key="textColor"/>
@@ -74,17 +66,14 @@
             <constraints>
                 <constraint firstItem="p5C-3V-alT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="1xV-cN-8mH"/>
                 <constraint firstItem="Cq0-Ov-f9X" firstAttribute="centerX" secondItem="O2s-j7-49f" secondAttribute="centerX" id="30a-XY-GCY"/>
-                <constraint firstItem="Pxg-23-ogF" firstAttribute="width" secondItem="Cq0-Ov-f9X" secondAttribute="width" id="5Jq-GH-ihe"/>
                 <constraint firstItem="Yiw-PV-bgC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="6xS-51-Uyz"/>
                 <constraint firstItem="Cq0-Ov-f9X" firstAttribute="top" secondItem="O2s-j7-49f" secondAttribute="bottom" constant="28" id="Ikm-AZ-liF"/>
                 <constraint firstItem="O2s-j7-49f" firstAttribute="top" secondItem="p5C-3V-alT" secondAttribute="bottom" id="Iu6-7o-Tsn"/>
                 <constraint firstItem="KaK-zk-eYy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="PrV-Kb-wiq"/>
-                <constraint firstItem="Pxg-23-ogF" firstAttribute="top" secondItem="Cq0-Ov-f9X" secondAttribute="bottom" constant="14" id="Qhi-Ug-AGT"/>
                 <constraint firstItem="KaK-zk-eYy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="62" id="Ria-Zc-wev"/>
                 <constraint firstItem="O2s-j7-49f" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UB6-1W-cAV"/>
                 <constraint firstItem="p5C-3V-alT" firstAttribute="top" secondItem="Yiw-PV-bgC" secondAttribute="bottom" constant="-1" id="WKa-sQ-cXi"/>
                 <constraint firstItem="Yiw-PV-bgC" firstAttribute="top" secondItem="KaK-zk-eYy" secondAttribute="bottom" constant="4" id="YtT-FD-QVL"/>
-                <constraint firstItem="Pxg-23-ogF" firstAttribute="centerX" secondItem="Cq0-Ov-f9X" secondAttribute="centerX" id="bn8-qL-Wct"/>
                 <constraint firstItem="p5C-3V-alT" firstAttribute="width" secondItem="Yiw-PV-bgC" secondAttribute="width" id="nqU-lN-yX7"/>
                 <constraint firstItem="O2s-j7-49f" firstAttribute="width" secondItem="p5C-3V-alT" secondAttribute="width" id="v49-OE-KRB"/>
             </constraints>
