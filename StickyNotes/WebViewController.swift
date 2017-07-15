@@ -303,8 +303,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     }
     
     func updateSticky(_ sticky: StickyEntity, editSticky: Sticky) {
-        Store.shared.dispatch(EditStickyAction(sticky: sticky,
-                                                   editSticky: StickyEntity(sticky: editSticky)))
+        Store.shared.dispatch(EditStickyAction(sticky: sticky, editSticky: StickyEntity(sticky: editSticky)))
     }
 
     func showStickies(_ sticky: StickyEntity?) {
