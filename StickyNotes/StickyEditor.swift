@@ -182,11 +182,7 @@ class StickyEditor: UIView {
         sticky.content = contentTextView.text
         sticky.color = color.id
         if let tags = tagTextField.text?.characters.split(separator: ",").map({ String($0) }) {
-            sticky.tags.append(objectsIn: tags.map {
-                let tag = TagEntity()
-                tag.name = String($0)
-                return tag
-            })
+            sticky.tags.append(objectsIn: tags.map { TagEntity.findOrCreateBy(name: $0) })
         }
         delegate?.completeStickyEditor(sticky: sticky)
     }
