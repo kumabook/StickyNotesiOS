@@ -25,7 +25,6 @@ struct CreateUserAction: Delta.ActionType {
                 Store.shared.dispatch(CreatedUserAction())
                 Store.shared.dispatch(LoginAction(email: self.email, password: self.password))
             case .failure(let error):
-                print("\(error.localizedDescription)")
                 Store.shared.dispatch(FailToCreateUserAction(error: error))
             }
         }

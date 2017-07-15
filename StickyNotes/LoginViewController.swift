@@ -81,7 +81,7 @@ class LoginViewController: UIViewController {
     }
 
     func showAlert(error: SessionTaskError) {
-        let _ = UIAlertController.show(self, title: "Network error".localize(), message: error.localizedDescription) { _ in
+        let _ = UIAlertController.show(self, title: "Network error".localize(), message: error.message) { _ in
         }
     }
 

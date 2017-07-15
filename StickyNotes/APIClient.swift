@@ -56,12 +56,42 @@ class APIClient {
     }
 }
 
+extension SessionTaskError {
+    var message: String {
+        switch self {
+        case .connectionError(let error):
+            return error.localizedDescription
+        case .requestError(let error):
+            return error.localizedDescription
+        case .responseError(let error):
+            if let e = error as? StickyNotesError {
+                return e.message
+            }
+            return error.localizedDescription
+        }
+    }
+}
+
+struct StickyNotesError: Error {
+    let message: String
+    init(object: Any) {
+        let dictionary = object as? [String: Any]
+        message = dictionary?["error_description"] as? String ?? "Unknown error occurred"
+    }
+}
+
 protocol StickyNoteRequest: Request {
 }
 
 extension StickyNoteRequest {
     var baseURL: URL {
         return URL(string: APIClient.shared.baseUrl)!
+    }
+    func intercept(object: Any, urlResponse: HTTPURLResponse) throws -> Any {
+        if urlResponse.statusCode == 401 {
+            throw StickyNotesError(object: object)
+        }
+        return object
     }
 }
 
