@@ -241,8 +241,9 @@ class StickyEntity: Object {
         createdAt = sticky.createdAt as Date
         updatedAt = sticky.updatedAt as Date
         userId    = sticky.userId
-        page      = PageEntity.findOrCreateBy(url: sticky.page.url, title: sticky.page.title)
+        page      = PageEntity.findOrCreateBy(url: sticky.page.url)
         try? realm?.write {
+            page?.title     = sticky.page.title
             page?.visualUrl = sticky.page.visualUrl
         }
         tags.append(contentsOf: sticky.tags.map { TagEntity.findOrCreateBy(name: $0) })
@@ -261,7 +262,8 @@ class StickyEntity: Object {
             createdAt = sticky.createdAt as Date
             updatedAt = sticky.updatedAt as Date
             userId    = sticky.userId
-            page      = PageEntity.findOrCreateBy(url: sticky.page.url, title: sticky.page.title)
+            page      = PageEntity.findOrCreateBy(url: sticky.page.url)
+            page?.title     = sticky.page.title
             page?.visualUrl = sticky.page.visualUrl
             tags.removeAll()
             tags.append(contentsOf: sticky.tags.map { TagEntity.findOrCreateBy(name: $0) })
@@ -375,13 +377,14 @@ class PageEntity: Object {
         }
         return nil
     }
-    static func findOrCreateBy(url: String, title: String) -> PageEntity {
+    static func findOrCreateBy(url: String, title: String = "", visualUrl: String? = nil) -> PageEntity {
         if let page = findBy(url: url) {
             return page
         }
-        let page = PageEntity()
-        page.url   = url
-        page.title = title
+        let page       = PageEntity()
+        page.url       = url
+        page.title     = title
+        page.visualUrl = visualUrl
         return page
     }
 }
