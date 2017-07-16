@@ -66,6 +66,7 @@ StickyNotes.addSticky = function(sticky) {
   dom.style.borderRadius = '10px';
   dom.style.textOverflow = 'ellipsis';
   dom.style.padding = '10px';
+  dom.style.zIndex = '9999';
   var startX;
   var startY;
   var origX;
