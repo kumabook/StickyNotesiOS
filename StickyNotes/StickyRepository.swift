@@ -61,6 +61,9 @@ class StickyRepository {
                 switch result {
                 case .success:
                     self.state.value = .normal
+                    try? self.realm.write {
+                        self.realm.delete(self.realm.objects(TrashedStickyEntity.self))
+                    }
                     observer.send(value: ())
                     observer.sendCompleted()
                 case .failure(let error):

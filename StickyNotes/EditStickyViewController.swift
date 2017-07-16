@@ -133,7 +133,7 @@ class EditStickyViewController: UIViewController, UITextFieldDelegate {
         editSticky.content = contentTextView.text
         if let text = tagTextField.text {
             editSticky.tags.append(contentsOf: text.components(separatedBy: ",").map {
-                return TagEntity.findOrCreateBy(name: String($0))
+                return TagEntity.findOrCreateBy(name: String($0.trimmingCharacters(in: .whitespacesAndNewlines)))
             })
         }
         Store.shared.dispatch(EditStickyAction(sticky: sticky, editSticky: editSticky))
