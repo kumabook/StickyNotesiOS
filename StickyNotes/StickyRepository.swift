@@ -89,9 +89,13 @@ class StickyRepository {
                             return
                         }
                         do {
-                            let entity = StickyEntity(sticky: $0)
-                            try self.realm.write {
-                                self.realm.add(entity, update: true)
+                            if let entity = StickyEntity.findBy(uuid: $0.uuid) {
+                                try entity.update(sticky: $0)
+                            } else {
+                                let entity = StickyEntity(sticky: $0)
+                                try self.realm.write {
+                                    self.realm.add(entity, update: true)
+                                }
                             }
                         } catch  {
                             print("error")
@@ -234,8 +238,30 @@ class StickyEntity: Object {
         createdAt = sticky.createdAt as Date
         updatedAt = sticky.updatedAt as Date
         userId    = sticky.userId
-        page      = PageEntity(value: ["url": sticky.page.url, "title": sticky.page.title, "visualUrl": sticky.page.visualUrl])
+        page      = PageEntity.findOrCreateBy(url: sticky.page.url, title: sticky.page.title)
+        try? realm?.write {
+            page?.visualUrl = sticky.page.visualUrl
+        }
         tags.append(contentsOf: sticky.tags.map { TagEntity.findOrCreateBy(name: $0) })
+    }
+
+    func update(sticky: Sticky) throws {
+        try self.realm?.write {
+            id        = sticky.id
+            left      = sticky.left
+            top       = sticky.top
+            width     = sticky.width
+            height    = sticky.height
+            content   = sticky.content
+            color     = sticky.color
+            state     = sticky.state.rawValue
+            createdAt = sticky.createdAt as Date
+            updatedAt = sticky.updatedAt as Date
+            userId    = sticky.userId
+            page      = PageEntity.findOrCreateBy(url: sticky.page.url, title: sticky.page.title)
+            page?.visualUrl = sticky.page.visualUrl
+            tags.append(contentsOf: sticky.tags.map { TagEntity.findOrCreateBy(name: $0) })
+        }
     }
 
     static func findBy(uuid: String) -> StickyEntity? {
