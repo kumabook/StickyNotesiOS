@@ -288,7 +288,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         }
         let sticky = StickyEntity()
         sticky.id      = 0
-        sticky.uuid    = UUID().uuidString
+        sticky.uuid    = UUID().uuidString.lowercased()
         sticky.left    = x
         sticky.top     = y
         sticky.width   = 100

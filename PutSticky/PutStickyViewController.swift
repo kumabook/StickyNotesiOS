@@ -117,7 +117,7 @@ class PutStickyViewController: UIViewController {
     func newSticky(url: String, title: String) {
         let sticky = StickyEntity()
         sticky.id      = 0
-        sticky.uuid    = UUID().uuidString
+        sticky.uuid    = UUID().uuidString.lowercased()
         sticky.left    = 0
         sticky.top     = 0
         sticky.width   = 100
