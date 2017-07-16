@@ -263,6 +263,7 @@ class StickyEntity: Object {
             userId    = sticky.userId
             page      = PageEntity.findOrCreateBy(url: sticky.page.url, title: sticky.page.title)
             page?.visualUrl = sticky.page.visualUrl
+            tags.removeAll()
             tags.append(contentsOf: sticky.tags.map { TagEntity.findOrCreateBy(name: $0) })
         }
     }
