@@ -203,8 +203,11 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         Store.shared.state.subscribe {[weak self] state in
             switch state.mode.value {
             default:
-                self?.reloadStickies()
-                break
+                guard let strongSelf = self else { return }
+                if let page = strongSelf.page {
+                    strongSelf.page = PageEntity.findOrCreateBy(url: page.url, title: page.title)
+                    strongSelf.reloadStickies()
+                }
             }
         }
     }
