@@ -49,6 +49,7 @@ class PageStickyTableViewCell: UITableViewCell {
 
         tagLabels.forEach { $0.removeFromSuperview() }
         tagLabels.removeAll()
+//        editButton.titleLabel?.text = "Edit".localize()
         let margins = layoutMarginsGuide
         let _ = sticky.tags.reduce((anchor: layoutMarginsGuide.leadingAnchor, margin: 14.0 as CGFloat)) { (prev, tag) in
             let label = TagLabel()
@@ -60,6 +61,5 @@ class PageStickyTableViewCell: UITableViewCell {
             label.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
             return (anchor: label.trailingAnchor, margin: 8.0)
         }
-        editButton.titleLabel?.text = "Edit".localize()
     }
 }
