@@ -12,6 +12,14 @@ StickyNotes.postMessage = function(message) {
 };
 
 var touchCount = 0;
+function getScrollOffset(elem) {
+  var p = { left: 0, top: 0 };
+  for (var n = elem.parentNode; n !== document; n = n.parentNode) {
+    p.left += n.scrollLeft;
+    p.top += n.scrollTop;
+  }
+  return p;
+};
 
 document.addEventListener('touchstart', function(e) {
   var touches = e.changedTouches;
@@ -20,16 +28,15 @@ document.addEventListener('touchstart', function(e) {
   }
   var touch  = touches[0];
   var dom    = e.target;
-  var origX  = dom.offsetLeft;
-  var origY  = dom.offsetTop;
   var startX = touch.clientX;
   var startY = touch.clientY;
   touchCount++;
   if (touchCount >= 3) {
+    var scrollPosition = getScrollOffset(dom);
     StickyNotes.postMessage({
       type: 'create-sticky',
-      x: origX + startX,
-      y: origY + startY
+      x: startX + scrollPosition.left,
+      y: startY + scrollPosition.top
     });
   }
   setTimeout(function() {
