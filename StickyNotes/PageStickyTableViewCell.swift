@@ -36,7 +36,7 @@ class PageStickyTableViewCell: UITableViewCell {
         preservesSuperviewLayoutMargins = false
         layoutMargins = UIEdgeInsets.zero
 
-        contentTextView.text = sticky.content.characters.count > 0 ? sticky.content : "Insert a note here".localize()
+        contentTextView.text = sticky.content.characters.count > 0 ? sticky.content : "No content".localize()
         contentTextView.textContainerInset = UIEdgeInsets.zero
         contentTextView.textContainer.lineFragmentPadding = 0
         contentTextView.isUserInteractionEnabled = false
