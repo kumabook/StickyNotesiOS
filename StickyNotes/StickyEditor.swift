@@ -110,7 +110,7 @@ class StickyEditor: UIView {
             make.right.equalTo(self).offset(-margin)
             make.height.equalTo(40)
         }
-        titleLabel.text = "新規作成"
+        titleLabel.text = "New Sticky".localize()
         titleLabel.textAlignment = .center
         cancelButton.setTitle("Cancel", for: UIControlState.normal)
         cancelButton.setTitleColor(UIColor.black, for: UIControlState.normal)

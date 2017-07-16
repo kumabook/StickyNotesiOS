@@ -35,7 +35,6 @@
 		674293AC1EBB866000E95148 /* UserRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674293AA1EBB866000E95148 /* UserRegistrationViewController.swift */; };
 		674293AD1EBB866000E95148 /* UserRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 674293AB1EBB866000E95148 /* UserRegistrationViewController.xib */; };
 		674293AF1EBB938100E95148 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674293AE1EBB938100E95148 /* UINavigationController.swift */; };
-		674293B31EBD93DD00E95148 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 674293B21EBD93DD00E95148 /* Localizable.strings */; };
 		674293B51EBDA80000E95148 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674293B41EBDA80000E95148 /* TabBarController.swift */; };
 		674293B71EBEEFCA00E95148 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 674293B61EBEEFCA00E95148 /* config.json */; };
 		674293B81EBEEFCA00E95148 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 674293B61EBEEFCA00E95148 /* config.json */; };
@@ -55,6 +54,7 @@
 		679A7E991EB5FDDC0008EFBE /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 679A7E981EB5FDDC0008EFBE /* SDWebImage.framework */; };
 		67A4D4DF1F12188A00487D49 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A4D4DE1F12188A00487D49 /* TutorialViewController.swift */; };
 		67CF2B181EAD9BFA0094B25E /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67CF2B171EAD9BFA0094B25E /* ReactiveSwift.framework */; };
+		67D4EF3E1F1B88B20010C264 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 67D4EF401F1B88B20010C264 /* Localizable.strings */; };
 		67FECEE51D5399BC0029440F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FECEE41D5399BC0029440F /* AppDelegate.swift */; };
 		67FECEEE1D5399BC0029440F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67FECEED1D5399BC0029440F /* Assets.xcassets */; };
 		67FECEF11D5399BC0029440F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67FECEEF1D5399BC0029440F /* LaunchScreen.storyboard */; };
@@ -148,7 +148,6 @@
 		674293AA1EBB866000E95148 /* UserRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegistrationViewController.swift; sourceTree = "<group>"; };
 		674293AB1EBB866000E95148 /* UserRegistrationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserRegistrationViewController.xib; sourceTree = "<group>"; };
 		674293AE1EBB938100E95148 /* UINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
-		674293B21EBD93DD00E95148 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = ../Localizable.strings; sourceTree = "<group>"; };
 		674293B41EBDA80000E95148 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		674293B61EBEEFCA00E95148 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		674293B91EBEF07400E95148 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -165,6 +164,8 @@
 		679A7E981EB5FDDC0008EFBE /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
 		67A4D4DE1F12188A00487D49 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		67CF2B171EAD9BFA0094B25E /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
+		67D4EF421F1B88F80010C264 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		67D4EF431F1B88F90010C264 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		67FECEE11D5399BC0029440F /* StickyNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickyNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67FECEE41D5399BC0029440F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67FECEED1D5399BC0029440F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -325,7 +326,7 @@
 				679A7E951EB3AE370008EFBE /* Model */,
 				67FECF501D5C16500029440F /* AppState.swift */,
 				67FECF521D5CB6780029440F /* Action.swift */,
-				674293B21EBD93DD00E95148 /* Localizable.strings */,
+				67D4EF401F1B88B20010C264 /* Localizable.strings */,
 				674293B61EBEEFCA00E95148 /* config.json */,
 			);
 			path = StickyNotes;
@@ -559,6 +560,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 67FECED81D5399BC0029440F;
 			productRefGroup = 67FECEE21D5399BC0029440F /* Products */;
@@ -591,7 +593,7 @@
 				674293AD1EBB866000E95148 /* UserRegistrationViewController.xib in Resources */,
 				67FECF401D580FC70029440F /* StickyTableViewCell.xib in Resources */,
 				674DA6D51F0DD75000E2BEE0 /* Settings.bundle in Resources */,
-				674293B31EBD93DD00E95148 /* Localizable.strings in Resources */,
+				67D4EF3E1F1B88B20010C264 /* Localizable.strings in Resources */,
 				67FECEF11D5399BC0029440F /* LaunchScreen.storyboard in Resources */,
 				674293B71EBEEFCA00E95148 /* config.json in Resources */,
 				67FECEEE1D5399BC0029440F /* Assets.xcassets in Resources */,
@@ -867,10 +869,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		67D4EF401F1B88B20010C264 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				67D4EF431F1B88F90010C264 /* ja */,
+			);
+			name = Localizable.strings;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		67FECEEF1D5399BC0029440F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				67FECEF01D5399BC0029440F /* Base */,
+				67D4EF421F1B88F80010C264 /* ja */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -922,6 +934,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -970,6 +983,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
