@@ -9,6 +9,7 @@
 import Foundation
 import MBProgressHUD
 import StoreKit
+import Breit
 
 class PaymentManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     enum ProductType: String {
@@ -25,6 +26,17 @@ class PaymentManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionO
         set(val) {
             userDefaults.set(val, forKey: "is_premium")
         }
+    }
+    var canSyncNow: Bool {
+        #if DEBUG
+            return true
+        #else
+            if isPremiumUser {
+                return true
+            }
+            guard let lastSyncedAt = APIClient().lastSyncedAt else { return true }
+            return (Date().timestamp - lastSyncedAt.timestamp) as Int64 >= 30 * 60 * 1000
+        #endif
     }
     
     override init() {

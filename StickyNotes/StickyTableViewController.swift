@@ -40,10 +40,15 @@ class StickyTableViewController: UITableViewController {
         reloadData()
         tableView.reloadData()
         if APIClient.shared.isLoggedIn {
-            Store.shared.dispatch(FetchStickiesAction())
-        } else {
-            refreshControl?.endRefreshing()
+            if PaymentManager().canSyncNow {
+                Store.shared.dispatch(FetchStickiesAction())
+                return
+            }
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) {
+                let _ = UIAlertController.showPurchaseAlert(self, message: "You can sync per hour. If you purchase premium service, you can sync immediately.".localize())
+            }
         }
+        refreshControl?.endRefreshing()
     }
     
     func reloadData() {
