@@ -19,9 +19,8 @@ extension UIAlertController {
         vc.present(ac, animated: true, completion: nil)
         return ac
     }
-    class func showPurchaseAlert(_ vc: UIViewController) -> UIAlertController {
-        let title   = "プレミアムサービス"
-        let message = "プレミアムサービスに登録すると、\n・検索機能\n・広告の除去\nすることができます。"
+    class func showPurchaseAlert(_ vc: UIViewController, message: String) -> UIAlertController {
+        let title   = "Premium Service".localize()
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Purchase".localize(), style: .default) { action in
             AppDelegate.shared.paymentManager?.viewController = vc
@@ -31,16 +30,12 @@ extension UIAlertController {
         vc.present(ac, animated: true, completion: {})
         return ac
     }
+    class func showPurchaseAlert(_ vc: UIViewController) -> UIAlertController {
+        let message = "Premium User can use\n・Sync stickies without limit\n・Search stickies\n・Remove Ads".localize()
+        return showPurchaseAlert(vc, message: message)
+    }
     class func showPurchaseAlertToUse(_ vc: UIViewController) -> UIAlertController {
-        let title   = "プレミアムサービス"
-        let message = "この機能を使うためには、プレミアムサービスのを購入が必要です。"
-        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Purchase".localize(), style: .default) { action in
-            AppDelegate.shared.paymentManager?.viewController = vc
-            AppDelegate.shared.paymentManager?.purchasePremium()
-        })
-        ac.addAction(UIAlertAction(title: "Cancel".localize(), style: .cancel) {action in })
-        vc.present(ac, animated: true, completion: {})
-        return ac
+        let message = "This feature requires purchasing premium service.".localize()
+        return showPurchaseAlert(vc, message: message)
     }
 }

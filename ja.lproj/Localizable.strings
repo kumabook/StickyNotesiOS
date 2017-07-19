@@ -27,8 +27,7 @@
 "Forgot password?"   = "パスワードを忘れた場合";
 "Insert a note here" = "ここにメモを挿入";
 "New Sticky"         = "新規作成";
-
-
+"Premium Service"    = "プレミアムサービス";
 
 "second" = "秒";
 "minute" = "分";
@@ -72,4 +71,12 @@
 "Enable the StickyNotes share extension to put the sticky from Safari or your favorite apps." = "StickyNotesの共有拡張機能を有効にすると、Safariなどの別のアプリから付箋を作成できます。";
 "Sync with PC" = "PCとも同期";
 "If you use firefox addon of this app, you can sync stickies with PC." = "PCのFirefox のAddonをインストールすると保存した付箋をPCとの間で同期することができます。";
+
+/*
+ Alert
+ */
+
+"Premium User can use\n・Sync stickies without limit\n・Search stickies\n・Remove Ads" = "プレミアムサービスに登録すると、\n・検索機能\n・広告の除去\nすることができます。";
+"This feature requires purchasing premium service." = "この機能を使うためには、プレミアムサービスのを購入が必要です。";
+"You can sync per hour. If you purchase premium service, you can sync immediately." = "同期は１時間に１回のみです。プレミアムサービスを購入すれば、すぐに同期できます。";
 
