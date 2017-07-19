@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0A8F2644CC47B3E6EAE49AF7 /* Pods_PutSticky.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E26A4A8316CA37CDE2F6E7 /* Pods_PutSticky.framework */; };
 		64CA1F06902963B544944249 /* Pods_StickyNotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7F99C7D557381C4AE374436 /* Pods_StickyNotes.framework */; };
-		663DAC9801B59AD286015ABF /* Pods_StickyNotesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 862FE8233422B888FA960D48 /* Pods_StickyNotesTests.framework */; };
 		670599EE1D8195BA0085FCAC /* PutSticky.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 670599E41D8195BA0085FCAC /* PutSticky.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		670599F41D8196460085FCAC /* PutStickyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670599F21D8196460085FCAC /* PutStickyViewController.swift */; };
 		670599F51D8196460085FCAC /* PutStickyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 670599F31D8196460085FCAC /* PutStickyViewController.xib */; };
@@ -108,13 +107,6 @@
 			remoteGlobalIDString = 670599E31D8195BA0085FCAC;
 			remoteInfo = PutSticky;
 		};
-		67FECEF81D5399BC0029440F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 67FECED91D5399BC0029440F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 67FECEE01D5399BC0029440F;
-			remoteInfo = StickyNotes;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -171,7 +163,6 @@
 		67FECEED1D5399BC0029440F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		67FECEF01D5399BC0029440F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		67FECEF21D5399BC0029440F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		67FECEF71D5399BC0029440F /* StickyNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StickyNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		67FECF061D54EF2C0029440F /* APIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APIKit.framework; path = Carthage/Build/iOS/APIKit.framework; sourceTree = "<group>"; };
 		67FECF071D54EF2C0029440F /* Breit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Breit.framework; path = Carthage/Build/iOS/Breit.framework; sourceTree = "<group>"; };
 		67FECF081D54EF2C0029440F /* Himotoki.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Himotoki.framework; path = Carthage/Build/iOS/Himotoki.framework; sourceTree = "<group>"; };
@@ -256,14 +247,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		67FECEF41D5399BC0029440F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				663DAC9801B59AD286015ABF /* Pods_StickyNotesTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -305,7 +288,6 @@
 			isa = PBXGroup;
 			children = (
 				67FECEE11D5399BC0029440F /* StickyNotes.app */,
-				67FECEF71D5399BC0029440F /* StickyNotesTests.xctest */,
 				670599E41D8195BA0085FCAC /* PutSticky.appex */,
 			);
 			name = Products;
@@ -493,27 +475,6 @@
 			productReference = 67FECEE11D5399BC0029440F /* StickyNotes.app */;
 			productType = "com.apple.product-type.application";
 		};
-		67FECEF61D5399BC0029440F /* StickyNotesTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 67FECF031D5399BC0029440F /* Build configuration list for PBXNativeTarget "StickyNotesTests" */;
-			buildPhases = (
-				3AA693C6A770A3D255CA29F0 /* [CP] Check Pods Manifest.lock */,
-				67FECEF31D5399BC0029440F /* Sources */,
-				67FECEF41D5399BC0029440F /* Frameworks */,
-				67FECEF51D5399BC0029440F /* Resources */,
-				8481FE8BC65E87821005C117 /* [CP] Embed Pods Frameworks */,
-				BBFE7E68FDE7CA6994C806EA /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				67FECEF91D5399BC0029440F /* PBXTargetDependency */,
-			);
-			name = StickyNotesTests;
-			productName = StickyNotesTests;
-			productReference = 67FECEF71D5399BC0029440F /* StickyNotesTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -547,10 +508,6 @@
 							};
 						};
 					};
-					67FECEF61D5399BC0029440F = {
-						CreatedOnToolsVersion = 7.3.1;
-						TestTargetID = 67FECEE01D5399BC0029440F;
-					};
 				};
 			};
 			buildConfigurationList = 67FECEDC1D5399BC0029440F /* Build configuration list for PBXProject "StickyNotes" */;
@@ -568,7 +525,6 @@
 			projectRoot = "";
 			targets = (
 				67FECEE01D5399BC0029440F /* StickyNotes */,
-				67FECEF61D5399BC0029440F /* StickyNotesTests */,
 				670599E31D8195BA0085FCAC /* PutSticky */,
 			);
 		};
@@ -606,13 +562,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		67FECEF51D5399BC0029440F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -629,21 +578,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StickyNotes/Pods-StickyNotes-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3AA693C6A770A3D255CA29F0 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		674DA6DB1F0FA10A00E2BEE0 /* carthage copy-frameworks */ = {
@@ -686,36 +620,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ -e StickyNotes/config.json ]; then\n  ruby fabric.rb\nelse\n  echo \"Running StickyNotes/config.json is not found, do nothing.\"\nfi\n";
-		};
-		8481FE8BC65E87821005C117 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StickyNotesTests/Pods-StickyNotesTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BBFE7E68FDE7CA6994C806EA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StickyNotesTests/Pods-StickyNotesTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		E594BA65B6B33CF5211B8A91 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -846,13 +750,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		67FECEF31D5399BC0029440F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -860,11 +757,6 @@
 			isa = PBXTargetDependency;
 			target = 670599E31D8195BA0085FCAC /* PutSticky */;
 			targetProxy = 670599EC1D8195BA0085FCAC /* PBXContainerItemProxy */;
-		};
-		67FECEF91D5399BC0029440F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 67FECEE01D5399BC0029440F /* StickyNotes */;
-			targetProxy = 67FECEF81D5399BC0029440F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1062,32 +954,6 @@
 			};
 			name = Release;
 		};
-		67FECF041D5399BC0029440F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB17E1D06E6D33959EAAAE92 /* Pods-StickyNotesTests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = StickyNotesTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.kumabook.StickyNotesTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StickyNotes.app/StickyNotes";
-			};
-			name = Debug;
-		};
-		67FECF051D5399BC0029440F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 802D4641540393951927D6A7 /* Pods-StickyNotesTests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = StickyNotesTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.kumabook.StickyNotesTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StickyNotes.app/StickyNotes";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1114,15 +980,6 @@
 			buildConfigurations = (
 				67FECF011D5399BC0029440F /* Debug */,
 				67FECF021D5399BC0029440F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		67FECF031D5399BC0029440F /* Build configuration list for PBXNativeTarget "StickyNotesTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				67FECF041D5399BC0029440F /* Debug */,
-				67FECF051D5399BC0029440F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
